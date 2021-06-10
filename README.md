@@ -1,6 +1,35 @@
-# Getting Started with Create React App
+# vamalaka-fundation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# server setup
+
+## Requirments
+
+you should have docker and docker-compose installed on your machine
+
+## installation
+
+```
+cd server
+```
+
+- build your project using
+
+```
+$ docker-compose build
+```
+
+```
+$ docker-compose up
+```
+
+your graphql project will run on http://localhost:4000/graphql
+
+- admin-mongo interface will be displayed on http://localhost:8082/
+
+- add a random name to your connection and in the field connection string put the following connection string
+  (mongodb://mongo/myappdb)
+
+# Frontend
 
 ## Available Scripts
 
