@@ -24,6 +24,9 @@ exports.adType = new GraphQLObjectType({
       createdAt: {
         type: GraphQLString,
       },
+      categoryid: {
+        type: new GraphQLNonNull(GraphQLID),
+      },
       comments: {
         // type: GraphQLString,
         type: new GraphQLList(commentType.commentType),

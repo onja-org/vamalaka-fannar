@@ -6,9 +6,10 @@ const { mergeSchemas } = require("@graphql-tools/merge");
 
 const adSchema = require("./graphql/AdSchema").AdSchema;
 const userSchema = require("./graphql/UserSchema").UserSchema;
+const categorySchema = require("./graphql/CategorySchema").CategorySchema;
 
 const mergedSchema = mergeSchemas({
-  schemas: [adSchema, userSchema],
+  schemas: [categorySchema, adSchema, userSchema],
 });
 
 const cors = require("cors");
