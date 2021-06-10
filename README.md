@@ -1,4 +1,4 @@
-# vamalaka-fundation
+# vamalaka-foundation
 
 # server setup
 
