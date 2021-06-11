@@ -1,12 +1,12 @@
-# vamalaka-foundation
+# Vamalaka-foundation
 
-# server setup
+# Server setup
 
-## Requirments
+## Requirements
 
 you should have docker and docker-compose installed on your machine
 
-## installation
+## Installation
 
 ```
 cd server
@@ -15,14 +15,14 @@ cd server
 - build your project using
 
 ```
-$ docker-compose build
+$ sudo docker-compose build
 ```
 
 ```
-$ docker-compose up
+$ sudo docker-compose up
 ```
 
-your graphql project will run on http://localhost:4000/graphql
+your GraphQL project will run on http://localhost:4000/graphql
 
 - admin-mongo interface will be displayed on http://localhost:8082/
 
@@ -34,6 +34,10 @@ your graphql project will run on http://localhost:4000/graphql
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `yarn` 
+
+To install all required packages
 
 ### `yarn start`
 
