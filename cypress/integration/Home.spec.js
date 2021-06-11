@@ -5,6 +5,6 @@ describe("Home Screen", () => {
         cy.visit("/")
     })
     it("Displays the slogan", () => {
-        cy.contains("Madagascars peer to peer e-commerce platform")
+        cy.contains("Madagascars peer-to-peer e-commerce platform")
     })
 })

@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Vamalaka - Madagascars peer to peer e-commerce platform</h1>
+        <h1>Vamalaka - Madagascars peer-to-peer e-commerce platform</h1>
         <div onClick={()=>dispatch(decrement())}>DEC</div>
         <div onClick={()=>dispatch(incrementByAmount(10))}>+10</div>
         <div onClick={()=>dispatch(fetchAds(7))}>GET ADS</div>
