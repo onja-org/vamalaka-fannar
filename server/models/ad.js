@@ -19,7 +19,11 @@ const AdSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "user",
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "category",
   },
   comments: [
     {
