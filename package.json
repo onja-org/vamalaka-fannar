@@ -29,8 +29,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "cypress": "yarn start & CYPRESS_BASE_URL=http://localhost:3000 cypress open",
-    "cypress:ci": "yarn start & CYPRESS_BASE_URL=http://localhost:3000 cypress run"
+    "cypress": "yarn start & yarn storybook & CYPRESS_BASE_URL=http://localhost:3000 cypress open",
+    "cypress:ci": "yarn start & yarn storybook & CYPRESS_BASE_URL=http://localhost:3000 cypress run"
   },
   "eslintConfig": {
     "extends": [
