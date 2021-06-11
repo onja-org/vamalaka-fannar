@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+//import logo from './logo.svg';
 import './App.css';
-import { sendQuery, getAdsQuery } from './graphqlHelper';
+// import { sendQuery, getAdsQuery } from './graphqlHelper';
 // import { useSelector, useDispatch } from 'react-redux'
 import { adsSelector, decrement, fetchAds, incrementByAmount } from './redux/slices/adsSlice'
-import { useAppSelector, useAppDispatch } from './redux/hooks'
+import { /*useAppSelector,*/ useAppDispatch } from './redux/hooks'
 import { useSelector } from 'react-redux';
 
 function App() {
 
-  const count = useAppSelector((state) => state.ads.value)
+  // const count = useAppSelector((state) => state.ads.value)
   const dispatch = useAppDispatch()
   const ads = useSelector(adsSelector)
   
