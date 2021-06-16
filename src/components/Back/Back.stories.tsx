@@ -1,6 +1,6 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
-import { Back, BackProps } from './Back/Back'
+import { Back, BackProps } from './Back'
 
 export default {
   title: 'Components/Back',
