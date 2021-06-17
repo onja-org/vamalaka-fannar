@@ -6,7 +6,7 @@ describe('Header NavLink Storybook', () => {
     cy.visit('http://localhost:6006/?path=/story/header-navlink--logged-in')
   })
   it('should have an ul tag', () => {
-    cy.get('ul').children()
+    cy.get('a').should('have.attr', 'href')
   })
   it('should have English as a text', () => {
     cy.visit(
