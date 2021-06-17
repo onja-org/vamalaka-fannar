@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react'
 import { CategoryItem, CategoryItemProp } from './categoryItem'
 
 export default {
-  title: 'Example/Category item',
+  title: 'Components/Category item',
   component: CategoryItem,
 } as Meta
 
@@ -21,5 +21,4 @@ export const Secondary = Template.bind({})
 Secondary.args = {
   item: 'Everything',
   primary: false,
-  selectCategory: () => alert('You selected everything'),
 }
