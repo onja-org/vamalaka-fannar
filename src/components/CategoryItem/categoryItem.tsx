@@ -24,6 +24,7 @@ export const CategoryItem: React.FC<CategoryItemProp> = ({
 const Button = styled.button`
   width: 100%;
   cursor: pointer;
+  margin-left: 0;
   font-size: 18px;
   padding: 8px 0 8px 0;
   max-width: 214px;
