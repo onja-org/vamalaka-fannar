@@ -3,13 +3,13 @@ import {
   createSelector,
   createSlice,
   PayloadAction,
-} from "@reduxjs/toolkit";
-import { sendQuery, getAdsQuery } from "../../graphqlHelper";
-import { RootState } from "../store";
+} from '@reduxjs/toolkit'
+import { sendQuery, getAdsQuery } from '../../graphqlHelper'
+import { RootState } from '../store'
 
 type FetchAdsError = {
-  message: string;
-};
+  message: string
+}
 
 // possible errors.
 export const fetchAds = createAsyncThunk<
@@ -17,36 +17,36 @@ export const fetchAds = createAsyncThunk<
   number,
   { rejectValue: FetchAdsError }
 >(
-  "ads/fetch",
+  'ads/fetch',
   // The second argument, `thunkApi`, is an object
   // that contains all those fields
   // and the `rejectWithValue` function:
   async (limit: number, thunkApi) => {
-    console.log(limit, limit);
-    const response = await sendQuery(getAdsQuery());
+    // console.log(limit, limit)
+    const response = await sendQuery(getAdsQuery())
 
-    const ads = response?.data?.data?.ads;
+    const ads = response?.data?.data?.ads
     // const data: any[] = await response.json();
-    console.log(ads, "ads");
+    // console.log(ads, 'ads')
 
     // Check if status is not okay:
     if (response.status !== 200) {
       // Return the error message:
       return thunkApi.rejectWithValue({
-        message: "Failed to fetch todos.",
-      });
+        message: 'Failed to fetch todos.',
+      })
     }
 
-    return ads;
+    return ads
   }
-);
+)
 
 export const adsSlice = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState: {
     value: 0,
     ads: [] as any[],
-    status: "",
+    status: '',
     error: null as FetchAdsError | null,
   },
   reducers: {
@@ -56,18 +56,18 @@ export const adsSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.value += 1;
+      state.value += 1
     },
     //TODO remove used only as an example
     decrement: (state) => {
-      console.log(state.value, "dec");
-      state.value -= 1;
+      // console.log(state.value, 'dec')
+      state.value -= 1
     },
     //TODO remove used only as an example
     incrementByAmount: (state, action: PayloadAction<number>) => {
-      console.log(action, "incbyamAC");
-      console.log(state, "increment");
-      state.value += action.payload;
+      // console.log(action, 'incbyamAC')
+      // console.log(state, 'increment')
+      state.value += action.payload
     },
   },
   extraReducers: (builder) => {
@@ -77,40 +77,40 @@ export const adsSlice = createSlice({
       // At that moment,
       // we change status to `loading`
       // and clear all the previous errors:
-      state.status = "loading";
-      state.error = null;
-    });
+      state.status = 'loading'
+      state.error = null
+    })
 
     // When a server responses with the data,
     // `fetchAds.fulfilled` is fired:
     builder.addCase(fetchAds.fulfilled, (state, { payload }) => {
       // We add all the new todos into the state
-      console.log("full", payload);
+      // console.log('full', payload)
 
       // and change `status` back to `idle`:
-      state.ads = payload;
-      state.status = "idle";
-    });
+      state.ads = payload
+      state.status = 'idle'
+    })
 
     // When a server responses with an error:
     builder.addCase(fetchAds.rejected, (state, { payload }) => {
       // We show the error message
       // and change `status` back to `idle` again.
-      console.log(payload, "REjected error");
-      if (payload) state.error = payload;
-      state.status = "idle";
-    });
+      // console.log(payload, 'REjected error')
+      if (payload) state.error = payload
+      state.status = 'idle'
+    })
   },
-});
+})
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = adsSlice.actions;
-export const selectCount = (state: RootState) => state.ads.value;
+export const { increment, decrement, incrementByAmount } = adsSlice.actions
+export const selectCount = (state: RootState) => state.ads.value
 
-export const selectAds = (state: RootState) => state.ads.ads;
+export const selectAds = (state: RootState) => state.ads.ads
 export const adsSelector = createSelector<RootState, any[], any[]>(
   selectAds,
   (ads) => ads
-);
+)
 
-export default adsSlice.reducer;
+export default adsSlice.reducer
