@@ -3,7 +3,7 @@ import Buttons from './Buttons'
 import { ButtonsProps } from './Buttons'
 
 export default {
-  title: 'Buttons',
+  title: 'Components/Buttons',
   component: Buttons,
 } as Meta
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GaramondWoff } from './fonts/Garamond.woff'
-import { GaramondWoff2 } from './fonts/Garamond.woff2'
+import { GaramondWoff } from '../../fonts/Garamond.woff'
+import { GaramondWoff2 } from '../../fonts/Garamond.woff2'
 
 export interface ButtonsProps {
   label?: string
@@ -40,7 +40,6 @@ const Button = styled.button<ButtonsProps>`
     background-color: gray;
   }
 `
-
 const Buttons: React.FC<ButtonsProps> = ({
   label,
   onClick,
