@@ -16,4 +16,3 @@ describe('Storybook Components', () => {
       .should('have.attr', 'fill', 'currentColor')
   })
 })
-

@@ -2,14 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { GaramondWoff } from '../../fonts/Garamond.woff'
 import { GaramondWoff2 } from '../../fonts/Garamond.woff2'
-
 export interface ButtonsProps {
   label?: string
   learnabled?: boolean
   disabled?: boolean
   onClick?: () => void
 }
-
 const Button = styled.button<ButtonsProps>`
   @font-face {
     font-family: 'Garamond';
@@ -18,7 +16,6 @@ const Button = styled.button<ButtonsProps>`
     font-weight: 400;
     font-style: normal;
   }
-
   border: none;
   outline: none;
   font-size: 24px;
@@ -33,7 +30,6 @@ const Button = styled.button<ButtonsProps>`
   box-sizing: ${(props) => (props.learnabled ? 'none' : 'border-box')};
   border: ${(props) => (props.learnabled ? 'none' : '2px solid #041d42')};
   cursor: pointer;
-
   &:disabled {
     color: '#FFFFFF';
     cursor: not-allowed;
