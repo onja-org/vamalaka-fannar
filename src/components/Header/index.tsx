@@ -10,24 +10,27 @@ import {
 } from '../HeaderNavLink/HeaderNavLink'
 import { List } from '../HeaderNavLink/List'
 import Input from '../HeaderInputSearch/HeaderInputSearch'
+import { Layout } from '../Layout/Layout'
 
 export const Header: FC<LinkTypes> = ({ item }) => {
   return (
-    <HeaderStyles>
-      <div>
-        <Logo logo={logo} alt='Vamalaka logo' />
-        <Input
-          icon={searchIcon}
-          alt='Input search'
-          placeholderText='Search for anything...'
-        />
-        <List>
-          {item.map((link: ItemType) => (
-            <HeaderNavLink {...link} key={link.path} />
-          ))}
-        </List>
-      </div>
-    </HeaderStyles>
+    <Layout>
+      <HeaderStyles>
+        <div>
+          <Logo logo={logo} alt='Vamalaka logo' />
+          <Input
+            icon={searchIcon}
+            alt='Input search'
+            placeholderText='Search for anything...'
+          />
+          <List>
+            {item.map((link: ItemType) => (
+              <HeaderNavLink {...link} key={link.path} />
+            ))}
+          </List>
+        </div>
+      </HeaderStyles>
+    </Layout>
   )
 }
 
