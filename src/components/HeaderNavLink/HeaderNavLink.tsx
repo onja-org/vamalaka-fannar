@@ -66,10 +66,6 @@ const Item = styled.li`
     text-decoration: none;
     display: flex;
 
-    img {
-      height: 22px;
-    }
-
     span {
       margin-inline-start: 10px;
 
