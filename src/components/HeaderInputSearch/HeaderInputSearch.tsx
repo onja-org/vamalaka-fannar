@@ -26,11 +26,6 @@ const Label = styled.label`
   position: relative;
   gap: 12px;
 
-  img {
-    width: 24px;
-    heigh: 24px;
-  }
-
   input {
     width: 98%;
     font-size: 27px;
@@ -38,10 +33,9 @@ const Label = styled.label`
     color: #979797;
     background: transparent;
     border: none;
-    padding-left: 24px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `
