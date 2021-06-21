@@ -64,6 +64,7 @@ const Item = styled.li`
     line-height: 30px;
     color: #041d42;
     text-decoration: none;
+    display: flex;
 
     img {
       height: 22px;
@@ -71,6 +72,15 @@ const Item = styled.li`
 
     span {
       margin-inline-start: 10px;
+
+      @media (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+  &:first-of-type {
+    @media (max-width: 900px) {
+      display: none;
     }
   }
 `
