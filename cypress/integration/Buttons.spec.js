@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 describe('Buttons Screen', () => {
   beforeEach('visits site', () => {
     cy.visit('http://localhost:6006')

@@ -1,14 +1,11 @@
 import { Story, Meta } from '@storybook/react'
 import Buttons from './Buttons'
 import { ButtonsProps } from './Buttons'
-
 export default {
   title: 'Components/Buttons',
   component: Buttons,
 } as Meta
-
 const Button: Story<ButtonsProps> = (args) => <Buttons {...args} />
-
 export const LearnAbled = Button.bind({})
 LearnAbled.args = {
   learnabled: true,
