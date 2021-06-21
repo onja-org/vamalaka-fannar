@@ -8,7 +8,6 @@ describe('Storybook Components', () => {
     cy.contains('LinkSection')
     cy.visit('http://localhost:6006/?path=/story/example-linksection')
     cy.contains('LinkSection')
-    cy.get('a')
-      .should('have.attr', 'href')
+    cy.get('a').should('have.attr', 'href')
   })
 })
