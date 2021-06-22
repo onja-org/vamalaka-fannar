@@ -3,7 +3,6 @@ describe('Storybook Components', () => {
     cy.visit('http://localhost:6006')
     cy.contains('Back', { timeout: 20000 })
   })
-
   it('Has the Back component', () => {
     cy.contains('Back')
     cy.visit(
