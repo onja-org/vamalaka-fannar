@@ -33,6 +33,10 @@ const Label = styled.label`
     color: #979797;
     background: transparent;
     border: none;
+
+    &:focus {
+      border: none;
+    }
   }
 
   @media (max-width: 900px) {

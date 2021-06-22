@@ -34,7 +34,6 @@ export const Header: FC<LinkTypes> = ({ item }) => {
 const HeaderStyles = styled.header`
   margin: 0;
   width: 100%;
-  background-color: #fff5f1;
 
   div {
     width: 100%;
