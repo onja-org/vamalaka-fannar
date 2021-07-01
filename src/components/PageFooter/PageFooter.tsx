@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { LinkSection } from '../Footer/Footer'
-import { Layout } from '../Layout/Layout'
 
 export interface Props {
   footerLinks: {
@@ -13,16 +12,14 @@ export interface Props {
 
 export const PageFooter: React.FC<Props> = ({ footerLinks }) => {
   return (
-    <Layout>
-      <Footer>
-        <FooterContainer>
-          {footerLinks &&
-            footerLinks.map((footerLink) => (
-              <LinkSection key={footerLink.id} footerLink={footerLink} />
-            ))}
-        </FooterContainer>
-      </Footer>
-    </Layout>
+    <Footer>
+      <FooterContainer>
+        {footerLinks &&
+          footerLinks.map((footerLink) => (
+            <LinkSection key={footerLink.id} footerLink={footerLink} />
+          ))}
+      </FooterContainer>
+    </Footer>
   )
 }
 const Footer = styled('footer')`
