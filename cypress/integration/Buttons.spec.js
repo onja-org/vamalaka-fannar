@@ -20,9 +20,7 @@ describe('Buttons Screen', () => {
   })
   it('Displays the trust button', () => {
     cy.contains('Buttons')
-    cy.visit(
-      'http://localhost:6006/iframe.html?id=components-buttons--trust&args=&viewMode=story'
-    )
+    cy.visit('http://localhost:6006/?path=/story/components-buttons--trust')
     cy.contains('Can you trust us?')
   })
 })
