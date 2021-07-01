@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 // Input search
 describe('Input Storybook', () => {
   beforeEach('visits an input element', () => {
