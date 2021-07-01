@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 
-import { CategoryItem, CategoryItemProp } from './categoryItem'
+import { CategoryItem, CategoryItemProp } from './CategoryItem'
 
 export default {
   title: 'Components/Category item',

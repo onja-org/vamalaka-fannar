@@ -26,6 +26,10 @@ const Label = styled.label`
   position: relative;
   gap: 12px;
 
+  @media (min-width: 1200px) {
+    width: 70%;
+  }
+
   input {
     width: 98%;
     font-size: 27px;

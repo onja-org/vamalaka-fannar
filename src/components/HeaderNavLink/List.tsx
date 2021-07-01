@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 
 export const ParentList: FC = ({ children }) => {
   return <List>{children}</List>
@@ -11,4 +11,5 @@ export const List = styled.ul`
   display: flex;
   list-style-type: none;
   gap: 24px;
+  justify-content: flex-end;
 `
