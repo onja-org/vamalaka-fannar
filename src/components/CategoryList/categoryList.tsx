@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CategoryItem } from '../CategoryItem/categoryItem'
+import { CategoryItem } from '../CategoryItem/CategoryItem'
 
 export interface CategoryListProps {
   primary: boolean

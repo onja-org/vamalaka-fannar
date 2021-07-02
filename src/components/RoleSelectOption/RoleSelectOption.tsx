@@ -39,6 +39,10 @@ const optionWrapperStyles = css`
     align-items: center;
     box-sizing: border-box;
     border-radius: 6px;
+    @media (max-width: 360px) {
+        flex-direction: column;
+        justify-content: start;
+    }
 `;
 
 export const Option :React.FC<OptionProps> = ({label, text, src, alt}) => {
@@ -89,6 +93,16 @@ const RoleSelectWrapper = styled.div`
         background-image: url(${whitePolygonBg});
         ${polygonBg}
     }
+
+    .text-wrapper {
+         @media (max-width: 360px) {
+            text-align: center;
+            margin: 0;
+        }
+         @media (max-width: 476px) {
+            max-width: 150px;
+        }
+     }
 
     .text-wrapper h6 {
         font-family: 'Futura Std';
