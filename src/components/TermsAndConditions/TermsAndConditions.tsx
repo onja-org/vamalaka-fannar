@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fonts } from '../../globalStyles/font'
+import { fonts } from '../../globalStyles/fonts'
 import checkedSvg from './checked.svg'
 
 export interface TermsAndConditionsProps {
@@ -12,7 +12,7 @@ export interface TermsAndConditionsProps {
 
 const TermsAndConditionsStyle = styled.label`
   ${fonts}
-  font-family: "Futura Std";
+  font-family: "Futura Std", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

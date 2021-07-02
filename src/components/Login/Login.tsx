@@ -1,8 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import FuturaStdMediumWoff from '../../fonts/FuturaStd-Medium.woff'
-import FuturaStdMediumWoff2 from '../../fonts/FuturaStd-Medium.woff2'
+import { fonts } from '../../globalStyles/fonts'
 
 export interface LoginProps {
   isSignedUp: boolean
@@ -27,23 +26,16 @@ export const Login: React.FC<LoginProps> = ({ isSignedUp, href }) => {
 }
 
 const LoginContainer = styled.div`
-  @font-face {
-    font-family: 'Futura Std';
-    src: local('Futura Std'), local(' Futura Std'),
-      url(${FuturaStdMediumWoff2}) format('woff2'),
-      url(${FuturaStdMediumWoff}) format('woff');
-    font-weight: 400;
-    font-style: normal;
-  }
-
   p {
-    font-family: 'Futura Std';
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     margin: 0;
     font-size: 18px;
     line-height: 28px;
     color: #979797;
     a {
-      font-family: 'Futura Std';
+      ${fonts}
+      font-family: 'Futura Std', Arial, Helvetica, sans-serif;
       color: #041d42;
       text-decoration: underline;
       padding-left: 5px;

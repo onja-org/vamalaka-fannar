@@ -4,7 +4,7 @@ import language from '../../assests/languages.svg'
 import transactions from '../../assests/transactions.svg'
 import account from '../../assests/account.svg'
 import signin from '../../assests/signin.svg'
-import { fontFace } from '../../globalStyles/fonts'
+import { fonts } from '../../globalStyles/fonts'
 
 export const loggedIn = [
   { path: '#language', imgSrc: language, alt: 'Languages', text: 'English' },
@@ -59,7 +59,8 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => (
 
 const Item = styled.li`
   a {
-    ${fontFace}
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     font-size: 25px;
     line-height: 30px;
     color: #041d42;
