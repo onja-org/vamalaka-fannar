@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fontFace } from '../../globalStyles/fonts';
+import { fonts } from '../../globalStyles/fonts';
 import Baobab from '../LeftSide/images/baobab.png';
 import Farmer from '../LeftSide/images/farmer.png'
 
@@ -13,7 +13,7 @@ const Container = styled.div`
   max-width: 583.5px;
   
   p {
-    ${fontFace};
+    ${fonts};
     font-family: 'Futura Std', sans-serif ;
     color: #FFFFFF;
     font-size: 40px;

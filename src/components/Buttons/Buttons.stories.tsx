@@ -15,7 +15,7 @@ LearnEnabled.args = {
 }
 export const Learndisabled = Button.bind({})
 Learndisabled.args = {
-  learnabled: true,
+  learnEnabled: true,
   disabled: true,
   label: 'Learn more',
 }

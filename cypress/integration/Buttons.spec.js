@@ -2,20 +2,20 @@
 
 describe('Buttons Screen', () => {
   beforeEach('visits site', () => {
-    cy.visit('http://localhost:6006')
+     cy.visit('http://localhost:6006')
     cy.contains('Buttons', { timeout: 20000 })
   })
   it('Displays the learn button', () => {
     cy.contains('Buttons')
     cy.visit(
-      'http://localhost:6006/iframe.html?id=components-buttons--learn-abled&args=&viewMode=story'
+      'http://localhost:6006/?path=/story/components-buttons--learn-enabled'
     )
     cy.contains('Learn more')
   })
   it('Displays the learn disabled button', () => {
     cy.contains('Buttons')
     cy.visit(
-      'http://localhost:6006/?path=/story/components-buttons--learn-disabled'
+      'http://localhost:6006/?path=/story/components-buttons--learndisabled'
     )
     cy.contains('Learn more')
   })
