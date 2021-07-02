@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+
 describe('Buttons Screen', () => {
   beforeEach('visits site', () => {
     cy.visit('http://localhost:6006')
@@ -11,7 +12,7 @@ describe('Buttons Screen', () => {
     )
     cy.contains('Learn more')
   })
-  it('Displays the learn button', () => {
+  it('Displays the learn disabled button', () => {
     cy.contains('Buttons')
     cy.visit(
       'http://localhost:6006/?path=/story/components-buttons--learn-disabled'

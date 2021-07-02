@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
+import { GaramondWoff } from '../../fonts/Garamond.woff'
+import { GaramondWoff2 } from '../../fonts/Garamond.woff2'
+
 export interface ButtonsProps {
   label?: string
-  learnabled?: boolean
+  learnEnabled?: boolean
   disabled?: boolean
   onClick?: () => void
 }
@@ -16,15 +19,20 @@ const FirstWrapper = styled.div`
 const SecondWrapper = styled.div`
   display: inline-block;
   background: rgba(21, 140, 177, 0.3);
-  position: relative;
+  position: absolute;
   top: 6px;
   left: -6px;
 `
 const Button = styled.button<ButtonsProps>`
-  ${fonts}
-  font-family: 'Garamond', Arial, Helvetica, sans-serif;
-  border: none;
-  position: relative;
+  @font-face {
+    font-family: 'Garamond';
+    src: local('Garamond'), local('Garamond'),
+      url(${GaramondWoff2}) format('woff2'), url(${GaramondWoff}) format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  position: absolute;
   top: -3px;
   left: 3px;
   outline: none;
@@ -33,12 +41,14 @@ const Button = styled.button<ButtonsProps>`
   font-style: normal;
   font-weight: normal;
   font-family: 'Garamond';
-  color: ${(props) => (props.learnabled ? '#FFFFFF' : '#041d42')};
-  background-color: ${(props) => (props.learnabled ? '#041d42' : '#FFFFFF')};
+  color: ${(props) => (props.learnEnabled ? '#FFFFFF' : '#041d42')};
+  background-color: ${(props) => (props.learnEnabled ? '#041d42' : '#FFFFFF')};
   padding: ${(props) =>
-    props.learnabled ? '12px 20px 11px 20px' : '12px 28px 11px 28px'};
-  border: ${(props) => (props.learnabled ? 'none' : '2px solid #041d42')};
+    props.learnEnabled ? '12px 20px 11px 20px' : '12px 28px 11px 28px'};
+  border: ${(props) => (props.learnEnabled ? 'none' : '2px solid #041d42')};
+    props.learnEnabled ? '12px 20px 11px 20px' : '12px 28px 11px 28px'};
   cursor: pointer;
+
   &:disabled {
     color: '#FFFFFF';
     cursor: not-allowed;
@@ -49,7 +59,7 @@ const Buttons: React.FC<ButtonsProps> = ({
   label,
   onClick,
   disabled,
-  learnabled,
+  learnEnabled,
   ...props
 }) => {
   return (
@@ -57,7 +67,7 @@ const Buttons: React.FC<ButtonsProps> = ({
       <SecondWrapper>
         <Button
           type='button'
-          learnabled={learnabled ? true : false}
+          learnEnabled={learnEnabled ? true : false}
           disabled={disabled}
           onClick={() => ''}
           {...props}>
