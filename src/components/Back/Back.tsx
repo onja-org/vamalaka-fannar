@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fonts } from '../../globalStyles/font'
+import { fonts } from '../../globalStyles/fonts'
 
 const backIcon = (
   <svg
@@ -24,10 +24,10 @@ export interface BackProps {
 
 const BackLink = styled.a`
   ${fonts}
-​
+  ​
   --font-size: 16px;
-​
-  font-family: 'Futura Std', sans-serif;
+
+  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   line-height: 19px;
   display: flex;
   align-items: flex-start;
@@ -37,19 +37,16 @@ const BackLink = styled.a`
   text-decoration: none;
   word-wrap: break-word;
   font-size: var(--font-size);
-​
-  &.size--small {
+  ​ &.size--small {
     --font-size: 14px;
   }
-​
-  &.size--medium {
+  ​ &.size--medium {
     --font-size: 16px;
   }
   &.size--large {
     --font-size: 24px;
   }
-​
-  @media (max-width: 375px) {
+  ​ @media (max-width: 375px) {
     --font-size: 12px;
   }
 `

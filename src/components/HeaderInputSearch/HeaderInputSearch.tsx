@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { fonts } from '../../globalStyles/fonts'
 
 export interface InputType {
   placeholderText: string
@@ -31,15 +32,30 @@ const Label = styled.label`
   }
 
   input {
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     width: 98%;
     font-size: 27px;
     line-height: 32px;
     color: #979797;
     background: transparent;
     border: none;
-
     &:focus {
       border: none;
+    }
+    &::-webkit-input-placeholder {
+      ${fonts}
+      font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+    }
+
+    &:-ms-input-placeholder {
+      ${fonts}
+      font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+    }
+
+    &::placeholder {
+      ${fonts}
+      font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     }
   }
 

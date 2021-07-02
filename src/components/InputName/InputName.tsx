@@ -1,15 +1,11 @@
 import React from 'react'
 
 import styled, { css } from 'styled-components'
-import FuturaStdMedium from '../../fonts/FuturaStdMedium.woff'
+import { fonts } from '../../globalStyles/fonts'
 
 const inputStyles = css`
-  @font-face {
-    font-family: 'Futura Std';
-    src: local('Futura Std'), url(${FuturaStdMedium});
-    font-weight: 400;
-    font-style: normal;
-  }
+  ${fonts}
+  'Futura Std', Arial, Helvetica, sans-serif
   background: #ffffff;
   font-style: normal;
   font-weight: normal;
@@ -22,7 +18,6 @@ const inputStyles = css`
   outline: none;
   border: 1px solid #041d42;
   border-radius: 6px;
-  font-family: 'Futura Std';
 `
 
 const InputContainer = styled.div`
@@ -56,7 +51,27 @@ const InputContainer = styled.div`
     color: #979797;
     padding-bottom: 6px;
     align-items: start;
-    font-family: 'Futura Std';
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+  }
+`
+
+const InputElement = styled.input`
+  ${fonts}
+  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+
+  &::-webkit-input-placeholder {
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+  }
+
+  &:-ms-input-placeholder {
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+  }
+
+  &::placeholder {
+    ${fonts}
+    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   }
 `
 
@@ -70,7 +85,7 @@ export const Input: React.FC<InputProps> = ({ label, placeholder, name }) => {
   return (
     <InputContainer>
       <label className='labelStyle'>{label}</label>
-      <input placeholder={placeholder} className={name} />
+      <InputElement placeholder={placeholder} className={name} />
     </InputContainer>
   )
 }

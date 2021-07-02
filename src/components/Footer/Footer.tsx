@@ -3,21 +3,9 @@ import styled from 'styled-components'
 import { Link, BrowserRouter as Router } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
-import FuturaStd from '../../fonts/FuturaStdMedium.woff'
+import { fonts } from '../../globalStyles/fonts'
 
 export const FooterFonts = createGlobalStyle`
-	@font-face {
-		font-family: 'Futura Std';
-		src: local('Futura Std'), local('FuturaStd'),
-		url(${FuturaStd}) format('woff');
-		font-weight: 400;
-		font-style: normal;
-	}
-
-	details {
-		font-family: "Futura Std";
-	}
-
 	code {
 		font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 			monospace;
@@ -25,11 +13,12 @@ export const FooterFonts = createGlobalStyle`
 `
 
 const DetailsStyles = styled.details`
+  ${fonts}
+  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   text-align: start;
   background-color: #041d42;
   color: #ffffff;
   padding: 21px;
-  font-family: 'Futura Std';
   a {
     display: block;
     color: #ffffff;

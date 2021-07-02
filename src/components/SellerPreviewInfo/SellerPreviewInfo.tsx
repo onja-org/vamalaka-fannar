@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { fonts } from '../../globalStyles/fonts/fonts'
+import { fonts } from '../../globalStyles/fonts'
 
 export interface SellerInfoProperties {
   image: string
@@ -48,7 +48,7 @@ const Image = styled('img')`
 `
 const Description = styled('span')`
   ${fonts}
-  font-family: 'Futura Std', sans-serif;
+  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;

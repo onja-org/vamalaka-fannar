@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 
-import { CategoryList, CategoryListProps } from './categoryList'
+import { CategoryList, CategoryListProps } from './CategoryList'
 
 export default {
   title: 'Components/Category List',

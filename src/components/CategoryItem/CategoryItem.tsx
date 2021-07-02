@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { fonts } from '../../globalStyles/fonts'
 
 export interface CategoryItemProp {
   item: string
@@ -22,6 +23,8 @@ export const CategoryItem: React.FC<CategoryItemProp> = ({
 }
 
 const Button = styled.button`
+  ${fonts}
+  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   width: 100%;
   cursor: pointer;
   margin-left: 0;
