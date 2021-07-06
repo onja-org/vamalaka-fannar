@@ -3,6 +3,8 @@ var GraphQLNonNull = require("graphql").GraphQLNonNull;
 var GraphQLID = require("graphql").GraphQLID;
 var GraphQLString = require("graphql").GraphQLString;
 
+exports.userRoles = ["buyer", "seller", "admin", "moderator"];
+
 exports.userType = new GraphQLObjectType({
   name: "user",
   fields: () => {
@@ -17,6 +19,9 @@ exports.userType = new GraphQLObjectType({
         type: GraphQLString,
       },
       username: {
+        type: new GraphQLNonNull(GraphQLString),
+      },
+      role: {
         type: new GraphQLNonNull(GraphQLString),
       },
       createdAt: {

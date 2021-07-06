@@ -16,6 +16,7 @@ const RegisterInput = new GraphQLInputObjectType({
   fields: {
     username: { type: new GraphQLNonNull(GraphQLString) },
     password: { type: new GraphQLNonNull(GraphQLString) },
+    role: { type: new GraphQLNonNull(GraphQLString) },
     confirmPassword: { type: new GraphQLNonNull(GraphQLString) },
     email: { type: new GraphQLNonNull(GraphQLString) },
   },
@@ -40,7 +41,7 @@ module.exports = {
     resolve: async (root, args) => {
       console.log(args, "register USER-----------------");
       const {
-        registerInput: { password, username, confirmPassword, email },
+        registerInput: { password, username, confirmPassword, email, role },
       } = args;
 
       const existingUser = await usersModel.findOne({ username });
@@ -49,7 +50,8 @@ module.exports = {
         username,
         email,
         password,
-        confirmPassword
+        confirmPassword,
+        role
       );
 
       console.log(valid, "----------valid");
@@ -68,6 +70,7 @@ module.exports = {
         email,
         username,
         createdAt: new Date().toISOString(),
+        role,
       });
       const res = await uModel.save();
 

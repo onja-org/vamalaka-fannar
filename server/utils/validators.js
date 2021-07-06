@@ -1,18 +1,24 @@
+var userRoles = require("../graphql/types/user").userRoles;
 module.exports.validateRegisterInput = (
   username,
   email,
   password,
-  confirmPassword
+  confirmPassword,
+  role
 ) => {
   console.log(
     username + ":uname",
     email + ":email",
     password + ":pass",
-    confirmPassword + ":cpass"
+    confirmPassword + ":cpass",
+    role + ":role"
   );
   const errors = {};
   if (username.trim() === "") {
     errors.username = "Username must not be empty";
+  }
+  if (!userRoles.some((possibleRole) => possibleRole === role)) {
+    errors.role = "passed role does not match any possible roles";
   }
   if (email.trim() === "") {
     errors.email = "Email must not be empty";
