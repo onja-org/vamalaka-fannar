@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import { GaramondWoff } from '../../fonts/Garamond.woff'
-import { GaramondWoff2 } from '../../fonts/Garamond.woff2'
 
 export interface ButtonsProps {
   label?: string
@@ -27,7 +25,7 @@ const Button = styled.button<ButtonsProps>`
   @font-face {
     font-family: 'Garamond';
     src: local('Garamond'), local('Garamond'),
-      url(${GaramondWoff2}) format('woff2'), url(${GaramondWoff}) format('woff');
+      url(${fonts}) format('woff2'), url(${fonts}) format('woff');
     font-weight: 400;
     font-style: normal;
   }
