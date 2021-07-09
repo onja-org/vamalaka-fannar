@@ -78,14 +78,19 @@ const InputElement = styled.input`
 export interface InputProps {
   label: string
   placeholder: string
-  name: string
+  className: string
+  value: string
 }
 
-export const Input: React.FC<InputProps> = ({ label, placeholder, name }) => {
+export const Input: React.FC<InputProps> = ({
+  label,
+  placeholder,
+  className,
+}) => {
   return (
     <InputContainer>
       <label className='labelStyle'>{label}</label>
-      <InputElement placeholder={placeholder} className={name} />
+      <InputElement placeholder={placeholder} className={className} />
     </InputContainer>
   )
 }

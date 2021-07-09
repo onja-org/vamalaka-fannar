@@ -14,12 +14,14 @@ export const largeInput = Template.bind({})
 largeInput.args = {
   placeholder: 'Invictus Innocent',
   label: 'Your full name',
-  name: 'large',
+  className: 'large',
+  value: 'name',
 }
 
 export const smallInput = Template.bind({})
 smallInput.args = {
   placeholder: 'Invictus Innocent',
   label: 'Your full name',
-  name: 'small',
+  className: 'small',
+  value: 'name',
 }
