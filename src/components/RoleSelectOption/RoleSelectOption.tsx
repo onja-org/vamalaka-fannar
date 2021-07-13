@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 import arrowRightIcon from '../../stories/assets/arrow-right.svg'
@@ -10,6 +11,7 @@ export interface OptionProps {
   text?: string
   src?: string
   alt?: string
+  onClick?: () => void
 }
 
 const polygonBg = css`
@@ -26,134 +28,101 @@ const optionWrapperStyles = css`
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
-  padding-inline-start: 8px;
-  padding-block-start: 10px;
-  padding-block-end: 4px;
+  gap: 10%;
   align-items: center;
   box-sizing: border-box;
   border-radius: 6px;
+  padding: 8px 28px;
 `
 
-export const Option: React.FC<OptionProps> = ({ label, text, src, alt }) => {
+export const Option: React.FC<OptionProps> = ({
+  label,
+  text,
+  src,
+  alt,
+  onClick,
+}) => {
   return (
     <RoleSelectWrapper>
-      <div
-        className={
-          label === 'Buyer'
-            ? 'inner-select-wrapper-buyer'
-            : 'inner-select-wrapper-seller'
-        }>
-        <div
-          className={
-            label === 'Buyer'
-              ? 'dark-polygon-wrapper-bg'
-              : 'white-polygon-wrapper-bg'
-          }>
-          <img src={src} alt={alt} />
-        </div>
-        <div className='text-wrapper'>
+      <button onClick={onClick}>
+        {label === 'Buyer' ? (
+          <DarkPolygon>
+            <img src={src} alt={alt} />
+          </DarkPolygon>
+        ) : (
+          <WhitePolygon>
+            <img src={src} alt={alt} />
+          </WhitePolygon>
+        )}
+        <TextWrapper>
           <h6>{label}</h6>
           <p>{text}</p>
-        </div>
-        {label === 'Buyer' ? (
-          <button className='arrow-right-wrapper' onClick={() => null}>
-            <img src={arrowRightIcon} alt='Arrow icon' />
-          </button>
-        ) : (
-          <button className='arrow-right-wrapper-hidden'>
-            <img src={arrowRightIcon} alt='Arrow icon' />
-          </button>
-        )}
-      </div>
+        </TextWrapper>
+      </button>
     </RoleSelectWrapper>
   )
 }
 
 const RoleSelectWrapper = styled.div`
-  .inner-select-wrapper-buyer {
-    background-color: #f5f9ff;
-    border: 1px solid #041d42;
+  button {
+    width: 100%;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
     box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.04);
-    ${optionWrapperStyles}
-  }
+    ${optionWrapperStyles};
 
-  .inner-select-wrapper-seller {
-    box-shadow: 0px 2px 14px 1px rgba(0, 0, 0, 0.06);
-    ${optionWrapperStyles}
-  }
+    &:hover {
+      background-color: #f5f9ff;
+    }
 
-  .dark-polygon-wrapper-bg {
-    background-image: url(${darkPolygonBg});
-    ${polygonBg}
+    &:focus {
+      background-color: #f5f9ff;
+      border: 1px solid #041d42;
+      background-image: url(${arrowRightIcon});
+      background-repeat: no-repeat;
+      background-position: 95% 50%;
+    }
   }
+`
 
-  .white-polygon-wrapper-bg {
-    background-image: url(${whitePolygonBg});
-    ${polygonBg}
-  }
+const DarkPolygon = styled.div`
+  background-image: url(${darkPolygonBg});
+  ${polygonBg}
+`
 
-  .text-wrapper h6 {
+const WhitePolygon = styled.div`
+  background-image: url(${whitePolygonBg});
+  ${polygonBg}
+`
+
+const TextWrapper = styled.div`
+  text-align: start;
+
+  h6 {
     font-size: 16px;
     line-height: 19px;
+    font-family: 'Futura Std';
     margin-block-start: 16px;
     margin-block-end: 0;
     color: #041d42;
   }
 
-  .text-wrapper p {
+  p {
     max-width: 161px;
     font-size: 14px;
     line-height: 17px;
     margin-block-start: 4px;
     color: #979797;
   }
-  .text-wrapper {
-    @media (max-width: 360px) {
-      text-align: center;
-      margin: 0;
-    }
-    @media (max-width: 476px) {
-      max-width: 150px;
-    }
+
+  @media (max-width: 360px) {
+    text-align: center;
+    margin: 0;
   }
 
-  .text-wrapper h6 {
-    font-family: 'Futura Std';
-    font-size: 16px;
-    line-height: 19px;
-    margin-block-start: 16px;
-    margin-block-end: 0;
-    color: #041d42;
-  }
-
-  .arrow-right-wrapper {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    justify-self: end;
-    padding-inline-end: 8px;
-    padding-inline-start: 0;
-  }
-
-  .arrow-right-wrapper-hidden {
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  @media (min-width: 375px) {
-    .inner-select-wrapper-buyer,
-    .inner-select-wrapper-seller {
-      padding-inline-start: 28px;
-    }
-
-    .text-wrapper p {
-      max-width: 239px;
-    }
-
-    .arrow-right-wrapper {
-      padding-inline-end: 16px;
-    }
+  @media (max-width: 476px) {
+    max-width: 150px;
   }
 `
