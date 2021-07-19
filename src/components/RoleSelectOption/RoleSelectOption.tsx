@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 import arrowRightIcon from '../../stories/assets/arrow-right.svg'
