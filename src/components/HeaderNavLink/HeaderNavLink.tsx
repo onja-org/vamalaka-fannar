@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import language from '../../assests/languages.svg'
 import transactions from '../../assests/transactions.svg'

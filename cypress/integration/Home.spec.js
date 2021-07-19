@@ -5,6 +5,6 @@ describe('Home Screen', () => {
     cy.visit('/')
   })
   it('Displays the slogan', () => {
-    cy.contains('Vamalaka - Madagascars peer-to-peer e-commerce platform')
+    cy.contains('Discover amazing products and profit from a truly fair market')
   })
 })
