@@ -1,9 +1,9 @@
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLList = require("graphql").GraphQLList;
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLID = require("graphql").GraphQLID;
-var CategoryModel = require("../../models/category");
-var categoryType = require("../types/categoryType").categoryType;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLList = require("graphql").GraphQLList;
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLID = require("graphql").GraphQLID;
+const CategoryModel = require("../../models/category");
+const categoryType = require("../types/categoryType").categoryType;
 
 // Query
 exports.CategoryQuery = new GraphQLObjectType({

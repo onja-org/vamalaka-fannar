@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start.dev": "nodemon --legacy-watch server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +16,17 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
+    "fs": "^0.0.1-security",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.12.4",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.11"
+    "mongoose": "^5.12.11",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "sharp": "^0.28.3",
+    "stream": "^0.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
   }
 }

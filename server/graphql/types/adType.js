@@ -1,9 +1,11 @@
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLID = require("graphql").GraphQLID;
-var GraphQLString = require("graphql").GraphQLString;
-var commentType = require("../types/commentType");
-var GraphQLList = require("graphql").GraphQLList;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLID = require("graphql").GraphQLID;
+const GraphQLString = require("graphql").GraphQLString;
+const GraphQLFloat = require("graphql").GraphQLFloat;
+const commentType = require("../types/commentType");
+const GraphQLList = require("graphql").GraphQLList;
+const { PhotoType } = require("./photoType");
 
 exports.adType = new GraphQLObjectType({
   name: "ad",
@@ -18,6 +20,21 @@ exports.adType = new GraphQLObjectType({
       body: {
         type: GraphQLString,
       },
+      photos: {
+        type: new GraphQLList(PhotoType),
+      },
+      currency: {
+        type: GraphQLString,
+      },
+      price: {
+        type: GraphQLFloat,
+      },
+      unit: {
+        type: GraphQLString,
+      },
+      amountOfProduct: {
+        type: GraphQLFloat,
+      },
       username: {
         type: GraphQLString,
       },
@@ -28,7 +45,6 @@ exports.adType = new GraphQLObjectType({
         type: new GraphQLNonNull(GraphQLID),
       },
       comments: {
-        // type: GraphQLString,
         type: new GraphQLList(commentType.commentType),
       },
     };
