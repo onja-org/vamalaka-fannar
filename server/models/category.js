@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const CategorySchema = new Schema({
   title: {
@@ -15,5 +15,5 @@ const CategorySchema = new Schema({
   },
 });
 
-var CategoryModel = mongoose.model("category", CategorySchema);
+const CategoryModel = mongoose.model("category", CategorySchema);
 module.exports = CategoryModel;

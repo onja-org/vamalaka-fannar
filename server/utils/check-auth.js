@@ -2,10 +2,6 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 
 module.exports = (context) => {
-  console.log(
-    "contextcontextcontextcontextcontextcontextcontextcontextcontext",
-    context
-  );
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
     // Bearer ....

@@ -1,9 +1,9 @@
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLList = require("graphql").GraphQLList;
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLID = require("graphql").GraphQLID;
-var AdModel = require("../../models/ad");
-var adType = require("../types/adType").adType;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLList = require("graphql").GraphQLList;
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLID = require("graphql").GraphQLID;
+const AdModel = require("../../models/ad");
+const adType = require("../types/adType").adType;
 
 // Query
 exports.AdQuery = new GraphQLObjectType({

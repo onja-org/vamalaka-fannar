@@ -1,14 +1,5 @@
 version: "2"
 services:
-  app:
-    container_name: graphqlapp
-    build: .
-    ports:
-      - "4000:4000"
-    links:
-      - mongo
-    volumes:
-      - ". :/usr/src/graphqlApp"
   mongo:
     container_name: graphqlmongo
     image: mongo
@@ -26,3 +17,19 @@ services:
       - DB_HOST=mongo
     links:
       - mongo
+  app:
+    container_name: graphqlapp
+    image: localhost:5000/yourimage
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - USER_UPLOAD_DIR=/images
+      - USER_UPLOADED_DIR=/app/images
+      - DUMMY_IMG=dummy.jpg
+      - CHOKIDAR_USEPOLLING=true
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app:consistent
+      - ./uploads:/app/images:consistent
