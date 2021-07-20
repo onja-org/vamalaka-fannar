@@ -7,6 +7,7 @@ server/node_modules
 .pnp.js
 
 /server/data
+/server/uploads
 # testing
 /coverage
 
@@ -26,4 +27,5 @@ yarn-error.log*
 yarn.lock
 
 /cypress/videos
+/cypress/screenshots
 /storybook-static

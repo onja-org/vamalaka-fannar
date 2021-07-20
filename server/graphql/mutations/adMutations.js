@@ -1,9 +1,12 @@
-var adType = require("../types/adType");
-var adModel = require("../../models/ad");
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLString = require("graphql").GraphQLString;
+const adType = require("../types/adType");
+const adModel = require("../../models/ad");
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLString = require("graphql").GraphQLString;
+const GraphQLFloat = require("graphql").GraphQLFloat;
+const GraphQLList = require("graphql").GraphQLList;
 const checkAuth = require("../../utils/check-auth");
-var GraphQLID = require("graphql").GraphQLID;
+const GraphQLID = require("graphql").GraphQLID;
+const { PhotoInput } = require("../types/photoType");
 
 module.exports = {
   createAd: {
@@ -15,20 +18,38 @@ module.exports = {
       body: {
         type: new GraphQLNonNull(GraphQLString),
       },
+      photos: {
+        type: new GraphQLList(PhotoInput),
+      },
+      currency: {
+        type: GraphQLString,
+      },
+      price: {
+        type: GraphQLFloat,
+      },
+      unit: {
+        type: GraphQLString,
+      },
+      amountOfProduct: {
+        type: GraphQLFloat,
+      },
     },
     resolve: async (root, args, context) => {
-      // console.log(root, "root ");
-      // console.log(context, "context ");
       const user = checkAuth(context);
       console.log(user, "user");
-      const { title, body, username } = args;
+      const { title, body, photos, currency, price, unit, amountOfProduct } =
+        args;
 
-      // const uModel = new adModel(args);
       const uModel = new adModel({
         title,
         body,
         username: user.username,
         user: user.id,
+        photos,
+        currency,
+        price,
+        unit,
+        amountOfProduct,
         createdAt: new Date().toISOString(),
       });
 
@@ -46,17 +67,31 @@ module.exports = {
         type: new GraphQLNonNull(GraphQLString),
       },
       title: {
-        type: new GraphQLNonNull(GraphQLString),
+        type: GraphQLString,
       },
       body: {
-        type: new GraphQLNonNull(GraphQLString),
+        type: GraphQLString,
       },
-      username: {
-        type: new GraphQLNonNull(GraphQLString),
+      photos: {
+        type: new GraphQLList(PhotoInput),
+      },
+      currency: {
+        type: GraphQLString,
+      },
+      price: {
+        type: GraphQLFloat,
+      },
+      unit: {
+        type: GraphQLString,
+      },
+      amountOfProduct: {
+        type: GraphQLFloat,
       },
     },
     resolve: async (root, args) => {
-      const UpdatedAd = await adModel.findByIdAndUpdate(args.id, args);
+      const UpdatedAd = await adModel.findByIdAndUpdate(args.id, args, {
+        new: true,
+      });
       if (!UpdatedAd) {
         throw new Error("Error");
       }
@@ -73,23 +108,27 @@ module.exports = {
     resolve: async (root, args, context) => {
       console.log(args, "args");
       const user = checkAuth(context);
-
       const adToRemove = await adModel.findByIdAndRemove(args.id);
+      if (!adToRemove) {
+        throw new Error(`Add with id: ${args.id} not found`);
+      }
+
       try {
         if (user.username === adToRemove.username) {
+          //TODO add removal of the images ?
           await adToRemove.delete();
-          return "ad deleted successfully";
+
+          return {
+            username: adToRemove.username,
+            id: adToRemove._id,
+            title: adToRemove.title,
+          };
         } else {
           throw new Error("action not allowed");
         }
       } catch (error) {
         throw new Error(error);
       }
-
-      // if (!removedAd) {
-      //   throw new Error("error");
-      // }
-      // return removedAd;
     },
   },
   createComment: {
@@ -122,7 +161,7 @@ module.exports = {
           await adToComment.save();
           return adToComment;
         } else {
-          throw new Error("Post not found");
+          throw new Error("Ad not found");
         }
       } catch (error) {
         throw new Error(error);

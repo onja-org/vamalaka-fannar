@@ -1,7 +1,7 @@
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLNonNull = require("graphql").GraphQLNonNull;
-var GraphQLID = require("graphql").GraphQLID;
-var GraphQLString = require("graphql").GraphQLString;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLNonNull = require("graphql").GraphQLNonNull;
+const GraphQLID = require("graphql").GraphQLID;
+const GraphQLString = require("graphql").GraphQLString;
 
 exports.categoryType = new GraphQLObjectType({
   name: "category",

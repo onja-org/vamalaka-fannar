@@ -1,5 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const { photoSchemaDef } = require("./photo");
+const Schema = mongoose.Schema;
 
 const AdSchema = new Schema({
   body: {
@@ -13,6 +14,19 @@ const AdSchema = new Schema({
   username: {
     type: String,
     required: true,
+  },
+  photos: [photoSchemaDef],
+  currency: {
+    type: String,
+  },
+  price: {
+    type: Number,
+  },
+  unit: {
+    type: String,
+  },
+  amountOfProduct: {
+    type: Number,
   },
   createdAt: {
     type: String,
@@ -40,5 +54,5 @@ const AdSchema = new Schema({
   ],
 });
 
-var AdModel = mongoose.model("ad", AdSchema);
+const AdModel = mongoose.model("ad", AdSchema);
 module.exports = AdModel;

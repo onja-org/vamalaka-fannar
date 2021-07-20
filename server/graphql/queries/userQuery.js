@@ -1,7 +1,7 @@
-var GraphQLObjectType = require("graphql").GraphQLObjectType;
-var GraphQLList = require("graphql").GraphQLList;
-var UserModel = require("../../models/Users");
-var userType = require("../types/user").userType;
+const GraphQLObjectType = require("graphql").GraphQLObjectType;
+const GraphQLList = require("graphql").GraphQLList;
+const UserModel = require("../../models/Users");
+const userType = require("../types/user").userType;
 
 // Query
 exports.UserQuery = new GraphQLObjectType({
