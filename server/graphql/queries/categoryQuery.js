@@ -4,7 +4,7 @@ const GraphQLNonNull = require("graphql").GraphQLNonNull;
 const GraphQLID = require("graphql").GraphQLID;
 const CategoryModel = require("../../models/category");
 const categoryType = require("../types/categoryType").categoryType;
-
+const { getErrorForCode, ERROR_CODES } = require("../../utils/errorCodes");
 // Query
 exports.CategoryQuery = new GraphQLObjectType({
   name: "Query",
@@ -16,7 +16,7 @@ exports.CategoryQuery = new GraphQLObjectType({
           try {
             const categories = await CategoryModel.find();
             if (!categories) {
-              throw new Error("error while fetching data");
+              throw new Error(getErrorForCode(ERROR_CODES.EA3));
             }
             return categories;
           } catch (error) {
@@ -35,7 +35,7 @@ exports.CategoryQuery = new GraphQLObjectType({
           try {
             const category = await CategoryModel.findById(id);
             if (!category) {
-              throw new Error("category not found data");
+              throw new Error(getErrorForCode(ERROR_CODES.EA2));
             }
             return category;
           } catch (error) {

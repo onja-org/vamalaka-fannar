@@ -1,4 +1,5 @@
 const sharp = require("sharp");
+const { getErrorForCode, ERROR_CODES } = require("./errorCodes");
 
 module.exports.resize = (format, width, height) => {
   try {
@@ -14,7 +15,7 @@ module.exports.resize = (format, width, height) => {
     return transform;
   } catch (err) {
     console.log("Error in resize", err);
-    throw new Error("Problems reading the file");
+    throw new Error(getErrorForCode(ERROR_CODES.EI1));
   }
 };
 

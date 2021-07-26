@@ -7,6 +7,7 @@ const GraphQLList = require("graphql").GraphQLList;
 const checkAuth = require("../../utils/check-auth");
 const GraphQLID = require("graphql").GraphQLID;
 const { PhotoInput } = require("../types/photoType");
+const { getErrorForCode, ERROR_CODES } = require("../../utils/errorCodes");
 
 module.exports = {
   createAd: {
@@ -55,7 +56,7 @@ module.exports = {
 
       const newAd = await uModel.save();
       if (!newAd) {
-        throw new Error("error");
+        throw new Error(getErrorForCode(ERROR_CODES.EA1));
       }
       return newAd;
     },
@@ -93,7 +94,7 @@ module.exports = {
         new: true,
       });
       if (!UpdatedAd) {
-        throw new Error("Error");
+        throw new Error(getErrorForCode(ERROR_CODES.EA2));
       }
       return UpdatedAd;
     },
@@ -110,7 +111,7 @@ module.exports = {
       const user = checkAuth(context);
       const adToRemove = await adModel.findByIdAndRemove(args.id);
       if (!adToRemove) {
-        throw new Error(`Add with id: ${args.id} not found`);
+        throw new Error(getErrorForCode(ERROR_CODES.EA2));
       }
 
       try {
@@ -124,7 +125,7 @@ module.exports = {
             title: adToRemove.title,
           };
         } else {
-          throw new Error("action not allowed");
+          throw new Error(getErrorForCode(ERROR_CODES.EG1));
         }
       } catch (error) {
         throw new Error(error);
@@ -147,7 +148,7 @@ module.exports = {
         const { username } = checkAuth(context);
 
         if (body.trim() === "") {
-          throw new Error("Comment body must not be empty");
+          throw new Error(getErrorForCode(ERROR_CODES.ECO1));
         }
 
         const adToComment = await adModel.findById(postId);
@@ -161,7 +162,7 @@ module.exports = {
           await adToComment.save();
           return adToComment;
         } else {
-          throw new Error("Ad not found");
+          throw new Error(getErrorForCode(ERROR_CODES.EA2));
         }
       } catch (error) {
         throw new Error(error);
@@ -192,10 +193,10 @@ module.exports = {
             await ad.save();
             return ad;
           } else {
-            throw new Error("action not allowed");
+            throw new Error(getErrorForCode(ERROR_CODES.EG1));
           }
         } else {
-          throw new Error("ad / offer not found");
+          throw new Error(getErrorForCode(ERROR_CODES.EA2));
         }
       } catch (error) {
         throw new Error(error);

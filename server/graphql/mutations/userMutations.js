@@ -13,6 +13,7 @@ const checkAuth = require("../../utils/check-auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { PhotoInput } = require("../types/photoType");
+const { getErrorForCode, ERROR_CODES } = require("../../utils/errorCodes");
 
 const RegisterInput = new GraphQLInputObjectType({
   name: "RegisterInput",
@@ -58,14 +59,13 @@ module.exports = {
       );
 
       console.log(valid, "----------valid");
-
       if (!valid) {
         throw new Error(`Errors ${JSON.stringify(errors)}`);
       }
 
       console.log(existingUser, "existingUser");
       if (existingUser) {
-        throw new Error("user name already exists");
+        throw new Error(getErrorForCode(ERROR_CODES.EU2));
       }
       const hashedPassword = await bcrypt.hash(password, 12);
       const uModel = new usersModel({
@@ -78,7 +78,7 @@ module.exports = {
       const res = await uModel.save();
 
       if (!res) {
-        throw new Error("error saving data");
+        throw new Error(getErrorForCode(ERROR_CODES.EU3));
       }
 
       const token = generateToken(res);
@@ -104,13 +104,11 @@ module.exports = {
       const existingUser = await usersModel.findOne({ username });
 
       if (!valid) {
-        const errNotValid = "Invalid input";
-        errors.general = errNotValid;
-        throw new Error(errNotValid);
+        throw new Error(errors);
       }
 
       if (!existingUser) {
-        const errNoUser = "User not found";
+        const errNoUser = getErrorForCode(ERROR_CODES.EU12);
         errors.general = errNoUser;
         throw new Error(errNoUser);
       }
@@ -118,7 +116,7 @@ module.exports = {
       const match = await bcrypt.compare(password, existingUser.password);
 
       if (!match) {
-        const errNoUser = "Wrong creadentials";
+        const errNoUser = getErrorForCode(ERROR_CODES.EU13);
         errors.general = errNoUser;
         throw new Error(errNoUser);
       }
@@ -164,7 +162,7 @@ module.exports = {
       const errors = {};
       const user = checkAuth(context);
       if (!user) {
-        const errNotAuthenticated = "You are not authenticated";
+        const errNotAuthenticated = getErrorForCode(ERROR_CODES.EU14);
         errors.errNotAuthenticated = errNotAuthenticated;
         throw new Error(errNotValid);
       }
@@ -176,7 +174,7 @@ module.exports = {
       });
 
       if (!updatedUser) {
-        throw new Error("Error no user found for update");
+        throw new Error(getErrorForCode(ERROR_CODES.EU14));
       }
       return updatedUser;
     },
