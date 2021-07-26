@@ -4,6 +4,7 @@ const GraphQLNonNull = require("graphql").GraphQLNonNull;
 const GraphQLString = require("graphql").GraphQLString;
 const checkAuth = require("../../utils/check-auth");
 const GraphQLID = require("graphql").GraphQLID;
+const { getErrorForCode, ERROR_CODES } = require("../../utils/errorCodes");
 
 module.exports = {
   createCategory: {
@@ -30,7 +31,7 @@ module.exports = {
 
       const newCategory = await categoryModel.save();
       if (!newCategory) {
-        throw new Error("error");
+        throw new Error(getErrorForCode(ERROR_CODES.ECA1));
       }
       return newCategory;
     },
@@ -57,7 +58,7 @@ module.exports = {
         }
       );
       if (!updatedCategory) {
-        throw new Error("Error");
+        throw new Error(getErrorForCode(ERROR_CODES.ECA2));
       }
       return updatedCategory;
     },
@@ -79,7 +80,7 @@ module.exports = {
           await categoryToRemove.delete();
           return "Category deleted successfully";
         } else {
-          throw new Error("action not allowed");
+          throw new Error(getErrorForCode(ERROR_CODES.EG1));
         }
       } catch (error) {
         throw new Error(error);
