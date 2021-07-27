@@ -4,6 +4,7 @@ const GraphQLNonNull = require("graphql").GraphQLNonNull;
 const GraphQLID = require("graphql").GraphQLID;
 const AdModel = require("../../models/ad");
 const adType = require("../types/adType").adType;
+const { getErrorForCode, ERROR_CODES } = require("../../utils/errorCodes");
 
 // Query
 exports.AdQuery = new GraphQLObjectType({
@@ -16,7 +17,7 @@ exports.AdQuery = new GraphQLObjectType({
           try {
             const ads = await AdModel.find().sort({ createdAt: -1 });
             if (!ads) {
-              throw new Error("error while fetching data");
+              throw new Error(getErrorForCode(ERROR_CODES.EA3));
             }
             return ads;
           } catch (error) {
@@ -35,7 +36,7 @@ exports.AdQuery = new GraphQLObjectType({
           try {
             const ad = await AdModel.findById(id);
             if (!ad) {
-              throw new Error("add not found data");
+              throw new Error(getErrorForCode(ERROR_CODES.EA2));
             }
             return ad;
           } catch (error) {
