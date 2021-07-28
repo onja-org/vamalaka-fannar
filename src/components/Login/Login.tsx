@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
+import { Paths } from '../../paths'
 import { fonts } from '../../globalStyles/fonts'
 
 export interface LoginProps {
   isSignedUp: boolean
-  href: string
 }
 
-export const Login: React.FC<LoginProps> = ({ isSignedUp, href }) => {
+export const Login: React.FC<LoginProps> = ({ isSignedUp }) => {
   const loginEscapeTexts = isSignedUp
     ? 'Already have an account?'
     : 'Not a user yet?'
@@ -19,7 +20,7 @@ export const Login: React.FC<LoginProps> = ({ isSignedUp, href }) => {
     <LoginContainer>
       <p>
         {loginEscapeTexts}
-        <a href={href}>{signUpOrSignInTexts}</a>
+        <Link to={Paths.LOGIN}>{signUpOrSignInTexts}</Link>
       </p>
     </LoginContainer>
   )

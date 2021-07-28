@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 
 export interface InputType {
   placeholderText: string
@@ -27,9 +28,9 @@ const Label = styled.label`
   position: relative;
   gap: 12px;
 
-  @media (min-width: 1200px) {
-    width: 70%;
-  }
+  ${mediaQueries('xl', null)`
+    width: 100%;
+  `}
 
   input {
     ${fonts}
@@ -42,6 +43,7 @@ const Label = styled.label`
     border: none;
     &:focus {
       border: none;
+      outline: none;
     }
     &::-webkit-input-placeholder {
       ${fonts}
@@ -59,7 +61,7 @@ const Label = styled.label`
     }
   }
 
-  @media (max-width: 900px) {
+  ${mediaQueries(null, 'lmd')`
     display: none;
-  }
+  `}
 `

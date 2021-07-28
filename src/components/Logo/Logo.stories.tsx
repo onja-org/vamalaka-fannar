@@ -1,7 +1,12 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Story, Meta, addDecorator } from '@storybook/react'
 import { Logo, LogoProps } from './Logo'
 import logo from './images/vamalaka.svg'
+import { MemoryRouter } from 'react-router'
+
+addDecorator((story) => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
 
 export default {
   title: 'Header/Logo',

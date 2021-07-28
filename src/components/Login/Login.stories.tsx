@@ -1,7 +1,11 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
-
+import { Story, Meta, addDecorator } from '@storybook/react'
 import { Login, LoginProps } from './Login'
+import { MemoryRouter } from 'react-router'
+
+addDecorator((story) => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
 
 export default {
   title: 'Login/Login',
@@ -13,11 +17,9 @@ const LoginStoryBook: Story<LoginProps> = (args) => <Login {...args} />
 export const AlreadyHaveAnAccount = LoginStoryBook.bind({})
 AlreadyHaveAnAccount.args = {
   isSignedUp: true,
-  href: './',
 }
 
 export const NotUser = LoginStoryBook.bind({})
 NotUser.args = {
   isSignedUp: false,
-  href: './',
 }

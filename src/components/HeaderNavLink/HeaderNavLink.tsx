@@ -1,17 +1,19 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import language from '../../assests/languages.svg'
-import transactions from '../../assests/transactions.svg'
-import account from '../../assests/account.svg'
-import signin from '../../assests/signin.svg'
+import language from '../../assets/languages.svg'
+import transactions from '../../assets/transactions.svg'
+import account from '../../assets/account.svg'
+import signin from '../../assets/signin.svg'
 import { fonts } from '../../globalStyles/fonts'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 
 export const loggedIn = [
   { path: '#language', imgSrc: language, alt: 'Languages', text: 'English' },
   {
     path: '#transactions',
     imgSrc: transactions,
-    alt: 'Transactionss',
+    alt: 'Transactions',
     text: 'Transactions',
   },
   {
@@ -22,23 +24,23 @@ export const loggedIn = [
   },
 ]
 
-export const loggeOut = [
-  { path: '#language', imgSrc: language, alt: 'Languages', text: 'English' },
+export const login = [
+  { path: 'language', imgSrc: language, alt: 'Languages', text: 'English' },
   {
-    path: '#login',
+    path: 'login',
     imgSrc: signin,
     alt: 'Log in',
     text: 'Log in',
   },
   {
-    path: '#account',
+    path: 'register-account',
     imgSrc: account,
-    alt: 'Accounts',
-    text: 'Account',
+    alt: 'Sign up',
+    text: 'Sign up',
   },
 ]
 export interface ItemType {
-  path: string
+  path?: string
   imgSrc?: string
   alt: string
   text: string
@@ -50,10 +52,10 @@ export interface LinkTypes {
 
 export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => (
   <Item>
-    <a type='button' href={path} data-testid={text}>
+    <Link to={`/${path}`} data-testid={text}>
       <img src={imgSrc} alt={alt} />
       <span>{text}</span>
-    </a>
+    </Link>
   </Item>
 )
 
@@ -66,18 +68,15 @@ const Item = styled.li`
     color: #041d42;
     text-decoration: none;
     display: flex;
+    border: none;
+    background-color: transparent;
 
     span {
       margin-inline-start: 10px;
 
-      @media (max-width: 600px) {
+      ${mediaQueries('md', 'lg')`
         display: none;
-      }
-    }
-  }
-  &:first-of-type {
-    @media (max-width: 900px) {
-      display: none;
+      `}
     }
   }
 `

@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { loggedIn } from '../components/HeaderNavLink/HeaderNavLink'
+import { login } from '../components/HeaderNavLink/HeaderNavLink'
 import { Header } from '../components/Header'
-import { maxWidthMedia } from '../containers/RoleSelectionContainer'
 import { PageFooter } from '../components/PageFooter/PageFooter'
+import { mediaQueries } from '../mediaQueries/mediaQueries'
 
 export const footerLinks = [
   {
@@ -63,7 +63,7 @@ const GenericContainerPage: FC = ({ children }) => {
     <Container>
       <TopContainerStyles>
         <HeaderContainer>
-          <Header item={loggedIn} />
+          <Header item={login} />
         </HeaderContainer>
         <MainContainer>{children}</MainContainer>
       </TopContainerStyles>
@@ -80,7 +80,7 @@ const Container = styled.div`
     margin-top: 0;
     padding-top: 220px;
   }
-  @media (max-width: ${maxWidthMedia}) {
+  ${mediaQueries(null, 'lmd')`
     footer > div > * {
       display: none;
     }
@@ -89,7 +89,7 @@ const Container = styled.div`
       padding: 0;
       min-height: 184px;
     }
-  }
+  `}
 `
 
 const HeaderContainer = styled.div`
@@ -105,17 +105,17 @@ const TopContainerStyles = styled.div`
   );
   width: 100%;
   min-height: calc(318px + 164px + 205px - 54px);
-  @media (max-width: ${maxWidthMedia}) {
+  ${mediaQueries(null, 'lmd')`
     min-height: 480px;
-  }
+  `}
 
-  @media (max-width: 420px) {
+  ${mediaQueries(null, 'smd')`
     min-height: 544px;
-  }
+  `}
 
-  @media (max-width: 360px) {
+  ${mediaQueries(null, 'md')`
     min-height: 644px;
-  }
+  `}
 `
 
 const MainContainer = styled.div`
@@ -126,10 +126,10 @@ const MainContainer = styled.div`
   padding: 47px 14px 14px 16px;
   display: flex;
   justify-content: center;
-  @media (max-width: 920px) {
+  ${mediaQueries(null, 'lmd')`
     & > div:nth-child(1) {
       display: none;
-    }
+    `}
   }
 `
 

@@ -6,6 +6,9 @@ import userIcon from '../stories/assets/user.svg'
 import briefcaseIcon from '../stories/assets/briefcase.svg'
 import { Login } from '../components/Login/Login'
 import { LeftSide } from '../components/LeftSide/LeftSide'
+import { Link } from 'react-router-dom'
+import { Paths } from '../paths'
+import { mediaQueries } from '../mediaQueries/mediaQueries'
 
 export const maxWidthMedia = '920px'
 
@@ -24,23 +27,27 @@ export const RoleSelectionContainer = () => {
             }
           />
           <div>
-            <Option
-              label='Buyer'
-              text='Personal account to manage all you activities.'
-              src={userIcon}
-              alt='User icon'
-            />
+            <Link to={Paths.REGISTER_ACCOUNT}>
+              <Option
+                label='Buyer'
+                text='Personal account to manage all you activities.'
+                src={userIcon}
+                alt='User icon'
+              />
+            </Link>
           </div>
           <div>
-            <Option
-              label='Seller'
-              text='Own or belong to a company, this is for you.'
-              src={briefcaseIcon}
-              alt='Briefcase icon'
-            />
+            <Link to={Paths.REGISTER_ACCOUNT}>
+              <Option
+                label='Seller'
+                text='Own or belong to a company, this is for you.'
+                src={briefcaseIcon}
+                alt='Briefcase icon'
+              />
+            </Link>
           </div>
           <AccountContainer>
-            <Login isSignedUp={true} href='./' />
+            <Login isSignedUp={true} />
           </AccountContainer>
         </div>
       </RoleOptionContainer>
@@ -60,23 +67,27 @@ const RoleOptionContainer = styled.div`
       margin: 14px 0;
     }
   }
-
-  @media (min-width: ${maxWidthMedia}) {
+  ${mediaQueries('lmd', null)`
     flex-basis: 50%;
     padding: calc(113px - 14px * 2) 0;
-  }
+  `}
 `
 
 const AccountContainer = styled.div`
   color: #979797;
-  @media (min-width: ${maxWidthMedia}) {
+  p {
+    padding-top: 48px;
+  }
+
+  ${mediaQueries('lmd', null)`
     p {
       position: absolute;
       margin: 0;
       top: 22px;
       right: 27px;
+      padding-top: 0;
     }
-  }
+  `}
 `
 
 const ImageContainer = styled.div`
@@ -86,9 +97,9 @@ const ImageContainer = styled.div`
   max-width: 583px;
   max-height: 601px;
   overflow: hidden;
-  @media (min-width: ${maxWidthMedia}) {
+  ${mediaQueries('lmd', null)`
     flex-basis: 50%;
-  }
+  `}
   p {
     margin: 0;
   }
