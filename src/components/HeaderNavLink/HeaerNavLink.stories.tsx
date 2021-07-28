@@ -5,7 +5,7 @@ import {
   ItemType,
   LinkTypes,
   loggedIn,
-  loggeOut,
+  login,
 } from './HeaderNavLink'
 import { List } from './List'
 
@@ -29,5 +29,5 @@ LoggedIn.args = {
 
 export const LoggedOut = Template.bind({})
 LoggedOut.args = {
-  item: loggeOut,
+  item: login,
 }

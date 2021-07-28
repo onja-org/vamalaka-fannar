@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, BrowserRouter as Router } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
 import { fonts } from '../../globalStyles/fonts'
@@ -93,7 +93,7 @@ export interface SectionLinkProps {
 
 export const LinkSection: React.FC<SectionLinkProps> = ({ footerLink }) => {
   return (
-    <Router>
+    <>
       <FooterFonts />
       {footerLink && (
         <DetailsStyles key={footerLink.id} open>
@@ -105,6 +105,6 @@ export const LinkSection: React.FC<SectionLinkProps> = ({ footerLink }) => {
           ))}
         </DetailsStyles>
       )}
-    </Router>
+    </>
   )
 }
