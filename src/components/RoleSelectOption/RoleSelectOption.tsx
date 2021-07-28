@@ -44,7 +44,7 @@ export const Option: React.FC<OptionProps> = ({
 }) => {
   return (
     <RoleSelectWrapper>
-      <button onClick={onClick}>
+      <button>
         {label === 'Buyer' ? (
           <DarkPolygon>
             <img src={src} alt={alt} />

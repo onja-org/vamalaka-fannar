@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Logo } from '../Logo/Logo'
 import styled from 'styled-components'
 import logo from '../Logo/images/vamalaka.svg'
-import searchIcon from '../../assests/searchIcon.svg'
+import searchIcon from '../../assets/searchIcon.svg'
 import {
   HeaderNavLink,
   ItemType,

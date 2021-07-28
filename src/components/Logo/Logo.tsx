@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Paths } from '../../paths'
 
 export interface LogoProps {
   logo: string
@@ -9,9 +11,9 @@ export interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ alt, logo }) => {
   return (
     <Container>
-      <a href='/'>
+      <Link to={Paths.DEFAULT}>
         <Image src={logo} alt={alt} />
-      </a>
+      </Link>
     </Container>
   )
 }
