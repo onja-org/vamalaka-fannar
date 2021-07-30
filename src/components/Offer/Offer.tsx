@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import Buttons from '../Buttons/Buttons'
 import { DescriptionOffer } from '../DescriptionOffer/descriptionOffer'
 import { HeaderOfOffer } from '../HeaderOfOffer/HeaderOfOffer'
@@ -7,16 +8,17 @@ import { ImageWithinOffer } from '../ImageWithinOffer/ImageWithinOffer'
 import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
+import { Photo } from '../OffersList/OffersList'
 
 const flexLayout = css`
   display: flex;
   flex-direction: row;
-  align-items: center;
 `
-
 const OfferStyle = styled.div`
   background-color: #ffffff;
-  max-width: 225px;
+  max-width: 320px;
+  padding: 1rem;
+  box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
   .buttonContainer {
     ${flexLayout}
     justify-content: space-between;
@@ -34,25 +36,25 @@ const OfferStyle = styled.div`
       &:focus {
         outline: none;
       }
-      @media (min-width: 1114px) {
+      ${mediaQueries('xl', null)`
         display: none;
-      }
-    }
+      }`}
+
     .favoriteButtonContainer {
       display: none;
-      @media (min-width: 1114px) {
+      ${mediaQueries('xl', null)`
         display: block;
-      }
+      `}
 
       button {
         padding: 6px 10px;
       }
     }
 
-    @media (min-width: 1114px) {
+    ${mediaQueries('xl', null)`
       padding-bottom: 5px;
-      max-width: 90%;
-    }
+      gap: 16rem;
+    `}
   }
 
   .offerDetails {
@@ -60,47 +62,54 @@ const OfferStyle = styled.div`
     h3 {
       margin-left: -9px;
       padding-left: 9px;
+      padding-right: 9px;
       transform: translateY(-26px);
       background-color: #fff;
       width: fit-content;
 
-      @media (min-width: 1114px) {
+      ${mediaQueries('xl', null)`
         transform: translateY(14px);
         font-size: 30px;
-      }
+      `}
     }
+
+    ${mediaQueries('xl', null)`
+      margin-left: 20px;
+    `}
   }
 
   .productDetails {
     ${flexLayout}
     gap: 11.5px;
+    justify-content: space-between;
 
-    @media (min-width: 1114px) {
-      gap: 15.75px;
-    }
+    ${mediaQueries('xl', null)`
+      gap: 22px;
+      justify-content: end;
+    `}
   }
 
   .ratingContainer {
     ${flexLayout}
     gap: 4.19px;
+    align-items: center;
 
-    @media (min-width: 1114px) {
+    ${mediaQueries('xl', null)`
       gap: 7.5px;
-    }
+    `}
   }
 
-  @media (min-width: 1114px) {
-    ${flexLayout}
-    justify-content: space-between;
-    max-width: 422px;
-    padding-left: 3px;
-    padding-right: 11px;
+  ${mediaQueries('xl', null)`
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    padding: 1rem;
     box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
-  }
+    max-width: 800px;
+  `}
 `
-
 export interface OfferProps {
-  imageForOffer: string
+  photos: Photo[]
   imageDescription: string
   offerName: string
   currency: string
@@ -129,7 +138,7 @@ export interface OfferProps {
 // window.innerWidth + "px"=> get the width of the device
 
 export const Offer: React.FC<OfferProps> = ({
-  imageForOffer,
+  photos,
   imageDescription,
   offerName,
   currency,
@@ -163,9 +172,10 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
+  const imageSrc = `http://localhost:4000/uploads/${photos?.[0].url}?width=322&height=225&message=${name}`
   return (
     <OfferStyle>
-      <ImageWithinOffer src={imageForOffer} alt={imageDescription} />
+      <ImageWithinOffer src={imageSrc} alt={imageDescription} />
       <div className='offerDetails'>
         <HeaderOfOffer name={offerName} />
 

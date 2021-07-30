@@ -1,8 +1,5 @@
-import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import { Offer, OfferProps } from './Offer'
-
-import Image from '../../stories/assets/offer.svg'
 import SellerPrevImage from '../../stories/assets/seller-prev-img.png'
 
 export default {
@@ -13,7 +10,6 @@ export default {
 const Template: Story<OfferProps> = (args) => <Offer {...args} />
 export const OfferComponent = Template.bind({})
 OfferComponent.args = {
-  imageForOffer: Image,
   imageDescription: 'Image of offer',
   offerName: 'Cocoa nuts',
   currency: 'Euro',
