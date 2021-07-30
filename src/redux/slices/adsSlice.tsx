@@ -14,14 +14,14 @@ type FetchAdsError = {
 // possible errors.
 export const fetchAds = createAsyncThunk<
   any[],
-  number,
+  string[],
   { rejectValue: FetchAdsError }
 >(
   'ads/fetch',
   // The second argument, `thunkApi`, is an object
   // that contains all those fields
   // and the `rejectWithValue` function:
-  async (limit: number, thunkApi) => {
+  async (limit: string[], thunkApi) => {
     // console.log(limit, limit)
     const response = await sendQuery(getAdsQuery())
 
