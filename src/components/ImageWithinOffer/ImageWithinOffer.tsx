@@ -12,8 +12,8 @@ export const ImageWithinOffer: React.FC<ImageProps> = ({ src, alt }) => {
 
 const Image = styled.img`
   @media (min-width: 1114px) {
-    width: 138px;
-    height: 219px;
+    width: 322px;
+    height: 225px;
     object-fit: cover;
   }
 `
