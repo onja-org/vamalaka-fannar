@@ -8,6 +8,7 @@ export interface TermsAndConditionsProps {
   href: string
   serviceTerms: string
   isChecked?: boolean
+  onChange?: any
 }
 
 const TermsAndConditionsStyle = styled.label`
@@ -72,6 +73,7 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({
   href,
   serviceTerms,
   isChecked,
+  onChange,
   ...props
 }) => {
   return (
@@ -83,6 +85,8 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({
           className='checkbox'
           id='termAndCondition'
           checked={isChecked}
+          onChange={onChange}
+          required
         />
         <span className='checkMark'></span>
       </Checkbox>
