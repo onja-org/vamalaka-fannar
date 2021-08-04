@@ -4,22 +4,27 @@ import { Story, Meta } from '@storybook/react'
 import { Input, InputProps } from './InputName'
 
 export default {
-  title: 'Input/Input Name',
+  title: 'Input/Input',
   component: Input,
 } as Meta
 
 const Template: Story<InputProps> = (args) => <Input {...args} />
 
-export const largeInput = Template.bind({})
-largeInput.args = {
+export const inputWithError = Template.bind({})
+inputWithError.args = {
   placeholder: 'Invictus Innocent',
   label: 'Your full name',
-  name: 'large',
+  value: 'name',
+  errorMes: 'Invalid email. Please try again!',
+  type: 'email or password',
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => {},
 }
 
-export const smallInput = Template.bind({})
-smallInput.args = {
+export const inputWithoutError = Template.bind({})
+inputWithoutError.args = {
   placeholder: 'Invictus Innocent',
   label: 'Your full name',
-  name: 'small',
+  value: 'name',
+  type: 'email or password',
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => {},
 }
