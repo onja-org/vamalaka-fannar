@@ -15,13 +15,65 @@ exports.AdQuery = new GraphQLObjectType({
         type: new GraphQLList(adType),
         resolve: async () => {
           try {
-            const ads = await AdModel.find().sort({ createdAt: -1 });
+            const ads = await AdModel.find()
+              .populate("user")
+              .populate("category")
+              .sort({ createdAt: -1 });
+
             if (!ads) {
               throw new Error(getErrorForCode(ERROR_CODES.EA3));
             }
             return ads;
           } catch (error) {
             throw new Error(errro);
+          }
+        },
+      },
+      getUserAds: {
+        type: new GraphQLList(adType),
+        args: {
+          userId: {
+            type: new GraphQLNonNull(GraphQLID),
+          },
+        },
+        resolve: async (_, { userId }) => {
+          try {
+            const ads = await AdModel.find({ user: userId })
+              .populate("user")
+              .populate("category")
+              .sort({ createdAt: -1 });
+
+            console.log({ ads });
+            if (!ads) {
+              throw new Error(getErrorForCode(ERROR_CODES.EA3));
+            }
+            return ads;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
+      getCategoryAds: {
+        type: new GraphQLList(adType),
+        args: {
+          categoryId: {
+            type: new GraphQLNonNull(GraphQLID),
+          },
+        },
+        resolve: async (_, { categoryId }) => {
+          try {
+            const ads = await AdModel.find({ category: categoryId })
+              .populate("user")
+              .populate("category")
+              .sort({ createdAt: -1 });
+
+            console.log({ ads });
+            if (!ads) {
+              throw new Error(getErrorForCode(ERROR_CODES.EA3));
+            }
+            return ads;
+          } catch (error) {
+            throw new Error(error);
           }
         },
       },
@@ -34,7 +86,9 @@ exports.AdQuery = new GraphQLObjectType({
         },
         resolve: async (_, { id }) => {
           try {
-            const ad = await AdModel.findById(id);
+            const ad = await AdModel.findById(id)
+              .populate("user")
+              .populate("category");
             if (!ad) {
               throw new Error(getErrorForCode(ERROR_CODES.EA2));
             }

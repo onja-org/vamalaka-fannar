@@ -34,18 +34,30 @@ module.exports = {
       amountOfProduct: {
         type: GraphQLFloat,
       },
+      categoryId: {
+        type: new GraphQLNonNull(GraphQLID),
+      },
     },
     resolve: async (root, args, context) => {
       const user = checkAuth(context);
       console.log(user, "user");
-      const { title, body, photos, currency, price, unit, amountOfProduct } =
-        args;
+      const {
+        title,
+        body,
+        photos,
+        currency,
+        price,
+        unit,
+        amountOfProduct,
+        categoryId,
+      } = args;
 
       const uModel = new adModel({
         title,
         body,
         username: user.username,
         user: user.id,
+        category: categoryId,
         photos,
         currency,
         price,
@@ -58,7 +70,7 @@ module.exports = {
       if (!newAd) {
         throw new Error(getErrorForCode(ERROR_CODES.EA1));
       }
-      return newAd;
+      return newAd.populate("category").populate("user");
     },
   },
   updatead: {
@@ -88,11 +100,22 @@ module.exports = {
       amountOfProduct: {
         type: GraphQLFloat,
       },
+      categoryId: {
+        type: GraphQLID,
+      },
     },
     resolve: async (root, args) => {
-      const UpdatedAd = await adModel.findByIdAndUpdate(args.id, args, {
-        new: true,
-      });
+      const updatedArgs = {
+        ...args,
+        ...(args?.categoryId && { category: args.categoryId }),
+      };
+
+      const UpdatedAd = await adModel
+        .findByIdAndUpdate(args.id, updatedArgs, {
+          new: true,
+        })
+        .populate("category")
+        .populate("user");
       if (!UpdatedAd) {
         throw new Error(getErrorForCode(ERROR_CODES.EA2));
       }

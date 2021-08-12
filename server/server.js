@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const { graphqlHTTP } = require("express-graphql");
 const multer = require("multer");
 const fs = require("fs");
-const stream = require("stream");
 const path = require("path");
 const { mergeSchemas } = require("@graphql-tools/merge");
 
@@ -14,7 +13,6 @@ const categorySchema = require("./graphql/CategorySchema").CategorySchema;
 
 const {
   resize,
-  dummySVG,
   generatePlaceholderImageWithText,
 } = require("./utils/image-manipulation");
 
