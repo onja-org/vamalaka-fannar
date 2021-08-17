@@ -68,6 +68,9 @@ var upload = multer({
 app.use(cors());
 app.options("*", cors());
 
+// TODO only for dev
+mongoose.set("debug", true);
+
 mongoose.connect(
   "mongodb://mongo/myappdb",
   { useUnifiedTopology: true },

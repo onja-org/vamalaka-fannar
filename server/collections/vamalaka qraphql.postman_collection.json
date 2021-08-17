@@ -64,14 +64,14 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGE1MjZjYzYyMmM4MDAyOTY2YzRlZiIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJza29yZWsiLCJpYXQiOjE2Mjg2NjA5NTEsImV4cCI6MTYyODY2NDU1MX0.uYe3Kvu_vyX1j0nNWBZ7RRjTCrq_Xi1q20m589Afo2w",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation{createAd(\n    title:\"basket colorful\",\n    body:\"even more baskets\",\n    photos:[{url:\"i4\", info:\"info of first\"}, {url:\"id\", isPrimary: true}],\n    )\n \n {id,title,photos{url,info,isPrimary},currency,price,amountOfProduct}}\n\n # categoryId must be passed - create category first and assign ",
+						"query": "mutation{createAd(\n    title:\"Chicken\",\n    body:\"even fattier\",\n    photos:[{url:\"i4\", info:\"info of first\"}, {url:\"id\", isPrimary: true}],\n    categoryId:\"61160d5d31840d002924526d\"\n    )\n \n {id,title,photos{url,info,isPrimary},currency,price,amountOfProduct}}\n\n # categoryId must be passed - create category first and assign ",
 						"variables": ""
 					}
 				},
@@ -96,7 +96,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjU2ZTA2ZTZjMjA2MDAyOTI2MDYzZCIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJza29yZWsiLCJpYXQiOjE2MjY3NjI3MTAsImV4cCI6MTYyNjc2NjMxMH0.oeZKtXlo4UypWgZUP9UD_PLwjC5nq8a7RYR5wqODt-o",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
@@ -128,14 +128,14 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjU2ZTA2ZTZjMjA2MDAyOTI2MDYzZCIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJza29yZWsiLCJpYXQiOjE2MjY3NjI3MTAsImV4cCI6MTYyNjc2NjMxMH0.oeZKtXlo4UypWgZUP9UD_PLwjC5nq8a7RYR5wqODt-o",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query{users{username, photos{isPrimary,info,url},id,email,token,role,firstName,lastName,address,city,state,country,phone,bio}}\n",
+						"query": "query{categories{title, id, description}}\n",
 						"variables": ""
 					}
 				},
@@ -160,7 +160,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjU2ZTA2ZTZjMjA2MDAyOTI2MDYzZCIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJza29yZWsiLCJpYXQiOjE2MjY3NjI3MTAsImV4cCI6MTYyNjc2NjMxMH0.oeZKtXlo4UypWgZUP9UD_PLwjC5nq8a7RYR5wqODt-o",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
@@ -192,7 +192,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMTM2NzQ3NWFkODI1MDAyOWU2MDY4YiIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJzdHVkZW50IiwiaWF0IjoxNjI4Njc5NTI3LCJleHAiOjE2Mjg2ODMxMjd9.V6aa0cazarnQ6ogT95hja4B8VsPiVruExTpAjdXrQcY",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
@@ -224,7 +224,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGE1MjZjYzYyMmM4MDAyOTY2YzRlZiIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJza29yZWsiLCJpYXQiOjE2Mjg1OTg3MjEsImV4cCI6MTYyODYwMjMyMX0.xVsy83S8x-q4ytoPDeW4Ih193xPD6NYCmNgOiXSu5hk",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
@@ -256,7 +256,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMTM2NzQ3NWFkODI1MDAyOWU2MDY4YiIsImVtYWlsIjoiamFAbWUuY29tIiwidXNlcm5hbWUiOiJzdHVkZW50IiwiaWF0IjoxNjI4Njg3MjgxLCJleHAiOjE2Mjg2OTA4ODF9.ZUUrzFzJffM9PxAg0Ce9pXb8I6x-ZXkAsw-r31NgrYk",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
@@ -288,14 +288,78 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer jjjjj",
+						"value": "Bearer {{userToken}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation{createAd(title:\"peper\", body:\"more\"){title, username, id}}",
+						"query": "mutation{createCategory(title:\"food\", description:\"more\"){title, id}}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{updatedeCategory(title:\"Bicycles\", description:\"electric\",id:\"61163102a698ec0029023431\"){title, id}}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{deleteCategory(id:\"61163102a698ec0029023431\"){title}}",
 						"variables": ""
 					}
 				},

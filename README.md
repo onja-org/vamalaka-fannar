@@ -22,6 +22,12 @@ $ sudo docker-compose build
 $ sudo docker-compose up
 ```
 
+Or both
+
+```
+sudo docker-compose up --build
+```
+
 your GraphQL project will run on http://localhost:4000/graphql
 
 - admin-mongo interface will be displayed on http://localhost:8082/
@@ -29,13 +35,29 @@ your GraphQL project will run on http://localhost:4000/graphql
 - add a random name to your connection and in the field connection string put the following connection string
   (mongodb://mongo/myappdb)
 
+### DB data achiving and restoring
+
+After launching docker containers
+
+To archive:
+
+```
+docker exec graphqlmongo sh -c 'exec mongodump -d myappdb --archive' > ./server/migrate/all-collections.archive
+```
+
+To restore:
+
+```
+docker exec -i graphqlmongo sh -c "mongorestore --archive" < ./server/migrate/all-collections.archive
+```
+
 # Frontend
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn` 
+### `yarn`
 
 To install all required packages
 
