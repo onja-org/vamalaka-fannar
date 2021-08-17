@@ -104,22 +104,37 @@ module.exports = {
         type: GraphQLID,
       },
     },
-    resolve: async (root, args) => {
+    resolve: async (root, args, context) => {
+      const user = checkAuth(context);
+      const adToUpdate = await adModel.findById(args.id);
+      if (!adToUpdate) {
+        throw new Error(getErrorForCode(ERROR_CODES.EA2));
+      }
       const updatedArgs = {
         ...args,
         ...(args?.categoryId && { category: args.categoryId }),
       };
 
-      const UpdatedAd = await adModel
-        .findByIdAndUpdate(args.id, updatedArgs, {
-          new: true,
-        })
-        .populate("category")
-        .populate("user");
-      if (!UpdatedAd) {
-        throw new Error(getErrorForCode(ERROR_CODES.EA2));
+      try {
+        if (user.username === adToUpdate.username) {
+          const updatedAd = await adModel
+            .findByIdAndUpdate(args.id, updatedArgs, {
+              new: true,
+            })
+            .populate("category")
+            .populate("user");
+
+          if (!updatedAd) {
+            throw new Error(getErrorForCode(ERROR_CODES.EA2));
+          }
+
+          return updatedAd;
+        } else {
+          throw new Error(getErrorForCode(ERROR_CODES.EG1));
+        }
+      } catch (error) {
+        throw new Error(error);
       }
-      return UpdatedAd;
     },
   },
   deletead: {
@@ -132,7 +147,7 @@ module.exports = {
     resolve: async (root, args, context) => {
       console.log(args, "args");
       const user = checkAuth(context);
-      const adToRemove = await adModel.findByIdAndRemove(args.id);
+      const adToRemove = await adModel.findById(args.id);
       if (!adToRemove) {
         throw new Error(getErrorForCode(ERROR_CODES.EA2));
       }

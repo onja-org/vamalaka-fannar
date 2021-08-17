@@ -19,8 +19,11 @@ module.exports = {
     },
     resolve: async (root, args, context) => {
       const user = checkAuth(context);
-      // TODO check if user role is admin
-      console.log(user, "user");
+      // TODO check if user role is an admin
+
+      if (!user) {
+        throw new Error(getErrorForCode(ERROR_CODES.EU14));
+      }
       const { title, description } = args;
 
       const categoryModel = new CategoryModel({
@@ -49,7 +52,13 @@ module.exports = {
         type: new GraphQLNonNull(GraphQLString),
       },
     },
-    resolve: async (root, args) => {
+    resolve: async (root, args, context) => {
+      const user = checkAuth(context);
+      // TODO check if user role is an admin
+      if (!user) {
+        throw new Error(getErrorForCode(ERROR_CODES.EU14));
+      }
+
       const updatedCategory = await CategoryModel.findByIdAndUpdate(
         args.id,
         args,
@@ -73,15 +82,14 @@ module.exports = {
     resolve: async (root, args, context) => {
       console.log(args, "args");
       const user = checkAuth(context);
-      //TODO check if there are no ads for category
-      const categoryToRemove = await CategoryModel.findByIdAndRemove(args.id);
+      // TODO check if user role is an admin
+      if (!user) {
+        throw new Error(getErrorForCode(ERROR_CODES.EU14));
+      }
+
       try {
-        if (user.username === categoryToRemove.username) {
-          await categoryToRemove.delete();
-          return "Category deleted successfully";
-        } else {
-          throw new Error(getErrorForCode(ERROR_CODES.EG1));
-        }
+        const categoryToRemove = await CategoryModel.findByIdAndRemove(args.id);
+        return categoryToRemove;
       } catch (error) {
         throw new Error(error);
       }
