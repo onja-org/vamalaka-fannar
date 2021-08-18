@@ -1,22 +1,30 @@
-import './App.css'
-import { useEffect } from 'react'
-import { adsSelector, fetchAds } from './redux/slices/adsSlice'
-import { useAppDispatch } from './redux/hooks'
-import { useSelector } from 'react-redux'
-import { OffersList } from './components/OffersList/OffersList'
+import GenericContainerPage from './pages/GenericContainerPage'
+import { RegisterPage } from './pages/RegisterPage'
+import { LoginPage } from './pages/LoginPage'
+import { LanguagePage } from './pages/LanguagePage'
+import { Route, Switch } from 'react-router-dom'
+import { Paths } from './paths'
+
+import { Home } from './pages/Home'
 
 function App() {
-  const dispatch = useAppDispatch()
-  const ads = useSelector(adsSelector)
-
-  useEffect(() => {
-    dispatch(fetchAds([]))
-  }, [dispatch])
-
   return (
-    <div className='App'>
-      <OffersList offers={ads} />
-    </div>
+    <GenericContainerPage>
+      <Switch>
+        <Route path={Paths.DEFAULT} exact>
+          <Home />
+        </Route>
+        <Route path={Paths.LANGUAGE}>
+          <LanguagePage />
+        </Route>
+        <Route path={Paths.LOGIN}>
+          <LoginPage />
+        </Route>
+        <Route path={Paths.REGISTER_ACCOUNT}>
+          <RegisterPage />
+        </Route>
+      </Switch>
+    </GenericContainerPage>
   )
 }
 

@@ -53,7 +53,7 @@ const OfferStyle = styled.div`
 
     ${mediaQueries('xl', null)`
       padding-bottom: 5px;
-      gap: 16rem;
+      gap: 18.41px;
     `}
   }
 
@@ -105,7 +105,8 @@ const OfferStyle = styled.div`
     margin: 1rem;
     padding: 1rem;
     box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
-    max-width: 800px;
+    max-width: 1360px;
+    max-height: 225px
   `}
 `
 export interface OfferProps {
