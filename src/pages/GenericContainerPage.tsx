@@ -119,19 +119,7 @@ const TopContainerStyles = styled.div`
 `
 
 const MainContainer = styled.div`
-  position: absolute;
-  transform: translateX(-50%);
-  left: 50%;
-  width: 90%;
-  padding: 47px 14px 14px 16px;
-  display: flex;
-  justify-content: center;
-  ${mediaQueries(null, 'lmd')`
-    padding: 14px;
-    & > div:nth-child(1) {
-      display: none;
-    `}
-  }
+  display: block;
 `
 
 const FooterContainer = styled.div`

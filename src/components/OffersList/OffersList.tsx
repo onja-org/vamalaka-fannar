@@ -21,14 +21,15 @@ interface OfferData {
 export interface OffersListProps {
   offers: OfferData[]
 }
-
 const OffersListContainer = styled.ul`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 15px;
+  display: block;
+  max-width: 90%;
+  min-width: 90%;
+  margin: auto;
+  padding-inline-start: 0;
+  margin-block-end: 0;
+  padding-block-end: 4rem;
 `
-
 export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
   return (
     <OffersListContainer>
