@@ -11,7 +11,7 @@ export interface Photo {
   info: string
   isPrimary: boolean
 }
-export interface OfferData {
+interface OfferData {
   id: string
   title: string
   body: string

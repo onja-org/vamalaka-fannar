@@ -3,27 +3,25 @@ import styled from 'styled-components'
 import Buttons from '../Buttons/Buttons'
 import Input from '../InputName/InputName'
 import { TermsAndConditions } from '../TermsAndConditions/TermsAndConditions'
-import { mediaQueries } from '../../mediaQuery/mediaQueries'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import googleIcon from '../../icons/google.png'
+import backIcon from './icons/backIcon.svg'
 
+export interface ErrorType {
+  errorMes?: string
+}
 export interface FormProps {
-  errorMes: string
+  errorMes?: string
   icon?: string
-  isError: boolean
+  isError?: boolean
+  backOnclick?: () => void
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
 }
 
-export const RegisterForm: React.FC<FormProps> = ({ errorMes, onSubmit }) => {
-  const [checked, setChecked] = React.useState<boolean>(false)
+export const InputPassword: React.FC = () => {
   const [password, setPassword] = React.useState({
-    text: 'show',
     inputPassword: '',
     showPassword: false,
-  })
-
-  const [inputInfo, setInputInfo] = React.useState({
-    inputValue: '',
-    userName: '',
   })
 
   const handleShowPassword = () => {
@@ -39,9 +37,30 @@ export const RegisterForm: React.FC<FormProps> = ({ errorMes, onSubmit }) => {
     setPassword({
       ...password,
       inputPassword: event.target.value,
-      text: 'hide',
     })
   }
+
+  return (
+    <InputPasswordWrapper>
+      <Input
+        type={password.showPassword ? 'text' : 'password'}
+        onChange={handleSetPassword}
+        value={password.inputPassword}
+        placeholder='Enter a password'
+        label='Create password'
+      />
+      <ShowPasswordBtn type='button' onClick={handleShowPassword}>
+        {!password.showPassword ? 'show' : 'hide'}
+      </ShowPasswordBtn>
+    </InputPasswordWrapper>
+  )
+}
+
+export const InputEmail: React.FC<ErrorType> = ({ errorMes }) => {
+  const [inputInfo, setInputInfo] = React.useState({
+    inputValue: '',
+    userName: '',
+  })
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputInfo({
@@ -49,6 +68,29 @@ export const RegisterForm: React.FC<FormProps> = ({ errorMes, onSubmit }) => {
       inputValue: event.target.value,
     })
   }
+
+  return (
+    <Input
+      type='text'
+      placeholder='Enter email address'
+      label={'Email Address'}
+      errorMes={errorMes}
+      value={inputInfo.inputValue}
+      onChange={handleEmailChange}
+    />
+  )
+}
+
+export const RegisterForm: React.FC<FormProps> = ({
+  errorMes,
+  onSubmit,
+  backOnclick,
+}) => {
+  const [checked, setChecked] = React.useState<boolean>(false)
+  const [inputInfo, setInputInfo] = React.useState({
+    inputValue: '',
+    userName: '',
+  })
 
   const handleGoogleButton = () => {
     alert('google')
@@ -58,39 +100,34 @@ export const RegisterForm: React.FC<FormProps> = ({ errorMes, onSubmit }) => {
     setChecked(!checked)
   }
 
+  const handleSubmit = () => {
+    setInputInfo({ ...inputInfo, inputValue: 'input value' })
+  }
+
   return (
     <Container
       onSubmit={onSubmit}
       method='post'
       action=''
       id='profile-info-form'>
+      <Back>
+        <div>
+          <button onClick={backOnclick}>Back</button>
+          <Info>
+            <small>STEP 01/02</small>
+            <span>Personal Info.</span>
+          </Info>
+        </div>
+      </Back>
       <Input
         type='text'
-        placeholder='Invictus Innocent'
-        label='Your full name'
+        placeholder='Username'
+        label='Your username'
         value={inputInfo.userName}
-        onChange={() => {}}
+        onChange={handleSubmit}
       />
-      <Input
-        type='text'
-        placeholder='Enter email adress'
-        label={'Email Adress'}
-        errorMes={errorMes}
-        value={inputInfo.inputValue}
-        onChange={handleEmailChange}
-      />
-      <InputPasswordWrapper>
-        <Input
-          type={password.showPassword ? 'text' : 'password'}
-          onChange={() => handleSetPassword}
-          value={password.inputPassword}
-          placeholder='Enter a password'
-          label='Create password'
-        />
-        <ShowPasswordBtn type='button' onClick={handleShowPassword}>
-          {password.text}
-        </ShowPasswordBtn>
-      </InputPasswordWrapper>
+      <InputEmail errorMes={errorMes} />
+      <InputPassword />
       <TermsAndConditions
         isChecked={checked}
         href='/'
@@ -124,8 +161,16 @@ export const RegisterForm: React.FC<FormProps> = ({ errorMes, onSubmit }) => {
 
 const Container = styled.form`
   line-height: 50px;
+  max-width: 426px;
+  margin: auto;
+  display: grid;
+  padding: 34px 17px 0 17px;
+
+  ${mediaQueries(null, 'lmd')`
+    padding-bottom: calc(34px + 12px);
+  `}
 `
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   margin-block-start: 20px;
   display: flex;
   flex-direction: column;
@@ -136,16 +181,17 @@ const Wrapper = styled.div`
     margin-block-end: 10px;
 
     ${mediaQueries('lg', null)`
-    margin-inline-end: 20px;
-    margin-block-end: 0;
+      margin-inline-end: 20px;
+      margin-block-end: 0;
     `}
   }
 
   ${mediaQueries('lg', null)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`}
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 26px
+  `}
 `
 
 const InputPasswordWrapper = styled.div`
@@ -158,12 +204,45 @@ const ShowPasswordBtn = styled.button`
   border: none;
   background-color: transparent;
   position: absolute;
-  top: 55%;
-  right: 10px;
+  top: 50%;
+  right: 16px;
   cursor: pointer;
+`
+const Back = styled.div`
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 92%;
 
-  ${mediaQueries('lg', null)`
-    top: 55%;
-    right: 50px;
+  div {
+    color: #979797;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  button {
+    background-color: #fff;
+    border: none;
+    color: #979797;
+    padding-left: 16px;
+    background-image: url(${backIcon});
+    background-repeat: no-repeat;
+    background-position: 10% 17px;
+  }
+
+  ${mediaQueries(null, 'lmd')`
+    display: none;
   `}
+`
+
+const Info = styled.p`
+  margin: 0;
+  display: block;
+  span {
+    margin: 0;
+    font-weight: 700;
+  }
 `

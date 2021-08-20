@@ -1,30 +1,32 @@
+import { Route, Switch } from 'react-router'
+import './App.css'
 import GenericContainerPage from './pages/GenericContainerPage'
-import { RegisterPage } from './pages/RegisterPage'
-import { LoginPage } from './pages/LoginPage'
+import { HomePage } from './pages/HomePage'
 import { LanguagePage } from './pages/LanguagePage'
-import { Route, Switch } from 'react-router-dom'
+import { LoginPage } from './pages/LoginPage'
+import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
-
-import { Home } from './pages/Home'
 
 function App() {
   return (
-    <GenericContainerPage>
-      <Switch>
-        <Route path={Paths.DEFAULT} exact>
-          <Home />
-        </Route>
-        <Route path={Paths.LANGUAGE}>
-          <LanguagePage />
-        </Route>
-        <Route path={Paths.LOGIN}>
-          <LoginPage />
-        </Route>
-        <Route path={Paths.REGISTER_ACCOUNT}>
-          <RegisterPage />
-        </Route>
-      </Switch>
-    </GenericContainerPage>
+    <div className='App'>
+      <GenericContainerPage>
+        <Switch>
+          <Route path={Paths.DEFAULT} exact>
+            <HomePage />
+          </Route>
+          <Route path={Paths.LANGUAGE}>
+            <LanguagePage />
+          </Route>
+          <Route path={Paths.LOGIN}>
+            <LoginPage />
+          </Route>
+          <Route path={Paths.SIGN_UP}>
+            <OnboardingPage />
+          </Route>
+        </Switch>
+      </GenericContainerPage>
+    </div>
   )
 }
 
