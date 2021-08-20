@@ -3,9 +3,10 @@ export const breakpoints = {
   md: 360,
   smd: 420,
   lg: 600,
+  ld: 900,
   lmd: 920,
-  xL: 1114,
   xl: 1000,
+  xL: 1114,
 }
 
 export const mediaQueries = (

@@ -4,14 +4,12 @@ import { Option } from '../components/RoleSelectOption/RoleSelectOption'
 import userIcon from '../stories/assets/user.svg'
 import briefcaseIcon from '../stories/assets/briefcase.svg'
 import { Login } from '../components/Login/Login'
-import { mediaQueries } from '../mediaQueries/mediaQueries'
-import { OnboardingContainer } from './OnboardingContainer'
+import { OnboardingContainer } from '../containers/OnboardingContainer'
 import { Fragment, useState } from 'react'
 import { RegisterForm } from '../components/RegisterForm/RegisterForm'
+import { mediaQueries } from '../mediaQueries/mediaQueries'
 
-export const maxWidthMedia = '920px'
-
-export const RoleSelectionContainer: React.FC = () => {
+export const OnboardingPage = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false)
   const handleRoleButton = (e) => {
     setIsRegisterOpen(true)
@@ -20,6 +18,8 @@ export const RoleSelectionContainer: React.FC = () => {
   const handleBackButton = () => {
     setIsRegisterOpen(false)
   }
+
+  console.log('It is opening')
 
   return (
     <OnboardingContainer

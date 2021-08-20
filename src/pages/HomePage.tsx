@@ -7,7 +7,7 @@ import { adsSelector, fetchAds } from '../redux/slices/adsSlice'
 import { useAppDispatch } from '../redux/hooks'
 import { useSelector } from 'react-redux'
 
-export const Home = () => {
+export const HomePage = () => {
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
 
