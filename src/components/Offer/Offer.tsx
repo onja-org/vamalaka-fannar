@@ -172,7 +172,7 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
-  const imageSrc = `http://localhost:4000/uploads/${photos?.[0].url}?width=322&height=225&message=${name}`
+  const imageSrc = `http://localhost:4000/uploads/${photos?.[0]?.url}?width=322&height=225&message=${name}`
   return (
     <OfferStyle>
       <ImageWithinOffer src={imageSrc} alt={imageDescription} />
@@ -189,10 +189,14 @@ export const Offer: React.FC<OfferProps> = ({
         <SellerPreviewInfo image={profile} name={name} location={location} />
         <DescriptionOffer text={offerDescription} />
         <div className='buttonContainer'>
-          <Buttons learnEnabled={isLearnEnabled} label={detailButtonText} />
+          <Buttons
+            type='button'
+            isPrimary={isLearnEnabled}
+            label={detailButtonText}
+          />
           <button className='favoriteButton'>{outlineHeart}</button>
           <div className='favoriteButtonContainer'>
-            <Buttons label={favoriteButtonText} />
+            <Buttons type='button' label={favoriteButtonText} />
           </div>
         </div>
       </div>

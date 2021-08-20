@@ -41,14 +41,14 @@ export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
           location={{ city: 'Mahanoro', country: 'Madagascar' }}
           currency={''}
           detailButtonText='See details'
-          imageDescription={offer.photos[0].info}
+          imageDescription={offer && offer?.photos?.[0]?.info}
           photos={offer?.photos}
           imageForRating={''}
           isLearnEnabled={true}
           isFavourited={false}
           favoriteButtonText='Add to favourite'
-          name={offer.username}
-          offerDescription={offer.body}
+          name={offer?.username}
+          offerDescription={offer?.body}
           profile={''}
           ratingDescription={''}
           star={0}

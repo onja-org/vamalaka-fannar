@@ -1,26 +1,32 @@
 import { Story, Meta } from '@storybook/react'
-import Buttons from './Buttons'
-import { ButtonsProps } from './Buttons'
+import Button from './Buttons'
+import { ButtonProps } from './Buttons'
+import googleIcon from '../../icons/google.png'
+import loadingIcon from '../../icons/small-load-icon.png'
 
 export default {
   title: 'Components/Buttons',
-  component: Buttons,
+  component: Button,
 } as Meta
 
-const Button: Story<ButtonsProps> = (args) => <Buttons {...args} />
-export const LearnEnabled = Button.bind({})
+const ButtonStory: Story<ButtonProps> = (args) => <Button {...args} />
+export const LearnEnabled = ButtonStory.bind({})
 LearnEnabled.args = {
-  learnEnabled: true,
+  isPrimary: true,
   label: 'Learn more',
+  type: 'button',
 }
-export const Learndisabled = Button.bind({})
+export const Learndisabled = ButtonStory.bind({})
 Learndisabled.args = {
-  learnEnabled: true,
+  isPrimary: true,
   disabled: true,
   label: 'Learn more',
+  type: 'button',
 }
-export const Trust = Button.bind({})
+export const Trust = ButtonStory.bind({})
 Trust.args = {
-  learnEnabled: false,
+  isPrimary: false,
   label: 'Can you trust us?',
+  icon: googleIcon,
+  type: 'button',
 }
