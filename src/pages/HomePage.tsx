@@ -1,34 +1,33 @@
 import { useEffect } from 'react'
+import { OffersList } from '../components/OffersList/OffersList'
 import {
-  OffersList,
-  OffersListProps,
-} from '../components/OffersList/OffersList'
-import { adsSelector, fetchAds } from '../redux/slices/adsSlice'
+  adsSelector,
+  fetchAds,
+  adsStatusSelector,
+} from '../redux/slices/adsSlice'
 import {
   categoriesSelector,
   fetchCategories,
 } from '../redux/slices/categoriesSlice'
-import { useAppDispatch } from '../redux/hooks'
-import { useSelector } from 'react-redux'
 import { IntroContent } from '../components/IntroContent/IntroContent'
 import { Categories } from '../components/Categories/Categories'
-import { styled } from '@storybook/theming'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
+import { useAppDispatch } from '../redux/hooks'
+import { useSelector } from 'react-redux'
+import { styled } from '@storybook/theming'
+import { IconSize, Loading } from '../components/Loading/Loading'
+import { FETCH_STATUS } from '../constants'
 
 export const HomePage = () => {
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
+  const offerStatus = useSelector(adsStatusSelector)
   const categories = useSelector(categoriesSelector)
 
-  // Add disptach to useEffect
   useEffect(() => {
     dispatch(fetchAds([]))
     dispatch(fetchCategories([]))
   }, [dispatch])
-
-  const ListOfOffers = function (props: OffersListProps): JSX.Element {
-    return <OffersList {...props} />
-  }
 
   return (
     <HomeContainer>
@@ -39,7 +38,13 @@ export const HomePage = () => {
         selectCategory={() => alert('Selected category')}
       />
       <hr />
-      <ListOfOffers offers={offers} />
+      {offerStatus === FETCH_STATUS.LOADING ? (
+        <LoadingContainer>
+          <Loading size={IconSize.xl} />
+        </LoadingContainer>
+      ) : (
+        <OffersList offers={offers} />
+      )}
     </HomeContainer>
   )
 }
@@ -53,10 +58,13 @@ const HomeContainer = styled.div`
     display: none;
     margin-bottom: 39px;
   }
-
   ${mediaQueries('lmd', null)`
     hr {
       display: block;
     }
   `}
+`
+
+const LoadingContainer = styled.div`
+  text-align: center;
 `

@@ -1,9 +1,5 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import { FETCH_STATUS } from '../../constants'
 import { sendQuery, getAdsQuery } from '../../graphqlHelper'
 import { RootState } from '../store'
 
@@ -19,7 +15,7 @@ export const fetchAds = createAsyncThunk<
 >(
   'ads/fetch',
   // The second argument, `thunkApi`, is an object
-  // that contains all those fields
+  // that contains all those fieldsgit push origin HEAD
   // and the `rejectWithValue` function:
   async (limit: string[], thunkApi) => {
     // console.log(limit, limit)
@@ -51,24 +47,6 @@ export const adsSlice = createSlice({
   },
   reducers: {
     //TODO remove used only as an example
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    //TODO remove used only as an example
-    decrement: (state) => {
-      // console.log(state.value, 'dec')
-      state.value -= 1
-    },
-    //TODO remove used only as an example
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      // console.log(action, 'incbyamAC')
-      // console.log(state, 'increment')
-      state.value += action.payload
-    },
   },
   extraReducers: (builder) => {
     // When we send a request,
@@ -77,7 +55,7 @@ export const adsSlice = createSlice({
       // At that moment,
       // we change status to `loading`
       // and clear all the previous errors:
-      state.status = 'loading'
+      state.status = FETCH_STATUS.LOADING
       state.error = null
     })
 
@@ -89,7 +67,7 @@ export const adsSlice = createSlice({
 
       // and change `status` back to `idle`:
       state.ads = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
 
     // When a server responses with an error:
@@ -98,19 +76,22 @@ export const adsSlice = createSlice({
       // and change `status` back to `idle` again.
       // console.log(payload, 'REjected error')
       if (payload) state.error = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = adsSlice.actions
-export const selectCount = (state: RootState) => state.ads.value
-
 export const selectAds = (state: RootState) => state.ads.ads
+export const selectStatus = (state: RootState) => state.ads.status
+
 export const adsSelector = createSelector<RootState, any[], any[]>(
   selectAds,
   (ads) => ads
+)
+export const adsStatusSelector = createSelector<RootState, string, string>(
+  selectStatus,
+  (status) => status
 )
 
 export default adsSlice.reducer

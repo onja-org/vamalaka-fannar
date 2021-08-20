@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 import './App.css'
-import GenericContainerPage from './pages/GenericContainerPage'
+import GenericContainerPage from '../src/pages/GenericContainerPage'
 import { HomePage } from './pages/HomePage'
 import { LanguagePage } from './pages/LanguagePage'
 import { LoginPage } from './pages/LoginPage'
