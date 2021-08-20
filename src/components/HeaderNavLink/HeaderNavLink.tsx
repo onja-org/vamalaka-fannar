@@ -33,7 +33,7 @@ export const login = [
     text: 'Log in',
   },
   {
-    path: 'register-account',
+    path: 'sign-up',
     imgSrc: account,
     alt: 'Sign up',
     text: 'Sign up',
@@ -63,7 +63,7 @@ const Item = styled.li`
   a {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-    font-size: 25px;
+    font-size: 1.6rem;
     line-height: 30px;
     color: #041d42;
     text-decoration: none;

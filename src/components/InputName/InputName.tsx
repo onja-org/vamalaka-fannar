@@ -47,11 +47,16 @@ const InputElement = styled.input<{ isError: boolean }>`
 
   max-width: 426px;
   padding-top: 12px;
-  padding-left: 5px;
+  padding-left: 30px;
   padding-bottom: 12px;
   padding-right: 76px;
-  box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
-  border: 1px solid ${(props) => (!props.isError ? '#fc462b' : '#041d42')};
+  border: 1px solid ${(props) => (!props.isError ? '#fc462b' : '#979797')};
+
+  &:hover,
+  &:focus {
+    border-color: ${(props) => (!props.isError ? '#fc462b' : '#041d42')};
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
+  }
   ${inputStyles}
 `
 

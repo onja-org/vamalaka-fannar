@@ -6,11 +6,12 @@ import darkPolygonBg from '../../stories/assets/dark-polygon.svg'
 import whitePolygonBg from '../../stories/assets/white-polygon.svg'
 
 export interface OptionProps {
-  label?: string
+  label: string
   text?: string
   src?: string
   alt?: string
-  onClick?: () => void
+  value: string
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const polygonBg = css`
@@ -40,11 +41,12 @@ export const Option: React.FC<OptionProps> = ({
   text,
   src,
   alt,
+  value,
   onClick,
 }) => {
   return (
     <RoleSelectWrapper>
-      <button>
+      <button onClick={onClick} value={value}>
         {label === 'Buyer' ? (
           <DarkPolygon>
             <img src={src} alt={alt} />
@@ -74,6 +76,9 @@ const RoleSelectWrapper = styled.div`
 
     &:hover {
       background-color: #f5f9ff;
+      background-image: url(${arrowRightIcon});
+      background-repeat: no-repeat;
+      background-position: 95% 50%;
     }
 
     &:focus {

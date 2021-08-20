@@ -127,6 +127,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   ${mediaQueries(null, 'lmd')`
+    padding: 14px;
     & > div:nth-child(1) {
       display: none;
     `}
