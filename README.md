@@ -1,18 +1,22 @@
-# Vamalaka-foundation
+# Vamalaka - E-commerce international trading platform that helps people in Madagascar sell their products globally. It follows "Direct to Consumer" bussiness model 
 
-# Server setup
+As a implementation technology we have chosen: TypeScript, React, Redux, Redux Tool Kit, Cypress for integration testing. Containerized backend that exposes GraphQL interface, MongoDB, NodeJS
 
-## Requirements
+# Development setup
 
-you should have docker and docker-compose installed on your machine
+## Backend
 
-## Installation
+### Requirements
+
+docker and docker-compose installed on your machine
+
+### Installation
 
 ```
 cd server
 ```
 
-- build your project using
+- build the project using
 
 ```
 $ sudo docker-compose build
@@ -82,20 +86,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### yarn cypress:ci
 
-### `yarn eject`
+To run ui integration tests
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### yarn storybook
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run storybook 
