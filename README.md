@@ -1,6 +1,6 @@
 # Vamalaka - E-commerce international trading platform that helps people in Madagascar sell their products globally. It follows "Direct to Consumer" bussiness model 
 
-As a implementation technology we have chosen: TypeScript, React, Redux, Redux Tool Kit, Cypress for integration testing. Containerized backend that exposes GraphQL interface, MongoDB, NodeJS
+As an implementation technology we have chosen: TypeScript, React, Redux, Redux Tool Kit, Cypress for integration testing. Containerized backend that exposes GraphQL interface, MongoDB, NodeJS
 
 # Development setup
 
