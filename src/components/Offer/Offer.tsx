@@ -18,6 +18,7 @@ const OfferStyle = styled.div`
   background-color: #ffffff;
   max-width: 320px;
   padding: 1rem;
+  margin-bottom: 1rem;
   box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
   .buttonContainer {
     ${flexLayout}
@@ -36,13 +37,13 @@ const OfferStyle = styled.div`
       &:focus {
         outline: none;
       }
-      ${mediaQueries('xl', null)`
+      ${mediaQueries('lg', null)`
         display: none;
       }`}
 
     .favoriteButtonContainer {
       display: none;
-      ${mediaQueries('xl', null)`
+      ${mediaQueries('lg', null)`
         display: block;
       `}
 
@@ -51,8 +52,11 @@ const OfferStyle = styled.div`
       }
     }
 
-    ${mediaQueries('xl', null)`
+    ${mediaQueries('lg', null)`
       padding-bottom: 5px;
+      gap: 10px;
+    `}
+      ${mediaQueries('xl', null)`
       gap: 16rem;
     `}
   }
@@ -67,13 +71,13 @@ const OfferStyle = styled.div`
       background-color: #fff;
       width: fit-content;
 
-      ${mediaQueries('xl', null)`
+      ${mediaQueries('lg', null)`
         transform: translateY(14px);
         font-size: 30px;
       `}
     }
 
-    ${mediaQueries('xl', null)`
+    ${mediaQueries('lg', null)`
       margin-left: 20px;
     `}
   }
@@ -83,7 +87,7 @@ const OfferStyle = styled.div`
     gap: 11.5px;
     justify-content: space-between;
 
-    ${mediaQueries('xl', null)`
+    ${mediaQueries('lg', null)`
       gap: 22px;
       justify-content: end;
     `}
@@ -94,16 +98,14 @@ const OfferStyle = styled.div`
     gap: 4.19px;
     align-items: center;
 
-    ${mediaQueries('xl', null)`
+    ${mediaQueries('lg', null)`
       gap: 7.5px;
     `}
   }
 
-  ${mediaQueries('xl', null)`
+  ${mediaQueries('lg', null)`
     display: flex;
     flex-direction: row;
-    margin: 1rem;
-    padding: 1rem;
     box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
     max-width: 800px;
   `}

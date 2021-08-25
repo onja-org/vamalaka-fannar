@@ -6,6 +6,7 @@ import {
 import { adsSelector, fetchAds } from '../redux/slices/adsSlice'
 import { useAppDispatch } from '../redux/hooks'
 import { useSelector } from 'react-redux'
+import { IntroContent } from '../components/IntroContent/IntroContent'
 
 export const HomePage = () => {
   const dispatch = useAppDispatch()
@@ -18,5 +19,10 @@ export const HomePage = () => {
   const ListOfOffers = function (props: OffersListProps): JSX.Element {
     return <OffersList {...props} />
   }
-  return <ListOfOffers offers={offers} />
+  return (
+    <>
+      <IntroContent />
+      <ListOfOffers offers={offers} />
+    </>
+  )
 }
