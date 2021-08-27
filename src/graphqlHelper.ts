@@ -8,6 +8,16 @@ export const sendQuery = (query: any, variables?: any): Promise<any> => {
 
 export const getAdsQuery = () => {
   return `{
-          ads{title, createdAt, id, username,comments{body, id, username}, photos{url, info, isPrimary}}
+          ads{title, createdAt, id, username,comments{body, id, username}}
       }`
+}
+
+export const registerMutation = (
+  username: string,
+  password: string,
+  email: string,
+  confirmPassword: string,
+  role: string
+) => {
+  return `mutation{register(registerInput:{username:"${username}", password:"${password}", confirmPassword:"${confirmPassword}",email:"${email}", role:"${role}"}){id,createdAt,email,username,token}}`
 }

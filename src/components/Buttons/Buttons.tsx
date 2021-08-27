@@ -42,6 +42,7 @@ const ButtonStyled = styled.button<ButtonProps>`
     margin-inline-end: 10px;
   }
   box-shadow: -3px 3px rgba(21, 140, 177, 0.3), 3px -3px rgba(252, 70, 43, 0.3); 
+
 `
 const Button: React.FC<ButtonProps> = ({
   label,

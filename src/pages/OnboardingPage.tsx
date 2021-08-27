@@ -6,8 +6,10 @@ import briefcaseIcon from '../stories/assets/briefcase.svg'
 import { Login } from '../components/Login/Login'
 import { OnboardingContainer } from '../containers/OnboardingContainer'
 import { Fragment, useState } from 'react'
-import { RegisterForm } from '../components/RegisterForm/RegisterForm'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
+import { RegisterAccount } from '../containers/RegisterAccountContainer'
+import { useSelector } from 'react-redux'
+import { userSelector } from '../redux/slices/userSlice'
 
 export const OnboardingPage = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false)
@@ -15,15 +17,15 @@ export const OnboardingPage = () => {
     setIsRegisterOpen(true)
   }
 
-  const handleBackButton = () => {
-    setIsRegisterOpen(false)
-  }
+  const user = useSelector(userSelector)
 
-  console.log('It is opening')
+  const success = user.username
+    ? 'Registration successful'
+    : 'Register Your Account'
 
   return (
     <OnboardingContainer
-      title={isRegisterOpen === false ? 'Join us' : 'Register Account'}>
+      title={isRegisterOpen === false ? 'Join us' : `${success}`}>
       {isRegisterOpen === false ? (
         <Fragment>
           <DescriptionOffer
@@ -58,10 +60,7 @@ export const OnboardingPage = () => {
           </AccountContainer>
         </Fragment>
       ) : (
-        <RegisterForm
-          onSubmit={() => alert('Submitted')}
-          backOnclick={handleBackButton}
-        />
+        <RegisterAccount />
       )}
     </OnboardingContainer>
   )

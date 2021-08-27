@@ -12,11 +12,27 @@ const Template: Story<FormProps> = (args) => <RegisterForm {...args} />
 export const formWithError = Template.bind({})
 formWithError.args = {
   isError: true,
-  errorMes: 'Invalid email. Please try again!',
+  errorMes: {
+    username: 'already exist',
+    email: 'not valid',
+    password: '8 characters',
+    confirmPassword: 'does not mutch',
+  },
   onSubmit: () => {},
+  onChangeEmail: () => null,
+  onChangePassword: () => null,
+  onChangeUsername: () => null,
+  handleCheckbox: () => null,
+  onChangeConfirmPassword: () => null,
 }
 
 export const formWithoutError = Template.bind({})
 formWithoutError.args = {
   isError: false,
+  onSubmit: () => {},
+  onChangeEmail: () => null,
+  onChangePassword: () => null,
+  onChangeUsername: () => null,
+  handleCheckbox: () => null,
+  onChangeConfirmPassword: () => null,
 }

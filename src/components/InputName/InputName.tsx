@@ -2,6 +2,7 @@ import React from 'react'
 
 import styled, { css } from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 
 const inputStyles = css`
   ${fonts}
@@ -23,40 +24,32 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  }
+  position: relative;
+  max-width: 520px;
 `
 
 const InputElement = styled.input<{ isError: boolean }>`
   ${fonts}
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-
   &::-webkit-input-placeholder {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   }
-
   &:-ms-input-placeholder {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   }
-
   &::placeholder {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   }
-
   max-width: 426px;
   padding-top: 12px;
-  padding-left: 30px;
+  padding-left: 5px;
   padding-bottom: 12px;
   padding-right: 76px;
-  border: 1px solid ${(props) => (!props.isError ? '#fc462b' : '#979797')};
-
-  &:hover,
-  &:focus {
-    border-color: ${(props) => (!props.isError ? '#fc462b' : '#041d42')};
-    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
-  }
+  box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.11);
+  border: 1px solid ${({ isError }) => (isError ? '#fc462b' : '#041d42')};
   ${inputStyles}
 `
 
@@ -66,11 +59,11 @@ const LabelStyle = styled.label`
   font-size: 16px;
   line-height: 19px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   color: #979797;
   padding-bottom: 6px;
-  align-items: start;
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   }
 `
@@ -79,12 +72,26 @@ const Error = styled.div<{ isError: boolean }>`
   ${(props) =>
     !props.isError
       ? ` color: #fc462b;
-          padding-inline-start: 18%;`
+          padding-inline-end: 25px;
+          `
       : `display: none`};
 `
 
 const Label = styled.span`
   text-align: start;
+`
+
+const ShowPasswordBtn = styled.button<{ showPwd: boolean }>`
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 65%;
+  right: 10px;
+  cursor: pointer;
+  ${mediaQueries('lg', null)`
+    top: 55%;
+    left: 336px;
+  `}
 `
 
 export interface InputProps {
@@ -94,7 +101,10 @@ export interface InputProps {
   value: string
   type: string
   isError?: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
+  handleShowPassword?: () => void
+  textPsw?: string
+  name?: string
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -103,6 +113,9 @@ export const Input: React.FC<InputProps> = ({
   type,
   onChange,
   errorMes,
+  handleShowPassword,
+  textPsw,
+  name,
 }) => {
   return (
     <InputContainer>
@@ -111,12 +124,19 @@ export const Input: React.FC<InputProps> = ({
         <Error isError={false}>{errorMes}</Error>
       </LabelStyle>
       <InputElement
-        isError={errorMes?.length === undefined ? true : false}
+        isError={errorMes?.length ? true : false}
         placeholder={placeholder}
         type={type}
         onChange={onChange}
+        name={name}
         required
       />
+      <ShowPasswordBtn
+        type='button'
+        showPwd={false}
+        onClick={handleShowPassword}>
+        {textPsw}
+      </ShowPasswordBtn>
     </InputContainer>
   )
 }

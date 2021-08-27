@@ -7,7 +7,7 @@ import { Login } from '../components/Login/Login'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
 import { OnboardingContainer } from './OnboardingContainer'
 import { Fragment, useState } from 'react'
-import { RegisterForm } from '../components/RegisterForm/RegisterForm'
+import { RegisterAccount } from './RegisterAccountContainer'
 
 export const maxWidthMedia = '920px'
 
@@ -58,10 +58,7 @@ export const RoleSelectionContainer: React.FC = () => {
           </AccountContainer>
         </Fragment>
       ) : (
-        <RegisterForm
-          onSubmit={() => alert('Submitted')}
-          backOnclick={handleBackButton}
-        />
+        <RegisterAccount />
       )}
     </OnboardingContainer>
   )

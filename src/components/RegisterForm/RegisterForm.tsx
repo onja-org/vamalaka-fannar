@@ -10,15 +10,59 @@ import backIcon from './icons/backIcon.svg'
 export interface ErrorType {
   errorMes?: string
 }
+
 export interface FormProps {
-  errorMes?: string
-  icon?: string
+  errorMes: {
+    username: string
+    email: string
+    password: string
+    confirmPassword: string
+  }
+  icon?: string | undefined
   isError?: boolean
+  isChecked: boolean
   backOnclick?: () => void
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onChangeEmail: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChangePassword: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChangeConfirmPassword:
+    | React.ChangeEventHandler<HTMLInputElement>
+    | undefined
+  onChangeUsername: React.ChangeEventHandler<HTMLInputElement> | undefined
+  handleCheckbox: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
-export const InputPassword: React.FC = () => {
+// Hnadle Email to be used in the loggin page and the register form
+
+export const InputEmail: React.FC<ErrorType> = ({ errorMes }) => {
+  const [inputInfo, setInputInfo] = React.useState({
+    inputValue: '',
+    userName: '',
+  })
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputInfo({
+      ...inputInfo,
+      inputValue: event.target.value,
+    })
+  }
+
+  return (
+    <Input
+      type='text'
+      name='email'
+      placeholder='Enter email adress'
+      label='Email Adress'
+      errorMes={errorMes}
+      value={inputInfo.inputValue}
+      onChange={handleEmailChange}
+    />
+  )
+}
+
+// Handle Password to be used in the loggin page and the register form
+
+export const InputPassword: React.FC<ErrorType> = ({ errorMes }) => {
   const [password, setPassword] = React.useState({
     inputPassword: '',
     showPassword: false,
@@ -39,57 +83,37 @@ export const InputPassword: React.FC = () => {
       inputPassword: event.target.value,
     })
   }
-
   return (
     <InputPasswordWrapper>
       <Input
-        type={password.showPassword ? 'text' : 'password'}
-        onChange={handleSetPassword}
-        value={password.inputPassword}
+        name='password'
         placeholder='Enter a password'
         label='Create password'
+        type={password.showPassword ? 'text' : 'password'}
+        textPsw={password.showPassword ? 'hide' : 'show'}
+        errorMes={errorMes}
+        value={password.inputPassword}
+        onChange={handleSetPassword}
+        handleShowPassword={handleShowPassword}
       />
-      <ShowPasswordBtn type='button' onClick={handleShowPassword}>
-        {!password.showPassword ? 'show' : 'hide'}
-      </ShowPasswordBtn>
     </InputPasswordWrapper>
   )
 }
 
-export const InputEmail: React.FC<ErrorType> = ({ errorMes }) => {
-  const [inputInfo, setInputInfo] = React.useState({
-    inputValue: '',
-    userName: '',
-  })
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputInfo({
-      ...inputInfo,
-      inputValue: event.target.value,
-    })
-  }
-
-  return (
-    <Input
-      type='text'
-      placeholder='Enter email address'
-      label={'Email Address'}
-      errorMes={errorMes}
-      value={inputInfo.inputValue}
-      onChange={handleEmailChange}
-    />
-  )
-}
+// Register Form  to be called in the register page
 
 export const RegisterForm: React.FC<FormProps> = ({
+  backOnclick,
   errorMes,
   onSubmit,
-  backOnclick,
+  onChangeConfirmPassword,
+  onChangeUsername,
+  icon,
 }) => {
   const [checked, setChecked] = React.useState<boolean>(false)
-  const [inputInfo, setInputInfo] = React.useState({
-    inputValue: '',
-    userName: '',
+  const [showConfirmPsw, setShowConfirmPsw] = React.useState({
+    inputConfirmPsw: '',
+    showPassword: false,
   })
 
   const handleGoogleButton = () => {
@@ -100,8 +124,11 @@ export const RegisterForm: React.FC<FormProps> = ({
     setChecked(!checked)
   }
 
-  const handleSubmit = () => {
-    setInputInfo({ ...inputInfo, inputValue: 'input value' })
+  const handleShowConfirmPassword = () => {
+    setShowConfirmPsw({
+      ...showConfirmPsw,
+      showPassword: !showConfirmPsw.showPassword,
+    })
   }
 
   return (
@@ -121,13 +148,26 @@ export const RegisterForm: React.FC<FormProps> = ({
       </Back>
       <Input
         type='text'
-        placeholder='Username'
-        label='Your username'
-        value={inputInfo.userName}
-        onChange={handleSubmit}
+        name='username'
+        placeholder='Invictus Innocent'
+        label='Your full name'
+        errorMes={errorMes?.username}
+        value={'inputInfo.inputValue'}
+        onChange={onChangeUsername}
       />
-      <InputEmail errorMes={errorMes} />
-      <InputPassword />
+      <InputEmail errorMes={errorMes?.email} />
+      <InputPassword errorMes={errorMes?.password} />
+      <Input
+        placeholder='Confirm your password'
+        label='Confirm a password'
+        name='confirmPassword'
+        type={showConfirmPsw.showPassword ? 'text' : 'password'}
+        textPsw={showConfirmPsw.showPassword ? 'hide' : 'show'}
+        value={showConfirmPsw.inputConfirmPsw}
+        errorMes={errorMes?.confirmPassword}
+        onChange={onChangeConfirmPassword}
+        handleShowPassword={handleShowConfirmPassword}
+      />
       <TermsAndConditions
         isChecked={checked}
         href='/'
@@ -142,7 +182,7 @@ export const RegisterForm: React.FC<FormProps> = ({
             label='Register Account'
             disabled={false}
             isPrimary={true}
-            onClick={() => {}}
+            icon={icon}
           />
         </div>
 
@@ -193,21 +233,12 @@ export const Wrapper = styled.div`
     gap: 26px
   `}
 `
-
 const InputPasswordWrapper = styled.div`
   position: relative;
   margin-block-end: 25px;
   max-width: 548px;
 `
 
-const ShowPasswordBtn = styled.button`
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  cursor: pointer;
-`
 const Back = styled.div`
   position: absolute;
   top: 0;
