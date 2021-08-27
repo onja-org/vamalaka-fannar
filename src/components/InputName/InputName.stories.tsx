@@ -17,7 +17,9 @@ inputWithError.args = {
   value: 'name',
   errorMes: 'Invalid email. Please try again!',
   type: 'email or password',
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => {},
+  onChange: () => {},
+  handleShowPassword: () => null,
+  textPsw: '',
 }
 
 export const inputWithoutError = Template.bind({})
@@ -26,5 +28,7 @@ inputWithoutError.args = {
   label: 'Your full name',
   value: 'name',
   type: 'email or password',
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => {},
+  onChange: () => {},
+  handleShowPassword: () => null,
+  textPsw: 'show',
 }
