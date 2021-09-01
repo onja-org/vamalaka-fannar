@@ -3,7 +3,7 @@ import { OnboardingContainer } from '../containers/OnboardingContainer'
 
 export const LoginPage = () => {
   return (
-    <OnboardingContainer title=''>
+    <OnboardingContainer title='Log in'>
       <LoginForm />
     </OnboardingContainer>
   )

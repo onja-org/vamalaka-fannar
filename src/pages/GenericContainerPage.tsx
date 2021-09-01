@@ -65,7 +65,7 @@ const GenericContainerPage: FC = ({ children }) => {
         <HeaderContainer>
           <Header item={login} />
         </HeaderContainer>
-        <MainContainer>{children}</MainContainer>
+        <Main>{children}</Main>
       </TopContainerStyles>
       <FooterContainer>
         <PageFooter footerLinks={footerLinks} />
@@ -92,6 +92,8 @@ const Container = styled.div`
   `}
 `
 
+const Main = styled.div``
+
 const HeaderContainer = styled.div`
   padding: 10px 16px 11px 10px;
 `
@@ -116,10 +118,6 @@ const TopContainerStyles = styled.div`
   ${mediaQueries(null, 'md')`
     min-height: 644px;
   `}
-`
-
-const MainContainer = styled.div`
-  display: block;
 `
 
 const FooterContainer = styled.div`

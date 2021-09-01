@@ -13,10 +13,10 @@ import { Photo } from '../OffersList/OffersList'
 const flexLayout = css`
   display: flex;
   flex-direction: row;
+  padding: 0;
 `
 const OfferStyle = styled.div`
   background-color: #ffffff;
-  max-width: 320px;
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
@@ -106,6 +106,7 @@ const OfferStyle = styled.div`
   ${mediaQueries('lg', null)`
     display: flex;
     flex-direction: row;
+    padding: 1rem;
     box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
     max-width: 800px;
   `}

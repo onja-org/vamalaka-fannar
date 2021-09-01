@@ -18,3 +18,7 @@ describe('Layout storybook', () => {
     )
   })
 })
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false
+})

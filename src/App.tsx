@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router'
+import { Route, Switch } from 'react-router-dom'
 import './App.css'
 import GenericContainerPage from './pages/GenericContainerPage'
 import { HomePage } from './pages/HomePage'
@@ -10,8 +10,8 @@ import { Paths } from './paths'
 function App() {
   return (
     <div className='App'>
-      <GenericContainerPage>
-        <Switch>
+      <Switch>
+        <GenericContainerPage>
           <Route path={Paths.DEFAULT} exact>
             <HomePage />
           </Route>
@@ -24,8 +24,8 @@ function App() {
           <Route path={Paths.SIGN_UP}>
             <OnboardingPage />
           </Route>
-        </Switch>
-      </GenericContainerPage>
+        </GenericContainerPage>
+      </Switch>
     </div>
   )
 }

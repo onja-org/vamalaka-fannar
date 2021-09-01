@@ -1,5 +1,10 @@
-import { Story, Meta } from '@storybook/react'
+import { Story, Meta, addDecorator } from '@storybook/react'
+import { MemoryRouter } from 'react-router'
 import { PageFooter, Props } from './PageFooter'
+
+addDecorator((story) => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
 
 export default {
   title: 'Components/Page Footer',

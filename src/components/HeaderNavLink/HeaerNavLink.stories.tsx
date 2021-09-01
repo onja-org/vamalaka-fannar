@@ -1,5 +1,5 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Story, Meta, addDecorator } from '@storybook/react'
 import {
   HeaderNavLink,
   ItemType,
@@ -8,6 +8,11 @@ import {
   login,
 } from './HeaderNavLink'
 import { List } from './List'
+import { MemoryRouter } from 'react-router'
+
+addDecorator((story) => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
 
 export default {
   title: 'Header/NavLink',

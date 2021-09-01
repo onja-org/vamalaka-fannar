@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { CategoryItem } from '../CategoryItem/CategoryItem'
 
 interface Category {
@@ -8,7 +9,7 @@ interface Category {
 export interface CategoryProps {
   primary: boolean
   categories: Category[]
-  selectCategory: () => void
+  selectCategory: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Categories: React.FC<CategoryProps> = ({
@@ -23,6 +24,7 @@ export const Categories: React.FC<CategoryProps> = ({
         {categories.map((category) => (
           <CategoryItem
             key={category.id}
+            categoryId={category.id}
             item={category.title}
             primary={primary}
             selectCategory={selectCategory}
@@ -38,10 +40,15 @@ const CategoryList = styled.ul`
   padding: 0;
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  justify-content: space-between;
   overflow-x: auto;
+  margin-bottom: 25px;
 
   &::-webkit-scrollbar {
     display: none;
   }
+
+  ${mediaQueries('md', null)`
+    gap: 15px; 
+  `}
 `
