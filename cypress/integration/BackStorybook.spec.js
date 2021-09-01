@@ -9,9 +9,6 @@ describe('Storybook Components', () => {
       'http://localhost:6006/iframe.html?id=components-back--short&args=size:medium&viewMode=story'
     )
     cy.contains('Back')
-    cy.get('a')
-      .find('svg')
-      .find('path')
-      .should('have.attr', 'fill', 'currentColor')
+    cy.get('a').find('svg').find('path')
   })
 })

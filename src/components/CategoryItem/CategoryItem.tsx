@@ -5,18 +5,21 @@ import { fonts } from '../../globalStyles/fonts'
 export interface CategoryItemProp {
   item: string
   primary: boolean
-  selectCategory: () => void
+  selectCategory: (e: React.MouseEvent<HTMLButtonElement>) => void
+  categoryId?: string
 }
 
 export const CategoryItem: React.FC<CategoryItemProp> = ({
   item,
   primary = true,
   selectCategory,
+  categoryId,
 }) => {
   return (
     <Button
       style={primary ? primaryColor.button : secondaryColor.button}
-      onClick={selectCategory}>
+      onClick={selectCategory}
+      id={categoryId}>
       {item}
     </Button>
   )
@@ -25,7 +28,7 @@ export const CategoryItem: React.FC<CategoryItemProp> = ({
 const Button = styled.button`
   ${fonts}
   font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-  width: 100%;
+  width: 214px;
   cursor: pointer;
   margin-left: 0;
   font-size: 18px;

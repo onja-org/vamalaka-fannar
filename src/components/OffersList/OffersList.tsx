@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { Offer } from '../Offer/Offer'
 interface User {
   firstName: string
@@ -23,12 +24,18 @@ export interface OffersListProps {
 }
 const OffersListContainer = styled.ul`
   display: block;
-  max-width: 90%;
   min-width: 90%;
   margin: auto;
-  padding-inline-start: 0;
   margin-block-end: 0;
+  padding: 0;
   padding-block-end: 4rem;
+  width: 100%;
+
+  ${mediaQueries('lmd', null)`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  `}
 `
 export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
   return (

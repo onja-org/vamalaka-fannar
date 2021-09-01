@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import styled from 'styled-components'
 import { LeftSide } from '../components/LeftSide/LeftSide'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
@@ -12,7 +11,7 @@ export const OnboardingContainer: React.FC<TitleType> = ({
   children,
 }) => {
   return (
-    <Fragment>
+    <MainContainer>
       <ImageContainer>
         <LeftSide backgroundImage='Baobab' />
       </ImageContainer>
@@ -24,9 +23,25 @@ export const OnboardingContainer: React.FC<TitleType> = ({
           {children}
         </div>
       </RoleOptionContainer>
-    </Fragment>
+    </MainContainer>
   )
 }
+
+const MainContainer = styled.div`
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 90%;
+  padding: 47px 14px 14px 16px;
+  display: flex;
+  justify-content: center;
+  ${mediaQueries(null, 'lmd')`
+    padding: 14px;
+    & > div:nth-child(1) {
+      display: none;
+    `}
+  }
+`
 
 const ImageContainer = styled.div`
   background-color: #041d42;

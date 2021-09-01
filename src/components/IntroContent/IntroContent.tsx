@@ -93,7 +93,8 @@ const ContentWrapper = styled.div`
     flex-direction: row-reverse;
     align-items: center;
     gap: 40px;
-    padding: 3rem;
-    padding-top: 0;
+    padding: 0;
+    padding-top: 3rem;
+    margin: 0;
   `}
 `

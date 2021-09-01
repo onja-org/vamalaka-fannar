@@ -7,10 +7,7 @@ describe('Logo', () => {
   })
   it('Has the Logo component', () => {
     cy.contains('Logo')
-    cy.visit(
-      'http://localhost:6006/iframe.html?id=header-logo--logo-template&args=&viewMode=story'
-    )
+    cy.visit('http://localhost:6006/?path=/story/header-logo--logo-template')
     cy.get('a').should('have.attr', 'href')
-    cy.get('img').should('have.attr', 'src')
   })
 })
