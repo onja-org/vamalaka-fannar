@@ -1,24 +1,65 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import Button from '../Buttons/Buttons'
 import googleIcon from '../../icons/google.png'
 
-import {
-  ErrorType,
-  InputEmail,
-  InputPassword,
-  Wrapper,
-} from '../RegisterForm/RegisterForm'
+import { Wrapper } from '../RegisterForm/RegisterForm'
 import styled from 'styled-components'
 import { mediaQueries } from '../../mediaQueries/mediaQueries'
+import Input from '../InputName/InputName'
+import { useState } from 'react'
 
-export const LoginForm: FC<ErrorType> = ({ errorMes }) => {
+export interface LoginType {
+  passwordType: string
+  errorMes?: string | undefined
+  usernameErr: string
+  passwordErr: string
+  onSubmit: (username: string, password: string) => void
+  icon?: string
+  textPsw?: string
+  handleShowPassword?: () => void
+}
+
+export const LoginForm: FC<LoginType> = ({
+  usernameErr,
+  passwordErr,
+  onSubmit,
+  icon,
+  textPsw,
+  passwordType,
+  handleShowPassword,
+}) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault()
+      onSubmit(username, password)
+    },
+    [username, password, onSubmit]
+  )
+
   return (
-    <Login>
+    <Login onSubmit={handleSubmit}>
       <div>
-        <div>
-          <InputEmail errorMes={errorMes} />
-          <InputPassword />
-        </div>
+        <InputWrapper>
+          <Input
+            type='text'
+            placeholder='Username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            errorMes={usernameErr}
+          />
+          <Input
+            type={passwordType}
+            placeholder='Password'
+            handleShowPassword={handleShowPassword}
+            value={password}
+            textPsw={textPsw}
+            onChange={(e) => setPassword(e.target.value)}
+            errorMes={passwordErr}
+          />
+        </InputWrapper>
         <Wrapper>
           <div>
             <Button
@@ -26,7 +67,7 @@ export const LoginForm: FC<ErrorType> = ({ errorMes }) => {
               label='Login'
               disabled={false}
               isPrimary={true}
-              onClick={() => {}}
+              icon={icon}
             />
           </div>
 
@@ -51,11 +92,16 @@ const Login = styled.form`
 
   & > div {
     display: grid;
-    gap: 122px;
-    padding: 32px 0;
-  }
+    gap: 204px;
+    padding: 17px 0;
 
-  ${mediaQueries(null, 'md')`
-    gap: 122px;
-  `}
+    ${mediaQueries('md', null)`
+      gap: 144px;
+    `}
+  }
+`
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `

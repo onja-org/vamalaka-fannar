@@ -86,3 +86,6 @@ const ButtonWrapper = styled.div`
   display: grid;
   gap: 28px;
 `
+const RoleSelectionWrapper = styled.div`
+  padding: 52px 0;
+`

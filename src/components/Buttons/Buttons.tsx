@@ -6,7 +6,7 @@ export interface ButtonProps {
   label: string | undefined
   isPrimary?: boolean
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent) => void
   type: 'button' | 'submit' | 'reset' | undefined
   icon?: string
 }
@@ -50,6 +50,7 @@ const Button: React.FC<ButtonProps> = ({
   isPrimary,
   type,
   icon,
+  onClick,
 }) => {
   return (
     <>
@@ -57,7 +58,7 @@ const Button: React.FC<ButtonProps> = ({
         label={label}
         disabled={disabled}
         isPrimary={isPrimary}
-        onClick={() => {}}
+        onClick={onClick}
         type={type}>
         {icon && <img src={icon} alt='icon' />}
         <span>{label}</span>

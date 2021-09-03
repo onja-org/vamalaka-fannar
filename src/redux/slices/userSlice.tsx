@@ -1,8 +1,12 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
-import { sendQuery, registerMutation } from '../../graphqlHelper'
+import { sendQuery, registerMutation, loginMutation } from '../../graphqlHelper'
 import { AppDispatch, RootState } from '../store'
 
 type fetchUserRegisterError = {
+  message: string
+}
+
+type FetchUserLoginError = {
   message: string
 }
 
@@ -18,12 +22,20 @@ interface UserRegister {
   role: string
 }
 
-interface payloadForm {
+interface PayloadForm {
   register: UserRegister
 }
 
+interface UserLogin {
+  username: string
+  password: string
+}
+interface LoginFormPayload {
+  login: UserLogin
+}
+
 export const fetchUserRegister = createAsyncThunk<
-  payloadForm,
+  PayloadForm,
   UserRegister,
   {
     dispatch: AppDispatch
@@ -38,7 +50,36 @@ export const fetchUserRegister = createAsyncThunk<
   )
 
   const user = response.data.data
-  console.log(user)
+
+  if (response.status !== 200) {
+    return thunkApi.rejectWithValue({
+      message: 'Failed to fetch todos.',
+    })
+  }
+
+  const errorMessage = response?.data?.errors
+  if (errorMessage) {
+    return thunkApi.rejectWithValue({
+      message: errorMessage?.[0].message,
+    })
+  }
+  return user
+})
+
+export const fetchUserLogin = createAsyncThunk<
+  LoginFormPayload,
+  UserLogin,
+  {
+    dispatch: AppDispatch
+    state: RootState
+    rejectValue: FetchUserLoginError
+  }
+>('user/login', async (userRegisterForm, thunkApi) => {
+  const { username, password } = userRegisterForm
+
+  const response = await sendQuery(loginMutation(username, password))
+
+  const user = response.data.data
 
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
@@ -56,9 +97,10 @@ export const fetchUserRegister = createAsyncThunk<
 })
 
 const initialState = {
-  user: { username: '' } as UserData,
+  user: { username: '', password: '' } as UserData,
   status: '',
-  error: null as fetchUserRegisterError | null,
+  registerError: null as fetchUserRegisterError | null,
+  loginError: null as FetchUserLoginError | null,
 }
 
 export const userSlice = createSlice({
@@ -68,21 +110,34 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUserRegister.pending, (state) => {
       state.status = 'loading'
-      state.error = null
+      state.registerError = null
     })
     builder.addCase(fetchUserRegister.fulfilled, (state, { payload }) => {
       state.user = payload?.register
       state.status = 'idle'
     })
     builder.addCase(fetchUserRegister.rejected, (state, { payload }) => {
-      if (payload) state.error = payload
+      if (payload) state.registerError = payload
+      state.status = 'idle'
+    })
+    builder.addCase(fetchUserLogin.pending, (state) => {
+      state.status = 'loading'
+      state.loginError = null
+    })
+    builder.addCase(fetchUserLogin.fulfilled, (state, { payload }) => {
+      state.user = payload?.login
+      state.status = 'idle'
+    })
+    builder.addCase(fetchUserLogin.rejected, (state, { payload }) => {
+      if (payload) state.loginError = payload
       state.status = 'idle'
     })
   },
 })
 
 const selectUser = (state: RootState) => state.user.user
-const selectUserError = (state: RootState) => state?.user?.error
+const selectRegisterError = (state: RootState) => state?.user?.registerError
+const selectLoginError = (state: RootState) => state?.user?.loginError
 const selectUserStatus = (state: RootState) => state?.user?.status
 
 export const userSelector = createSelector<RootState, any, any>(
@@ -90,11 +145,14 @@ export const userSelector = createSelector<RootState, any, any>(
   (user) => user
 )
 
-console.log(selectUser)
+export const userErrorLogin = createSelector<RootState, any, any>(
+  selectLoginError,
+  (loginError) => loginError
+)
 
 export const userErrorRegister = createSelector<RootState, any, any>(
-  selectUserError,
-  (error) => error
+  selectRegisterError,
+  (registerError) => registerError
 )
 export const userStatusSelector = createSelector<RootState, any, any>(
   selectUserStatus,

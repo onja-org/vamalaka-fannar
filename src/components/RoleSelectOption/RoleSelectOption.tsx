@@ -17,10 +17,7 @@ export interface OptionProps {
 const polygonBg = css`
   background-repeat: no-repeat;
   max-width: 426px;
-  padding-block-end: 16px;
-  padding-block-start: 16px;
-  padding-inline-end: 16px;
-  padding-inline-start: 16px;
+  padding: 16px;
 `
 
 const optionWrapperStyles = css`

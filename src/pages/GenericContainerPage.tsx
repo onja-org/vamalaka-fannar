@@ -107,13 +107,6 @@ const TopContainerStyles = styled.div`
   );
   width: 100%;
   min-height: calc(318px + 164px + 205px - 54px);
-  ${mediaQueries(null, 'lmd')`
-    min-height: 480px;
-  `}
-
-  ${mediaQueries(null, 'smd')`
-    min-height: 544px;
-  `}
 
   ${mediaQueries(null, 'md')`
     min-height: 644px;

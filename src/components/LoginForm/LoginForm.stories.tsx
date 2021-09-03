@@ -1,19 +1,19 @@
 import { Story, Meta } from '@storybook/react'
-import { LoginForm } from './LoginForm'
+import { LoginForm, LoginType } from './LoginForm'
 
 export default {
   title: 'Components/Login form',
   component: LoginForm,
 } as Meta
 
-const Template: Story = (args) => <LoginForm {...args} />
+const Template: Story<LoginType> = (args) => <LoginForm {...args} />
 export const LoginWithoutError = Template.bind({})
 LoginWithoutError.args = {
-  isError: true,
+  onSubmit: () => {},
 }
 
 export const LoginWithError = Template.bind({})
 LoginWithError.args = {
-  isError: true,
   errorMes: 'Invalid email. Please try again!',
+  onSubmit: () => {},
 }
