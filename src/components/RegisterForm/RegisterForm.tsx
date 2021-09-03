@@ -204,7 +204,7 @@ const Container = styled.form`
   max-width: 426px;
   margin: auto;
   display: grid;
-  padding: 34px 17px 0 17px;
+  padding: 34px 0 17px;
 
   ${mediaQueries(null, 'lmd')`
     padding-bottom: calc(34px + 12px);

@@ -84,7 +84,7 @@ const AccountContainer = styled.div`
 `
 
 const ButtonWrapper = styled.div`
-  padding-top: 36px;
+  padding: 36px 0;
   display: grid;
   gap: 28px;
 `

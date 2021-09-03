@@ -67,14 +67,17 @@ const RoleOptionContainer = styled.div`
   & > div {
     max-width: 426px;
     margin: auto;
-    padding: 14px;
+    padding: 52px 14px;
+
+    ${mediaQueries('lmd', null)`
+      padding: 92px 14px;
+    `}
   }
   ${mediaQueries('lmd', null)`
     flex-basis: 50%;
-    padding: calc(74px - 14px * 2) 0;
+    padding: calc(36px - 14px * 2) 0;
   & > div {
       height: 100%;
-      padding: 38px 0 0 0;
     }
   `}
 `
@@ -88,5 +91,4 @@ const Heading = styled.h3`
   align-items: center;
   color: #041d42;
   margin: calc(27px - 14px) 0 4px 0;
-  padding-left: 16px;
 `
