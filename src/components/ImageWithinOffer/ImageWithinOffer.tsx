@@ -13,9 +13,6 @@ export const ImageWithinOffer: React.FC<ImageProps> = ({ src, alt }) => {
 
 const Image = styled.img`
   width: 100%;
-  ${mediaQueries('md', null)`
-    max-width: 322px;
- `}
   ${mediaQueries('lmd', null)`
     max-width: 322px;
   `}

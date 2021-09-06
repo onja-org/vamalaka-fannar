@@ -77,7 +77,7 @@ const OfferStyle = styled.div`
       `}
     }
 
-    ${mediaQueries('lg', null)`
+    ${mediaQueries('xl', null)`
       margin-left: 20px;
     `}
   }
@@ -87,7 +87,7 @@ const OfferStyle = styled.div`
     gap: 11.5px;
     justify-content: space-between;
 
-    ${mediaQueries('lg', null)`
+    ${mediaQueries('xl', null)`
       gap: 22px;
       justify-content: end;
     `}
@@ -98,7 +98,7 @@ const OfferStyle = styled.div`
     gap: 4.19px;
     align-items: center;
 
-    ${mediaQueries('lg', null)`
+    ${mediaQueries('xl', null)`
       gap: 7.5px;
     `}
   }
@@ -108,7 +108,7 @@ const OfferStyle = styled.div`
     flex-direction: row;
     padding: 1rem;
     box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
-    max-width: 800px;
+    max-width: 1360px;
   `}
 `
 export interface OfferProps {
