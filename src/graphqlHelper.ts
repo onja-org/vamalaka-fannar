@@ -18,6 +18,10 @@ export const getCategoriesQuery = () => {
       }`
 }
 
+export const getUsers = () => {
+  return `{users{photos{url},id,username,firstName,lastName}}`
+}
+
 export const registerMutation = (
   username: string,
   password: string,
