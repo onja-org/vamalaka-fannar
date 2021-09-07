@@ -2,43 +2,27 @@ import styled, { css } from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import Button from '../Buttons/Buttons'
-import IntroImage from '../../assets/introImage.png'
-import { Link } from 'react-router-dom'
-import { Paths } from '../../paths'
+import { Headings, Figures } from './IntroContent'
 
-export const Figures = () => {
-  return (
-    <figure>
-      <img src={IntroImage} alt='content of how it works ' />
-    </figure>
-  )
-}
-
-export const Headings = () => {
-  return (
-    <>
-      <div>
-        <h3>Madagascars peer-to-peer e-commerce platform</h3>
-        <p>
-          Purchase high-quality products made by the people that sell them. By
-          cutting out middlemen, you know exactly where your purchase is from
-          how it was made.
-        </p>
-      </div>
-    </>
-  )
-}
-
-export const IntroContent = () => {
+export const LearnMore = () => {
   return (
     <ContentWrapper>
       <Figures />
       <div>
         <Headings />
         <ButtonWrapper>
-          <Link to={`${Paths.HOWITWORKS}`}>
-            <Button label='Learn how it works' type='button' isPrimary={true} />
-          </Link>
+          <Button
+            label='Learn more'
+            type='button'
+            isPrimary={true}
+            onClick={() => {}}
+          />
+          <Button
+            label='Can you trust us'
+            type='button'
+            isPrimary={false}
+            onClick={() => {}}
+          />
         </ButtonWrapper>
       </div>
     </ContentWrapper>
@@ -52,7 +36,10 @@ const fontProps = css`
 const ButtonWrapper = styled.div`
   display: none;
   ${mediaQueries('lmd', null)`
-    display: block;
+    display: flex;
+    button {
+      margin-right: 20px;
+    }
   `}
 `
 

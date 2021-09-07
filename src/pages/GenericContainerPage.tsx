@@ -86,7 +86,7 @@ const Container = styled.div`
     }
 
     footer > div {
-      padding: 0;
+      padding-bottom: 0;
       min-height: 184px;
     }
   `}
@@ -111,6 +111,12 @@ const TopContainerStyles = styled.div`
   ${mediaQueries(null, 'md')`
     min-height: 644px;
   `}
+
+  ${mediaQueries('xL', null)`
+  
+  }
+    
+ `}
 `
 
 const FooterContainer = styled.div`
