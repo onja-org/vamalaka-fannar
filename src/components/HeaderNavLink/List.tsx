@@ -12,4 +12,10 @@ export const List = styled.ul`
   list-style-type: none;
   gap: 24px;
   justify-content: flex-end;
+  align-items: center;
+  width: max-content;
+
+  img {
+    max-width: 31.25px;
+  }
 `
