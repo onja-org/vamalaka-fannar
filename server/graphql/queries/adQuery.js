@@ -94,7 +94,7 @@ exports.AdQuery = new GraphQLObjectType({
             }
             return ad;
           } catch (error) {
-            throw new Error(errro);
+            throw new Error(error);
           }
         },
       },

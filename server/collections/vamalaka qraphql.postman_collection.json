@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d7eedde3-c1cf-419b-825e-a7661ac41695",
+		"_postman_id": "7b9847fe-91db-44b1-ba54-fc00e82cd60a",
 		"name": "vamalaka qraphql",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -71,7 +71,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation{createAd(\n    title:\"Chicken\",\n    body:\"even fattier\",\n    photos:[{url:\"i4\", info:\"info of first\"}, {url:\"id\", isPrimary: true}],\n    categoryId:\"61160d5d31840d002924526d\"\n    )\n \n {id,title,photos{url,info,isPrimary},currency,price,amountOfProduct}}\n\n # categoryId must be passed - create category first and assign ",
+						"query": "mutation{createAd(\n    title:\"New Fat Chicken\",\n    body:\"even fattier\",\n    photos:[{url:\"i4\", info:\"info of first\"}, {url:\"id\", isPrimary: true}],\n    categoryId:\"61160d5d31840d002924526d\"\n    )\n \n {id,title,photos{url,info,isPrimary},currency,price,amountOfProduct}}\n\n # categoryId must be passed - create category first and assign ",
 						"variables": ""
 					}
 				},
@@ -90,7 +90,7 @@
 			"response": []
 		},
 		{
-			"name": "query ads",
+			"name": "query ads all",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -103,7 +103,167 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query{ads{id,title,body,category{title}, user{username, email}}}\n\n#user information can be expanded as requiered address, firstName etc",
+						"query": "query{ads{id,title,body,category{title,id}, user{username, email, id}}}\n#user information can be expanded as requiered address, firstName etc",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query ad getad by id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{getad(id:\"61287ebec63fa9002a17b04a\"){id,title,body,category{title,id}, user{username, email, id}}}\n#user information can be expanded as requiered address, firstName etc",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query getUserAds",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{getUserAds(userId: \"611a2fdb48c3c9001e106f36\"){id,title,body,category{title}, user{username, email}}}\n\n#user information can be expanded as requiered address, firstName etc",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query getCategoryAds",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{getCategoryAds(categoryId: \"611b76fd70611a0029d822a8\"){id,title,body,category{title}, user{username, email}}}\n\n#user information can be expanded as requiered address, firstName etc",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query getUserByUsername",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{getUserByUsername(username:\"student\"){ username, id}}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query getUserById",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{userToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{getUserById(id:\"611a2fdb48c3c9001e106f36\"){ username, id}}",
 						"variables": ""
 					}
 				},
