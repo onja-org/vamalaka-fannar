@@ -4,7 +4,6 @@ describe('Storybook Components', () => {
     cy.contains('Back', { timeout: 20000 })
   })
   it('Has the Back component', () => {
-    cy.contains('Back')
     cy.visit(
       'http://localhost:6006/iframe.html?id=components-back--short&args=&viewMode=story'
     )
