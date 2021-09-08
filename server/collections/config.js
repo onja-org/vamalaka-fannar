@@ -13,7 +13,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation{login(username:\"skavatar-rosny-1630994399829-701451667.jpgorek\" , password:\"aaaa\"){id, username,token}}",
+						"query": "mutation{login(username:\"skorek\" , password:\"aaaa\"){id, username,token}}",
 						"variables": ""
 					}
 				},
