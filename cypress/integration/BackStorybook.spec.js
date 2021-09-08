@@ -6,7 +6,7 @@ describe('Storybook Components', () => {
   it('Has the Back component', () => {
     cy.contains('Back')
     cy.visit(
-      'http://localhost:6006/iframe.html?id=components-back--short&args=size:medium&viewMode=story'
+      'http://localhost:6006/iframe.html?id=components-back--short&args=&viewMode=story'
     )
     cy.contains('Back')
     cy.get('a').find('svg').find('path')
