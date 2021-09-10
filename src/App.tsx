@@ -6,6 +6,7 @@ import { HowItWorksPage } from './pages/HowItWorksPage'
 import { LanguagePage } from './pages/LanguagePage'
 import { LoginPage } from './pages/LoginPage'
 import { OnboardingPage } from './pages/OnboardingPage'
+import { ViewProfile } from './pages/ViewProfilePage'
 import { Paths } from './paths'
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path={Paths.HOWITWORKS}>
             <HowItWorksPage />
+          </Route>
+          <Route path={Paths.PROFILE}>
+            <ViewProfile />
           </Route>
         </GenericContainerPage>
       </Switch>

@@ -9,7 +9,8 @@ import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Photo } from '../OffersList/OffersList'
-import { Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import { Paths } from '../../paths'
 
 const flexLayout = css`
   display: flex;
@@ -190,9 +191,9 @@ export const Offer: React.FC<OfferProps> = ({
             <span>({amountOfProduct})</span>
           </div>
         </div>
-        <Route path=''>
+        <Link to={Paths.PROFILE}>
           <SellerPreviewInfo image={profile} name={name} location={location} />
-        </Route>
+        </Link>
         <DescriptionOffer text={offerDescription} />
         <div className='buttonContainer'>
           <Buttons

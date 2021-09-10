@@ -1,7 +1,3 @@
 export const ViewProfile = () => {
-  return (
-    <>
-      <h1>Profile page</h1>
-    </>
-  )
+  return <div></div>
 }

@@ -5,4 +5,5 @@ export enum Paths {
   REGISTER_ACCOUNT = '/register-account',
   LANGUAGE = '/language',
   HOWITWORKS = '/how-it-works',
+  PROFILE = '/profile/:username',
 }
