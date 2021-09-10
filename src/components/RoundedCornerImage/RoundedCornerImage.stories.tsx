@@ -15,5 +15,6 @@ const Template: Story<RoundImageProps> = (args) => (
 export const RoundedImage = Template.bind({})
 RoundedImage.args = {
   alt: 'rounded courner image',
-  src: roundedSvg,
+  imageSource: roundedSvg,
+  onClick: () => {},
 }
