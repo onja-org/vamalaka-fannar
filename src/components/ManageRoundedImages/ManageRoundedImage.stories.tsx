@@ -2,6 +2,7 @@ import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import imageWithStar from '../../images/image-with-star.svg'
 import imageNoStar from '../../images/round-no-star.svg'
+import emptyImage from '../../images/empty-image.svg'
 import { ManageImageProps, ManageRoundedImage } from './ManageRoundedImage'
 
 export default {
@@ -31,4 +32,5 @@ ImageNoStar.args = {
 export const EmptyImage = Template.bind({})
 EmptyImage.args = {
   showStar: false,
+  emptyImage: emptyImage,
 }
