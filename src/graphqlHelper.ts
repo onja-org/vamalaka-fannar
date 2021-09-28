@@ -8,7 +8,7 @@ export const sendQuery = (query: string, variables?: any): Promise<any> => {
 
 export const getAdsQuery = () => {
   return `{
-          ads{title, createdAt, id, username,comments{body, id, username}, photos{url, info, isPrimary}}
+          ads{title, createdAt, id, username,comments{body, id, username}, photos{url, info, isPrimary}, user{username, photos{url}}}
       }`
 }
 

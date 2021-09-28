@@ -15,102 +15,7 @@ const flexLayout = css`
   flex-direction: row;
   padding: 0;
 `
-const OfferStyle = styled.div`
-  background-color: #ffffff;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
-  .buttonContainer {
-    ${flexLayout}
-    justify-content: space-between;
 
-    button {
-      padding: 8px 18px;
-      font-size: 16px;
-    }
-
-    .favoriteButton {
-      display: block;
-      background-color: transparent;
-      border: none;
-
-      &:focus {
-        outline: none;
-      }
-      ${mediaQueries('lg', null)`
-        display: none;
-      }`}
-
-    .favoriteButtonContainer {
-      display: none;
-      ${mediaQueries('lg', null)`
-        display: block;
-      `}
-
-      button {
-        padding: 6px 10px;
-      }
-    }
-
-    ${mediaQueries('lg', null)`
-      padding-bottom: 5px;
-      gap: 10px;
-    `}
-      ${mediaQueries('xl', null)`
-      gap: 16rem;
-    `}
-  }
-
-  .offerDetails {
-    margin-left: 9px;
-    h3 {
-      margin-left: -9px;
-      padding-left: 9px;
-      padding-right: 9px;
-      transform: translateY(-26px);
-      background-color: #fff;
-      width: fit-content;
-
-      ${mediaQueries('lg', null)`
-        transform: translateY(14px);
-        font-size: 30px;
-      `}
-    }
-
-    ${mediaQueries('xl', null)`
-      margin-left: 20px;
-    `}
-  }
-
-  .productDetails {
-    ${flexLayout}
-    gap: 11.5px;
-    justify-content: space-between;
-
-    ${mediaQueries('xl', null)`
-      gap: 22px;
-      justify-content: end;
-    `}
-  }
-
-  .ratingContainer {
-    ${flexLayout}
-    gap: 4.19px;
-    align-items: center;
-
-    ${mediaQueries('xl', null)`
-      gap: 7.5px;
-    `}
-  }
-
-  ${mediaQueries('lg', null)`
-    display: flex;
-    flex-direction: row;
-    padding: 1rem;
-    box-shadow: 0px 4px 50px -8px rgba(21, 140, 177, 0.3);
-    max-width: 1360px;
-  `}
-`
 export interface OfferProps {
   photos: Photo[]
   imageDescription: string
@@ -179,30 +84,132 @@ export const Offer: React.FC<OfferProps> = ({
   return (
     <OfferStyle>
       <ImageWithinOffer src={imageSrc} alt={imageDescription} />
-      <div className='offerDetails'>
+      <OfferDetails>
         <HeaderOfOffer name={offerName} />
 
-        <div className='productDetails'>
+        <ProductDetails>
           <PriceOfOffer currency={currency} value={amount} unit={unit} />
-          <div className='ratingContainer'>
+          <RatingContainer>
             <Rating star={star} alt={ratingDescription} />
             <span>({amountOfProduct})</span>
-          </div>
-        </div>
+          </RatingContainer>
+        </ProductDetails>
         <SellerPreviewInfo image={profile} name={name} location={location} />
         <DescriptionOffer text={offerDescription} />
-        <div className='buttonContainer'>
+        <ButtonContainer>
           <Buttons
             type='button'
             isPrimary={isLearnEnabled}
             label={detailButtonText}
           />
-          <button className='favoriteButton'>{outlineHeart}</button>
-          <div className='favoriteButtonContainer'>
+          <FavoriteButton>{outlineHeart}</FavoriteButton>
+          <AddFavoriteButtonContainer>
             <Buttons type='button' label={favoriteButtonText} />
-          </div>
-        </div>
-      </div>
+          </AddFavoriteButtonContainer>
+        </ButtonContainer>
+      </OfferDetails>
     </OfferStyle>
   )
 }
+
+const OfferStyle = styled.div`
+  background-color: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 322px 1fr;
+  gap: 22px;
+  box-shadow: 0px 0px 14px -9px rgba(21, 140, 177, 0.3);
+
+  ${mediaQueries(null, 'lg')`
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0px 0px 14px -9px rgba(21, 140, 177, 0.3)
+
+  `};
+`
+
+const OfferDetails = styled.div`
+  margin-left: 9px;
+
+  h3 {
+    margin-left: -9px;
+    padding-left: 9px;
+    padding-right: 9px;
+    transform: translateY(-26px);
+    background-color: #fff;
+    width: fit-content;
+
+    ${mediaQueries('lg', null)`
+        transform: translateY(14px);
+        font-size: 30px;
+      `}
+  }
+
+  ${mediaQueries('lg', null)`
+      margin-left: 20px;
+    `}
+`
+const RatingContainer = styled.div`
+  ${flexLayout}
+  gap: 4.19px;
+  align-items: center;
+
+  ${mediaQueries('lg', null)`
+    gap: 7.5px;
+  `}
+`
+
+const ProductDetails = styled.div`
+  ${flexLayout}
+  gap: 11.5px;
+  justify-content: space-between;
+
+  ${mediaQueries('lg', null)`
+    gap: 22px;
+    justify-content: end;
+  `}
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 19px;
+
+  button {
+    padding: 8px 18px;
+    font-size: 16px;
+  }
+
+  ${mediaQueries('lg', null)`
+    padding-bottom: 5px;
+  `}
+  ${mediaQueries('xl', null)`
+    gap: 19px;
+  `}
+`
+
+const FavoriteButton = styled.button`
+  display: block;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  ${mediaQueries('lg', null)`
+    display: none;
+  }`}
+`
+
+const AddFavoriteButtonContainer = styled.div`
+  display: none;
+  ${mediaQueries('lg', null)`
+    display: block;
+  `}
+
+  button {
+    padding: 6px 10px;
+  }
+`
