@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import React from 'react'
 import { RoundedCornerImage } from '../RoundedCornerImage/RoundedCornerImage'
-import emptyImage from '../../images/empty-image.svg'
 import crossImage from '../../images/x-circle.svg'
 import starImage from '../../images/star.svg'
 
 export interface ManageImageProps {
   imageSource: string | undefined
+  emptyImage?: string
   alt: string
   showStar?: boolean
-  onImageClik: () => void
+  onClickImage: () => void
   onDeleteImage?: () => void
 }
 
@@ -17,8 +17,9 @@ export const ManageRoundedImage: React.FC<ManageImageProps> = ({
   alt,
   imageSource,
   showStar,
-  onImageClik,
+  onClickImage: onImageClik,
   onDeleteImage,
+  emptyImage,
 }) => {
   return (
     <Container>
@@ -35,10 +36,11 @@ export const ManageRoundedImage: React.FC<ManageImageProps> = ({
   )
 }
 
-const Container = styled.div``
+const Container = styled.div`
+  position: relative;
+`
 
 const Wrapper = styled.div`
-  position: relative;
   img {
     width: 100%;
   }
@@ -46,12 +48,12 @@ const Wrapper = styled.div`
 
 const Star = styled.img`
   position: absolute;
-  top: 15px;
+  top: 0;
   max-width: 20px;
 `
 const Cross = styled.img`
   position: absolute;
-  left: 93px;
-  top: 15px;
+  left: 75px;
+  top: 0;
   max-width: 20px;
 `
