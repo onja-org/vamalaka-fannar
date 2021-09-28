@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { LoginForm } from '../components/LoginForm/LoginForm'
 import { OnboardingContainer } from '../containers/OnboardingContainer'
+import loadingIcon from '../icons/small-load-icon.png'
+import { useState } from 'react'
 import {
   fetchUserLogin,
   userErrorLogin,
   userStatusSelector,
 } from '../redux/slices/userSlice'
-import loadingIcon from '../icons/small-load-icon.png'
-import { useState } from 'react'
 
 export const LoginPage = () => {
   const error = useSelector(userErrorLogin)

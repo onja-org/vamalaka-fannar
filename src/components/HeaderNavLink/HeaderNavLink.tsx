@@ -17,7 +17,7 @@ export const loggedIn = [
     text: 'Transactions',
   },
   {
-    path: '#account',
+    path: 'profile',
     imgSrc: account,
     alt: 'Accounts',
     text: 'Account',

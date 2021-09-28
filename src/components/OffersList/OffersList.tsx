@@ -17,6 +17,7 @@ interface OfferData {
   body: string
   username: User
   photos: Photo[]
+  user: any
 }
 export interface OffersListProps {
   offers: OfferData[]
@@ -27,7 +28,6 @@ const OffersListContainer = styled.ul`
   margin: auto;
   margin-block-end: 0;
   padding: 0;
-  padding-block-end: 4rem;
   width: 100%;
 `
 export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
@@ -50,7 +50,7 @@ export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
           favoriteButtonText='Add to favourite'
           name={offer.username}
           offerDescription={offer.body}
-          profile={''}
+          profile={offer.user.photos[0]?.url}
           ratingDescription={''}
           star={0}
           unit={''}

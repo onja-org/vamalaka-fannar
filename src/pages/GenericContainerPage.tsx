@@ -1,9 +1,12 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { login } from '../components/HeaderNavLink/HeaderNavLink'
+import { loggedIn, login } from '../components/HeaderNavLink/HeaderNavLink'
 import { Header } from '../components/Header'
 import { PageFooter } from '../components/PageFooter/PageFooter'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
+import { useSelector } from 'react-redux'
+import { userStatusSelector } from '../redux/slices/userSlice'
+import { STATUS } from '../enums/enums'
 
 export const footerLinks = [
   {
@@ -59,11 +62,13 @@ export const footerLinks = [
 ]
 
 const GenericContainerPage: FC = ({ children }) => {
+  const userStatus = useSelector(userStatusSelector)
+
   return (
     <Container>
       <TopContainerStyles>
         <HeaderContainer>
-          <Header item={login} />
+          <Header item={userStatus === STATUS.Idle ? loggedIn : login} />
         </HeaderContainer>
         <Main>{children}</Main>
       </TopContainerStyles>
@@ -92,7 +97,9 @@ const Container = styled.div`
   `}
 `
 
-const Main = styled.div``
+const Main = styled.div`
+  padding: 32px 16px;
+`
 
 const HeaderContainer = styled.div`
   padding: 10px 16px 11px 10px;

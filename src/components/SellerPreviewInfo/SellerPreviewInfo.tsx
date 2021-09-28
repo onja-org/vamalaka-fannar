@@ -31,7 +31,7 @@ export const SellerPreviewInfo: React.FC<SellerInfoProperties> = ({
 
 const Container = styled('div')`
   display: flex;
-  flext-direction: row;
+  flex-direction: row;
   gap: 5px;
   align-items: center;
 `
