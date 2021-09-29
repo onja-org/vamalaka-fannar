@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux'
 import { styled } from '@storybook/theming'
 import { IconSize, Loading } from '../components/Loading/Loading'
 import { FETCH_STATUS } from '../constants'
+import { SubtitleInfo } from '../components/SubtitleInfo/SubtitleInfo'
 
 export const HomePage = () => {
   const dispatch = useAppDispatch()
@@ -45,6 +46,7 @@ export const HomePage = () => {
       ) : (
         <OffersList offers={offers} />
       )}
+      <SubtitleInfo />
     </HomeContainer>
   )
 }
