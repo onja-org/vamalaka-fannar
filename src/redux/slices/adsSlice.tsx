@@ -12,30 +12,20 @@ export const fetchAds = createAsyncThunk<
   any[],
   string[],
   { rejectValue: FetchAdsError }
->(
-  'ads/fetch',
-  // The second argument, `thunkApi`, is an object
-  // that contains all those fieldsgit push origin HEAD
-  // and the `rejectWithValue` function:
-  async (limit: string[], thunkApi) => {
-    // console.log(limit, limit)
-    const response = await sendQuery(getAdsQuery())
+>('ads/fetch', async (limit: string[], thunkApi) => {
+  // console.log(limit, limit)
+  const response = await sendQuery(getAdsQuery())
 
-    const ads = response?.data?.data?.ads
-    // const data: any[] = await response.json();
-    // console.log(ads, 'ads')
-
-    // Check if status is not okay:
-    if (response.status !== 200) {
-      // Return the error message:
-      return thunkApi.rejectWithValue({
-        message: 'Failed to fetch todos.',
-      })
-    }
-
-    return ads
+  const ads = response?.data?.data?.ads
+  if (response.status !== 200) {
+    // Return the error message:
+    return thunkApi.rejectWithValue({
+      message: 'Failed to fetch todos.',
+    })
   }
-)
+
+  return ads
+})
 
 export const adsSlice = createSlice({
   name: 'counter',
@@ -49,32 +39,18 @@ export const adsSlice = createSlice({
     //TODO remove used only as an example
   },
   extraReducers: (builder) => {
-    // When we send a request,
-    // `fetchAds.pending` is being fired:
     builder.addCase(fetchAds.pending, (state) => {
-      // At that moment,
-      // we change status to `loading`
-      // and clear all the previous errors:
       state.status = FETCH_STATUS.LOADING
       state.error = null
     })
 
-    // When a server responses with the data,
-    // `fetchAds.fulfilled` is fired:
     builder.addCase(fetchAds.fulfilled, (state, { payload }) => {
-      // We add all the new todos into the state
-      // console.log('full', payload)
-
-      // and change `status` back to `idle`:
       state.ads = payload
       state.status = FETCH_STATUS.IDLE
     })
 
     // When a server responses with an error:
     builder.addCase(fetchAds.rejected, (state, { payload }) => {
-      // We show the error message
-      // and change `status` back to `idle` again.
-      // console.log(payload, 'REjected error')
       if (payload) state.error = payload
       state.status = FETCH_STATUS.IDLE
     })

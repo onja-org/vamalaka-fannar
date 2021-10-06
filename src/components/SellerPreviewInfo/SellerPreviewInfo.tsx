@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { UPLOAD_PHOTO_URL } from '../../constants'
 import { fonts } from '../../globalStyles/fonts'
-
+import { User } from '../OffersList/OffersList'
 export interface SellerInfoProperties {
-  image: string
-  name: {
-    firstName: string
-    lastName: string
-  }
+  user: User
   location: {
     country: string
     city: string
@@ -15,15 +12,15 @@ export interface SellerInfoProperties {
 }
 
 export const SellerPreviewInfo: React.FC<SellerInfoProperties> = ({
-  image,
-  name,
+  user,
   location,
 }) => {
+  const imageSrc = `${UPLOAD_PHOTO_URL}/${user?.photos?.[0]?.url}?width=322&height=225&message=${user}`
   return (
     <Container>
-      <Image src={image} alt={`${name.firstName}'s profile picture`} />
+      <Image src={imageSrc} alt={`${user.username}'s profile picture`} />
       <Description>
-        {name.firstName} {name.lastName} | {location.city} | {location.country}
+        {user.username} | {location.city} | {location.country}
       </Description>
     </Container>
   )

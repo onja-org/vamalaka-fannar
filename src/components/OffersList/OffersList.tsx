@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Offer } from '../Offer/Offer'
-interface User {
-  firstName: string
-  lastName: string
+export interface User {
+  username: string
+  id: string
+  email: string
+  photos: Photo[]
 }
 // export photo interface and use it in offer
 export interface Photo {
@@ -11,11 +13,12 @@ export interface Photo {
   info: string
   isPrimary: boolean
 }
+
 interface OfferData {
   id: string
   title: string
   body: string
-  username: User
+  user: User
   photos: Photo[]
 }
 export interface OffersListProps {
@@ -48,7 +51,7 @@ export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
           isLearnEnabled={true}
           isFavourited={false}
           favoriteButtonText='Add to favourite'
-          name={offer.username}
+          user={offer.user}
           offerDescription={offer.body}
           profile={''}
           ratingDescription={''}

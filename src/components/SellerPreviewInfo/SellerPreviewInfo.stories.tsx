@@ -16,10 +16,11 @@ const Template: Story<SellerInfoProperties> = (args) => (
 
 export const SellerPreview = Template.bind({})
 SellerPreview.args = {
-  image: SellerPrevImage,
-  name: {
-    firstName: 'Eliud',
-    lastName: 'Kipchoge',
+  user: {
+    username: 'Eliud',
+    email: 'Eliud@gmail.com',
+    id: 'aaa',
+    photos: [{ url: '', info: '', isPrimary: false }],
   },
   location: {
     country: 'Madagascar',

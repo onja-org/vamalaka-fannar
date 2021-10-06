@@ -8,9 +8,10 @@ import { ImageWithinOffer } from '../ImageWithinOffer/ImageWithinOffer'
 import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
-import { Photo } from '../OffersList/OffersList'
-import { Link, Route } from 'react-router-dom'
+import { Photo, User } from '../OffersList/OffersList'
+import { Link } from 'react-router-dom'
 import { Paths } from '../../paths'
+import { UPLOAD_PHOTO_URL } from '../../constants'
 
 const flexLayout = css`
   display: flex;
@@ -130,10 +131,7 @@ export interface OfferProps {
   favoriteButtonText?: string
   isFavourited?: boolean
   profile: string
-  name: {
-    firstName: string
-    lastName: string
-  }
+  user: User
   location: {
     country: string
     city: string
@@ -157,8 +155,7 @@ export const Offer: React.FC<OfferProps> = ({
   detailButtonText,
   favoriteButtonText,
   isFavourited,
-  profile,
-  name,
+  user,
   location,
 }) => {
   const outlineHeart = isFavourited ? (
@@ -177,7 +174,7 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
-  const imageSrc = `http://localhost:4000/uploads/${photos?.[0]?.url}?width=322&height=225&message=${name}`
+  const imageSrc = `${UPLOAD_PHOTO_URL}/${photos?.[0]?.url}?width=322&height=225&message=${user}`
   return (
     <OfferStyle>
       <ImageWithinOffer src={imageSrc} alt={imageDescription} />
@@ -192,7 +189,7 @@ export const Offer: React.FC<OfferProps> = ({
           </div>
         </div>
         <Link to={Paths.PROFILE}>
-          <SellerPreviewInfo image={profile} name={name} location={location} />
+          <SellerPreviewInfo user={user} location={location} />
         </Link>
         <DescriptionOffer text={offerDescription} />
         <div className='buttonContainer'>

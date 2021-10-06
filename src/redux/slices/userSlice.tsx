@@ -25,11 +25,11 @@ interface UserRegister {
 interface PayloadForm {
   register: UserRegister
 }
-
 interface UserLogin {
   username: string
   password: string
 }
+
 interface LoginFormPayload {
   login: UserLogin
 }

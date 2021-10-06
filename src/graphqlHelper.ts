@@ -8,7 +8,7 @@ export const sendQuery = (query: string, variables?: any): Promise<any> => {
 
 export const getAdsQuery = () => {
   return `{
-          ads{title, createdAt, id, username,comments{body, id, username}, photos{url, info, isPrimary}}
+          ads{title, createdAt, id, user{username, email, id, photos{url,info, isPrimary}},comments{body, id, username}, photos{url, info, isPrimary}}
       }`
 }
 
@@ -22,6 +22,9 @@ export const getUsers = () => {
   return `{users{photos{url},id,username,firstName,lastName}}`
 }
 
+export const getByUserName = (username: string) => {
+  return `{getUserByUsername(username:"${username}"){ username, id, photos{url, info, isPrimary}}}`
+}
 export const registerMutation = (
   username: string,
   password: string,

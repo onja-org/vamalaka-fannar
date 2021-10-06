@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import adsReducer from './slices/adsSlice'
 import userReducer from './slices/userSlice'
+import userNameReducer from './slices/userNameSlice'
 import { routerMiddleware, connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import categoriesReducer from './slices/categoriesSlice'
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   router: connectRouter(history) as any,
   user: userReducer,
   ads: adsReducer,
+  userName: userNameReducer,
   categories: categoriesReducer,
 })
 

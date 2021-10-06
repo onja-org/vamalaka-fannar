@@ -25,9 +25,11 @@ OfferComponent.args = {
   detailButtonText: 'See details',
   favoriteButtonText: 'Add to favourite',
   profile: SellerPrevImage,
-  name: {
-    firstName: 'Eliud',
-    lastName: 'Kipchoge',
+  user: {
+    username: 'Eliud',
+    email: 'Eliud@gmail.com',
+    id: 'aaa',
+    photos: [{ url: '', info: '', isPrimary: false }],
   },
   location: {
     country: 'Madagascar',
