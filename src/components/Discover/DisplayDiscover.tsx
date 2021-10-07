@@ -99,7 +99,7 @@ const Paragraph = styled.p`
 
 const MadagascarSvgStyle = styled.img`
   display: none;
-  ${mediaQueries('lg', null)`
+  ${mediaQueries('xl', null)`
   display: block;
   position: absolute;
   z-index: 0;
