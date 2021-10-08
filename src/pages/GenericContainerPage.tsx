@@ -92,13 +92,17 @@ const Container = styled.div`
 
     footer > div {
       padding-bottom: 0;
-      min-height: 184px;
+      min-height: 40px;
     }
   `}
 `
 
 const Main = styled.div`
-  padding: 32px 16px;
+  padding: 82px 16px;
+  
+  ${mediaQueries('lmd', null)`
+    padding: 22px 16px;
+  `}
 `
 
 const HeaderContainer = styled.div`

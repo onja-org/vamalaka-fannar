@@ -85,7 +85,7 @@ const ShowPasswordBtn = styled.button<{ showPwd: boolean }>`
   border: none;
   background-color: transparent;
   position: absolute;
-  top: 40%;
+  top: 54%;
   right: 10px;
   cursor: pointer;
   ${mediaQueries('lg', null)`

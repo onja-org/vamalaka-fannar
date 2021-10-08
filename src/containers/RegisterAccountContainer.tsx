@@ -12,8 +12,6 @@ import {
 } from '../redux/slices/userSlice'
 import { SuccessFulRegistration } from '../components/SuccessfulRegistration/SuccessfulRegistration'
 
-const Wrapper = styled.section``
-
 export const RegisterAccount = () => {
   const [checked, setChecked] = React.useState<boolean>(false)
   const [accountRegister, setAccountRegister] = React.useState({
@@ -119,3 +117,9 @@ export const RegisterAccount = () => {
     </Wrapper>
   )
 }
+
+const Wrapper = styled.section`
+  & ~ div {
+    bakground: black;
+  }  
+`

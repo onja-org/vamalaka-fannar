@@ -203,12 +203,7 @@ const Container = styled.form`
   line-height: 50px;
   max-width: 426px;
   margin: auto;
-  display: grid;
-  padding: 34px 0 17px;
-
-  ${mediaQueries(null, 'lmd')`
-    padding-bottom: calc(34px + 12px);
-  `}
+  padding-top: 34px;
 `
 export const Wrapper = styled.div`
   margin-block-start: 20px;

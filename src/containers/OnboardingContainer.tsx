@@ -68,9 +68,10 @@ const RoleOptionContainer = styled.div`
     max-width: 426px;
     margin: auto;
     padding: 52px 14px;
+    padding-bottom: 0;
 
-    ${mediaQueries('lmd', null)`
-      padding: 92px 14px;
+    ${mediaQueries(null, 'lmd')`
+      padding-bottom: 44px;
     `}
   }
   ${mediaQueries('lmd', null)`
