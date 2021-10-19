@@ -5,15 +5,21 @@ import Button from '../Buttons/Buttons'
 import dropDownSvg from './drop-image.svg'
 
 export interface dropDownProps {
+  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
   image: string
   alt: string
+  name: string
 }
 
-export const DropDownImage: React.FC<dropDownProps> = ({ alt, image }) => {
+export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, name }) => {
   return (
     <Container>
-      <Label htmlFor='file-upload'>
-        <DropDownInput type='file' name='file-upload' id='file-upload' />
+      <Label htmlFor={name}>
+        <DropDownInput 
+        type='file' 
+        name={name} 
+        id={name}
+        onChange={onChange} />
         <Image src={dropDownSvg} alt={alt} />
       </Label>
       <ContentWrapper>
@@ -35,7 +41,8 @@ const Image = styled.img`
   width: 100%;
   margin-inline-start: 0;
 `
-const Label = styled.label``
+const Label = styled.label`
+`
 
 const DropDownInput = styled.input`
   visibility: hidden;

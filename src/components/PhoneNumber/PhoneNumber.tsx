@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React from 'react'
 import Button from '../Buttons/Buttons'
 import phone from './icons/phoneNumber.svg'
 

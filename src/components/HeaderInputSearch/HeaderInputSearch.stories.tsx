@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Meta, Story } from '@storybook/react'
 import Input, { InputType } from './HeaderInputSearch'
 import searchIcon from '../../assets/searchIcon.svg'
