@@ -5,12 +5,13 @@ import edit from './icons/edit.svg'
 import deleteIcon from './icons/delete.svg'
 import { Offer } from '../Offer/Offer'
 import { Paths } from '../../paths'
+import addSVG from "./icons/plus-circle.svg"
 
 interface User {
   firstName: string
   lastName: string
 }
-// export photo interface and use it in offer
+
 export interface Photo {
   url: string
   info: string
@@ -51,7 +52,12 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
       <Button label="Create new" type="button" onClick={() => {}} />
       </Wrapper>
       <OfferWrapper>
+        <Wrapper>
         <h4>Offers:</h4>
+        <Link to={`${Paths.CREATE_NEW_OFFER}`}>
+        <Button icon={addSVG} type="button" onClick={() => {}} label="Create new" />
+        </Link>
+        </Wrapper>
         <OfferList>
           {offers.map((offer) => (
             <li key={offer.id}>
@@ -142,7 +148,9 @@ const ImageButton = styled.div`
 `
 
 const Wrapper = styled.div`
-display: flex;
-align-items: center;
-jusify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 `

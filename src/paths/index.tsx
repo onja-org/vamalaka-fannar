@@ -4,6 +4,7 @@ export enum Paths {
   SIGN_UP = '/sign-up',
   REGISTER_ACCOUNT = '/register-account',
   LANGUAGE = '/language',
-  HOWITWORKS = '/how-it-works',
+  HOW_IT_WORKS = '/how-it-works',
   PROFILE = '/profile',
+  CREATE_NEW_OFFER = '/create-new-offer'
 }

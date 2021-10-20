@@ -8,6 +8,7 @@ import { LoginPage } from './pages/LoginPage'
 import { MyAccountPage } from './pages/MyAccount'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
+import { CreateNewOffer } from './pages/CreateNewOfferPage'
 
 function App() {
   return (
@@ -26,11 +27,14 @@ function App() {
           <Route path={Paths.SIGN_UP}>
             <OnboardingPage />
           </Route>
-          <Route path={Paths.HOWITWORKS}>
+          <Route path={Paths.HOW_IT_WORKS}>
             <HowItWorksPage />
           </Route>
           <Route path={Paths.PROFILE}>
             <MyAccountPage />
+          </Route>
+          <Route path={Paths.CREATE_NEW_OFFER}>
+            <CreateNewOffer/>
           </Route>
         </GenericContainerPage>
       </Switch>
