@@ -9,3 +9,6 @@ export default {
 const Template: Story<dropDownProps> = (args) => <DropDownImage {...args} />
 
 export const dropDown = Template.bind({})
+dropDown.args= {
+  name: 'file-upload'
+}

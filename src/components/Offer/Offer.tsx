@@ -9,6 +9,7 @@ import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Photo } from '../OffersList/OffersList'
+import { BACKEND_URL } from '../../localhostURL'
 
 const flexLayout = css`
   display: flex;
@@ -80,7 +81,7 @@ export const Offer: React.FC<OfferProps> = ({
     </svg>
   )
 
-  const imageSrc = `http://localhost:4000/uploads/${photos?.[0]?.url}?width=322&height=225&message=${name}`
+  const imageSrc = `${BACKEND_URL}/uploads/${photos?.[0]?.url}?width=322&height=225&message=${name}`
   return (
     <OfferStyle>
       <ImageWithinOffer src={imageSrc} alt={imageDescription} />

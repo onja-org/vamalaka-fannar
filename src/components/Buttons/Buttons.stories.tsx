@@ -2,7 +2,6 @@ import { Story, Meta } from '@storybook/react'
 import Button from './Buttons'
 import { ButtonProps } from './Buttons'
 import googleIcon from '../../icons/google.png'
-import loadingIcon from '../../icons/small-load-icon.png'
 
 export default {
   title: 'Components/Buttons',

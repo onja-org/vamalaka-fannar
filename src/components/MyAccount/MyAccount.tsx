@@ -33,6 +33,8 @@ export interface OffersListProps {
 const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
   return (
     <Container>
+      <Wrapper>
+        <div>
       <h3>My account</h3>
       <Profile>
         <h5>Profile:</h5>
@@ -45,6 +47,9 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
           </li>
         </ProfileLink>
       </Profile>
+      </div>
+      <Button label="Create new" type="button" onClick={() => {}} />
+      </Wrapper>
       <OfferWrapper>
         <h4>Offers:</h4>
         <OfferList>
@@ -134,4 +139,10 @@ const ImageButton = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+`
+
+const Wrapper = styled.div`
+display: flex;
+align-items: center;
+jusify-content: space-between;
 `

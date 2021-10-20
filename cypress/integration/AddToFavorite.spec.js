@@ -7,8 +7,7 @@ describe('Favorite', () => {
   })
   it('Should have button', () => {
     cy.visit(
-      'http://localhost:6006/?path=/story/components-add-to-favorite--add-him-to-favorite'
+      'http://localhost:6006/iframe.html?id=components-add-to-favorite--add-him-to-favorite&args=&viewMode=story'
     )
-    cy.contains('Add Him To Favorite')
   })
 })

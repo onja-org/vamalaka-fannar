@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { BACKEND_URL } from './localhostURL'
 
-export const sendQuery = (query: string, variables?: any): Promise<any> => {
-  return axios.post('http://localhost:4000/graphql?', {
+export const sendQuery = (query: any, variables?: any): Promise<any> => {
+  return axios.post(`${BACKEND_URL}/graphql?`, {
     query,
   })
 }

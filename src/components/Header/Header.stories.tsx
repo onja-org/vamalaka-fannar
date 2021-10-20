@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+
 import { addDecorator, Meta, Story } from '@storybook/react'
 import { Header } from '.'
 import { LinkTypes, loggedIn } from '../HeaderNavLink/HeaderNavLink'
