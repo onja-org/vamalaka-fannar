@@ -36,7 +36,7 @@ export const IntroContent = () => {
       <div>
         <Headings />
         <ButtonWrapper>
-          <Link to={`${Paths.HOWITWORKS}`}>
+          <Link to={`${Paths.HOW_IT_WORKS}`}>
             <Button label='Learn how it works' type='button' isPrimary={true} />
           </Link>
         </ButtonWrapper>
