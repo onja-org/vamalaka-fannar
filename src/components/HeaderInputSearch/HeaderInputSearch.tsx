@@ -24,20 +24,21 @@ const Label = styled.label`
   padding-bottom: 4px;
   border-bottom: 1px solid #041d42;
   display: flex;
-  width: 100%;
+  width: 80%;
   position: relative;
   gap: 12px;
 
   ${mediaQueries('xl', null)`
-    width: 100%;
+    width: 250px;
+    margin: auto;
   `}
 
   input {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-    width: 98%;
-    font-size: 27px;
-    line-height: 32px;
+    width: 75%;
+    font-size: 20px;
+    line-height: 24px;
     color: #979797;
     background: transparent;
     border: none;

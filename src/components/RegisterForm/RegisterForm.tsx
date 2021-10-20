@@ -142,7 +142,6 @@ export const RegisterForm: React.FC<FormProps> = ({
           <button onClick={backOnclick}>Back</button>
           <Info>
             <small>STEP 01/02</small>
-            <span>Personal Info.</span>
           </Info>
         </div>
       </Back>
