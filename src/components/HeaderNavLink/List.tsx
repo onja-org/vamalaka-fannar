@@ -16,6 +16,6 @@ export const List = styled.ul`
   width: max-content;
 
   img {
-    max-width: 31.25px;
+    max-width: 31px;
   }
 `

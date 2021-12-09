@@ -77,7 +77,7 @@ const Item = styled.li`
 
     span:last-child {
       ${mediaQueries('xl', null)`
-       width: 95px;
+      //  width: 95px;
        `}
     }
     span {

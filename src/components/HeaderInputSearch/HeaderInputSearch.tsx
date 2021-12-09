@@ -61,7 +61,7 @@ const Label = styled.label`
     }
   }
 
-  ${mediaQueries(null, 'lmd')`
+  ${mediaQueries(null, 'ld')`
     display: none;
   `}
 `
