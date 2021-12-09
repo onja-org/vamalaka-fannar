@@ -20,7 +20,7 @@ export const loggedIn = [
     path: 'profile',
     imgSrc: account,
     alt: 'Accounts',
-    text: 'Account',
+    text: 'My account',
   },
 ]
 
@@ -65,15 +65,14 @@ const Item = styled.li`
   }
   a {
     ${fonts}
-    font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-    font-size: 22px;
-    line-height: 28px;
+
+    font-family: 'Futura Std',Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    line-height: 24px;
     color: #041d42;
     text-decoration: none;
-    display: flex;
     border: none;
     background-color: transparent;
-    align-items: center;
 
     span:last-child {
       ${mediaQueries('xl', null)`
@@ -83,7 +82,7 @@ const Item = styled.li`
     span {
       margin-inline-start: 10px;
 
-      ${mediaQueries(null, 'sm')`
+      ${mediaQueries(null, 'ldg')`
         display: none;
       `}
     }

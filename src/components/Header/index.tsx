@@ -38,7 +38,7 @@ const HeaderStyles = styled.header`
   div {
     width: 100%;
     display: grid;
-    grid-template-columns: 280px 1fr 1fr;
+    grid-template-columns: 280px 1fr 1.5fr;
     align-items: center;
     gap: 30px;
 

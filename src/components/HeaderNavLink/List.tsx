@@ -8,13 +8,12 @@ export const ParentList: FC = ({ children }) => {
 export const List = styled.ul`
   padding: 0;
   margin: 0;
-  display: flex;
   list-style-type: none;
-  gap: 14px;
-  justify-content: flex-end;
-  align-items: center;
-  width: max-content;
-  justify-self: end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: baseline;
+  gap: 16px;
+  margin-left: auto;
 
   img {
     max-width: 22px;
