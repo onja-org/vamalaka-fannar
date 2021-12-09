@@ -74,7 +74,7 @@ export const selectCount = (state: RootState) => state.categories.value
 
 export const selectCategories = (state: RootState) =>
   state.categories.categories
-export const categoriesSelector = createSelector<RootState, any[], any[]>(
+export const categoriesSelector = createSelector(
   selectCategories,
   (categories) => categories
 )
