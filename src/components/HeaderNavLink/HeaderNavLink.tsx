@@ -20,7 +20,7 @@ export const loggedIn = [
     path: 'profile',
     imgSrc: account,
     alt: 'Accounts',
-    text: 'Account',
+    text: 'My Account',
   },
 ]
 
@@ -60,9 +60,6 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => (
 )
 
 const Item = styled.li`
-  img {
-    width: 100%;
-  }
   a {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
@@ -74,11 +71,6 @@ const Item = styled.li`
     border: none;
     background-color: transparent;
     align-items: center;
-
-    span:last-child {
-      ${mediaQueries('xl', null)`
-       width: 95px;
-       `}
     }
     span {
       margin-inline-start: 10px;

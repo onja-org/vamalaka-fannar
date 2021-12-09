@@ -8,9 +8,9 @@ export const ParentList: FC = ({ children }) => {
 export const List = styled.ul`
   padding: 0;
   margin: 0;
-  display: flex;
   list-style-type: none;
   gap: 24px;
+  display: flex;
   justify-content: flex-end;
   align-items: center;
   width: max-content;
