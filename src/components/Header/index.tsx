@@ -38,11 +38,11 @@ const HeaderStyles = styled.header`
   div {
     width: 100%;
     display: grid;
-    grid-template-columns: 346px 1fr 1fr;
+    grid-template-columns: 280px 1fr 1fr;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 920px) {
       display: flex;
       justify-content: space-between;
     }

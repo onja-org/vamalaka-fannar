@@ -29,12 +29,12 @@ export const LoginPage = () => {
   }
 
   const usernameErrorMessage =
-    error?.message?.toString()?.indexOf('CODE:EU12') > -1
+  error && error?.message?.toString()?.indexOf('CODE:EU12') > -1
       ? 'Username is not found.'
       : ''
 
   const passwordErrorMessage =
-    error?.message?.toString()?.indexOf('CODE:EU13') >= 0
+  error && error?.message?.toString()?.indexOf('CODE:EU13') >= 0
       ? 'Password is incorrect. Try again!'
       : ''
 

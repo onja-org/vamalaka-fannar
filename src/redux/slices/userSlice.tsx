@@ -140,21 +140,26 @@ const selectRegisterError = (state: RootState) => state?.user?.registerError
 const selectLoginError = (state: RootState) => state?.user?.loginError
 const selectUserStatus = (state: RootState) => state?.user?.status
 
-export const userSelector = createSelector<RootState, any, any>(
+// <RootState, any, any>
+export const userSelector = createSelector(
   selectUser,
   (user) => user
 )
 
-export const userErrorLogin = createSelector<RootState, any, any>(
+// <RootState, any, any>
+export const userErrorLogin = createSelector(
   selectLoginError,
   (loginError) => loginError
 )
 
-export const userErrorRegister = createSelector<RootState, any, any>(
+// <RootState, any, any>
+export const userErrorRegister = createSelector(
   selectRegisterError,
   (registerError) => registerError
 )
-export const userStatusSelector = createSelector<RootState, any, any>(
+
+// <RootState, any, any>
+export const userStatusSelector = createSelector(
   selectUserStatus,
   (status) => status
 )

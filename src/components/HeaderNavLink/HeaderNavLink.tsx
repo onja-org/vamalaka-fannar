@@ -66,8 +66,8 @@ const Item = styled.li`
   a {
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
-    font-size: 1.6rem;
-    line-height: 30px;
+    font-size: 22px;
+    line-height: 28px;
     color: #041d42;
     text-decoration: none;
     display: flex;
@@ -77,13 +77,13 @@ const Item = styled.li`
 
     span:last-child {
       ${mediaQueries('xl', null)`
-       width: 95px;
+       width: 74px;
        `}
     }
     span {
       margin-inline-start: 10px;
 
-      ${mediaQueries(null, 'xl')`
+      ${mediaQueries(null, 'sm')`
         display: none;
       `}
     }

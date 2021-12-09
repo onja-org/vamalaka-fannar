@@ -30,6 +30,7 @@ const Image = styled.img`
   }
 
   @media (min-width: 834px) {
-    width: 346px;
+    width: 270px;
+    height: 35px;
   }
 `

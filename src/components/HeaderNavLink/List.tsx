@@ -10,12 +10,13 @@ export const List = styled.ul`
   margin: 0;
   display: flex;
   list-style-type: none;
-  gap: 24px;
+  gap: 14px;
   justify-content: flex-end;
   align-items: center;
   width: max-content;
+  justify-self: end;
 
   img {
-    max-width: 31.25px;
+    max-width: 22px;
   }
 `
