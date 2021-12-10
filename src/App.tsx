@@ -9,6 +9,7 @@ import { MyAccountPage } from './pages/MyAccount'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
 import { CreateNewOffer } from './pages/CreateNewOfferPage'
+import UserWidget from './components/UserWidget/UserWidget'
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path={Paths.PROFILE}>
             <MyAccountPage />
+          </Route>
+          <Route path= {Paths.PROFILE}>
+            <UserWidget offers={[]} username={''} id={''}/>
           </Route>
           <Route path={Paths.CREATE_NEW_OFFER}>
             <CreateNewOffer/>
