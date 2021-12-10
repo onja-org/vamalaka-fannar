@@ -4,8 +4,8 @@ import Button from '../Buttons/Buttons'
 import edit from './icons/edit.svg'
 import deleteIcon from './icons/delete.svg'
 import { Offer } from '../Offer/Offer'
-import { Paths } from '../../paths'
 import addSVG from "./icons/plus-circle.svg"
+import { Paths } from '../../paths'
 
 interface User {
   firstName: string

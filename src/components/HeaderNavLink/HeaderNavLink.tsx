@@ -11,6 +11,7 @@ import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { adsSelector } from '../../redux/slices/adsSlice'
 import { userSelector } from '../../redux/slices/userSlice'
 import { useSelector } from 'react-redux'
+import { Paths } from '../../paths'
 
 
 
@@ -59,7 +60,6 @@ export interface LinkTypes {
 export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
   const offers = useSelector(adsSelector)
   const user = useSelector(userSelector)
-  
   const [isMyAccount, setIsMyAccount] = useState(false);
 
   function openMyAccountProfile() {
@@ -69,8 +69,8 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
   }
 
   const userOffers = offers.filter((offer) => offer.username === user.username)
-  console.log(userOffers);
-  console.log(user);
+  console.log(offers && offers[0]?.photos[0]);
+  
   
 
   return (
@@ -79,15 +79,24 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
         <img src={imgSrc} alt={alt} />
         <span>{text}</span>
       </Link>
+      {/* 
+        Create a component for this chunck of code 
+        Replacing the hooks with redux
+        Fixing the styles and the location of this component
+        Working on the path for the name of the user
+        Working on the log out
+      */}
+    
       {
         (isMyAccount === true && text === "My account") ?
         <ProfilePopup>
-          {/* <li>{offers[0]?.photos}</li> */}
-          <li>{user.username}</li>
-          {/* <li>
-            <Link to="">{user.username}</Link>
-          </li> */}
-          <li>{userOffers.length}</li>
+          {/* <li><ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /></li> */}
+          {/* <li>{user.username}</li> */}
+          <li>
+            {/* <Link to={`/${path}`}>{user.username}</Link> */}
+            <Link to={`${Paths.PROFILE}/:${user && user.username}`}>{user.username}</Link>
+          </li>
+          <li>Offers <span>{userOffers && userOffers.length}</span></li>
           <li>Log out</li>
         </ProfilePopup>
         : ""
@@ -95,6 +104,13 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
     </Item>
   )
 } 
+
+const ImageProfile = styled.img`
+  border: 2px solid #000000;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+  width: 76.7px;
+  height: 75px;
+`
 
 const Item = styled.button`  
   background: none;
@@ -128,8 +144,8 @@ const Item = styled.button`
   }
 `
 const ProfilePopup = styled.ul`
-  pointer-events: none;
-  cursor: default;
+  // pointer-events: none;
+  // cursor: default;
   position: absolute;
   top: 100px;
   right: 0;
@@ -147,5 +163,15 @@ const ProfilePopup = styled.ul`
     color: #041D42;
     list-style: none;
     margin: 20px 0;
+  }
+  li:nth-child(2) {
+    color: #0E54BB;
+  }
+  li:nth-child(3) span {
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 2px;
+    background: yellow;
+    padding: 4px;
   }
 `
