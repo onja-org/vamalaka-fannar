@@ -1,17 +1,18 @@
 import { FC } from 'react'
 import { Logo } from '../Logo/Logo'
 import styled from 'styled-components'
+import { List } from '../HeaderNavLink/List'
 import logo from '../Logo/images/vamalaka.svg'
 import searchIcon from '../../assets/searchIcon.svg'
+import Input from '../HeaderInputSearch/HeaderInputSearch'
 import {
   HeaderNavLink,
   ItemType,
   LinkTypes,
 } from '../HeaderNavLink/HeaderNavLink'
-import { List } from '../HeaderNavLink/List'
-import Input from '../HeaderInputSearch/HeaderInputSearch'
 
 export const Header: FC<LinkTypes> = ({ item }) => {
+
   return (
     <HeaderStyles>
       <div>

@@ -103,9 +103,10 @@ const Main = styled.div`
 
 const HeaderContainer = styled.div`
   padding: 10px 16px 11px 10px;
-`
-
-const TopContainerStyles = styled.div`
+  `
+  
+  const TopContainerStyles = styled.div`
+  position: relative;
   background: linear-gradient(
     180deg,
     #fff5f1 0%,

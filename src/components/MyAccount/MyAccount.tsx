@@ -32,6 +32,7 @@ export interface OffersListProps {
 }
 
 const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
+  
   return (
     <Container>
       <Wrapper>
@@ -60,6 +61,7 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
         </Wrapper>
         <OfferList>
           {offers.map((offer) => (
+            
             <li key={offer.id}>
               <Offer
                 offerName={offer.title}

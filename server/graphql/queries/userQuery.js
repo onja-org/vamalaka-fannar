@@ -49,7 +49,6 @@ exports.UserQuery = new GraphQLObjectType({
         resolve: async (_, { id }) => {
           const user = await UserModel.findById(id);
 
-          console.log({ user });
           if (!user) {
             throw new Error(getErrorForCode(ERROR_CODES.EA2));
           }
