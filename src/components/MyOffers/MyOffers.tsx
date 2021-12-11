@@ -1,17 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Button from '../Buttons/Buttons'
-// import edit from '../icons/edit.svg'
-// import deleteIcon from '../icons/delete.svg'
-// import deleteIcon from './'
-// import addSVG from "./icons/plus-circle.svg"
+import edit from './icons/edit.svg'
+import deleteIcon from './icons/delete.svg'
+import addSVG from "./icons/plus-circle.svg"
 import { Offer } from '../Offer/Offer'
 import { Paths } from '../../paths'
-
-interface User {
-  firstName: string
-  lastName: string
-}
 
 export interface Photo {
   url: string
@@ -43,9 +37,9 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
       <Profile>
         <h5>Profile:</h5>
         <ProfileLink>
-          {/* <li>
-            <Link to={`${Paths.PROFILE}/:${userName}`}>Preview</Link>
-          </li> */}
+          <li>
+            <Link to={`${Paths.PROFILE}/:${username}`}>Preview</Link>
+          </li>
           <li>
             <Link to={`${Paths.PROFILE}/:${id}`}>Edit</Link>
           </li>
@@ -58,7 +52,7 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
         <Wrapper>
         <h4>Offers:</h4>
         <Link to={`${Paths.CREATE_NEW_OFFER}`}>
-        {/* <Button icon={addSVG} type="button" onClick={() => {}} label="Create new" /> */}
+        <Button icon={addSVG} type="button" onClick={() => {}} label="Create new" />
         </Link>
         </Wrapper>
         <OfferList>
@@ -85,8 +79,8 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
                 unit={''}
               />
               <ImageButton>
-                {/* <Button label='EDIT' type='button' icon={edit} />
-                <Button label='DELETE' type='button' icon={deleteIcon} /> */}
+                <Button label='EDIT' type='button' icon={edit} />
+                <Button label='DELETE' type='button' icon={deleteIcon} />
               </ImageButton>
             </li>
           ))}

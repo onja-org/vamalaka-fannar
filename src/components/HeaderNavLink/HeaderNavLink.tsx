@@ -9,7 +9,7 @@ import { fonts } from '../../globalStyles/fonts'
 import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { adsSelector } from '../../redux/slices/adsSlice'
 import { userSelector } from '../../redux/slices/userSlice'
-import { openMyProfile, showProfile } from '../../redux/slices/showProfileSlice'
+import { openMyProfile, showProfile, closeProfile } from '../../redux/slices/showProfileSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -65,7 +65,6 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
     <ProfilePopup>
       <li onClick={() => dispatch(showProfile())}>
         <Link to={`/${path}`} data-testid={text}>
-          {/* <ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /> */}
           <ImageProfile src={imgSrc} alt={offers && offers[0]?.photos[0].info} />
         </Link>
       </li>
@@ -84,21 +83,11 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
           Log out
         </Link>
       </li>
-    </ProfilePopup>)
-
-// Working on the log out
-// Fixing the avatar image
-// Creating a new page for a specific user offer
-
-// Working on the path for the name of the user ====> (finished)
-// Replacing the hooks with redux ====> (finished)
-// Moving the profile popup outside of the nav link in the header ====> (finished)
-// Fixing the styles and the location of this component ====> (finished)
-  
+    </ProfilePopup>) 
 
   return (
     <Container>
-      <Item onClick={() => (text === "My account" && dispatch(showProfile()))}>
+      <Item onClick={() => (text === "My account" ? dispatch(showProfile()) : dispatch(closeProfile()))}>
         {text === "My account" ? <MyaccountNavigation /> :
           <Link to={`/${path}`} data-testid={text}>
             <img src={imgSrc} alt={alt} />

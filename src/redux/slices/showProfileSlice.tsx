@@ -8,12 +8,15 @@ import { createSlice } from '@reduxjs/toolkit'
     reducers: {
       showProfile: (state) => {
         state.isProfileOpen = !state.isProfileOpen
+      },
+      closeProfile: (state) => {
+        state.isProfileOpen = false
       }
     }
   })
 
   // Action creators are generated for each case reducer function
-  export const {showProfile} = showProfileSlice.actions
+  export const {showProfile, closeProfile} = showProfileSlice.actions
   export const openMyProfile = state => state.openProfile  
   export default showProfileSlice.reducer
 
