@@ -68,17 +68,23 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
     }
   }
 
+  const Myaccount = () => (<MyAccount><img src={imgSrc} alt={alt} /><span>{text}</span></MyAccount>)
   const userOffers = offers.filter((offer) => offer.username === user.username)
   console.log(offers && offers[0]?.photos[0]);
-  
   
 
   return (
     <Item onClick={() => openMyAccountProfile()}>
-      <Link to={`/${path}`} data-testid={text}>
-        <img src={imgSrc} alt={alt} />
-        <span>{text}</span>
-      </Link>
+      {
+        text === "My account" 
+        ?
+        <Myaccount />
+        :
+        <Link to={`/${path}`} data-testid={text}>
+          <img src={imgSrc} alt={alt} />
+          <span>{text}</span>
+        </Link>
+      }
       {/* 
         Create a component for this chunck of code 
         Replacing the hooks with redux
@@ -91,12 +97,18 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
         (isMyAccount === true && text === "My account") ?
         <ProfilePopup>
           {/* <li><ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /></li> */}
-          {/* <li>{user.username}</li> */}
+          <li>{user.username}</li>
           <li>
-            {/* <Link to={`/${path}`}>{user.username}</Link> */}
-            <Link to={`${Paths.PROFILE}/:${user && user.username}`}>{user.username}</Link>
+            <Link to={`/${path}`} data-testid={text}>
+              {user.username}
+            </Link>
+            {/* <Link to={`${Paths.PROFILE}/:${user && user.username}`}>{user.username}</Link> */}
           </li>
-          <li>Offers <span>{userOffers && userOffers.length}</span></li>
+          <li>
+            <Link to={`/${path}`} data-testid={text}>
+              Offers <span>{userOffers && userOffers.length}</span>
+            </Link>
+          </li>
           <li>Log out</li>
         </ProfilePopup>
         : ""
@@ -143,9 +155,32 @@ const Item = styled.button`
     }
   }
 `
+
+const MyAccount = styled.div`
+  ${fonts}
+  font-family: 'Futura Std',Arial,Helvetica,sans-serif;
+  font-size: 25px;
+  line-height: 30px;
+  color: #041d42;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+
+  span:last-child {
+    ${mediaQueries('xl', null)`
+    width: 74px;
+    `}
+  }
+  span {
+    margin-inline-start: 10px;
+
+    ${mediaQueries(null, 'ldg')`
+      display: none;
+    `}
+  }
+`
+
 const ProfilePopup = styled.ul`
-  // pointer-events: none;
-  // cursor: default;
   position: absolute;
   top: 100px;
   right: 0;
