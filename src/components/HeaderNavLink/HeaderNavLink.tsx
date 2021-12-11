@@ -96,13 +96,15 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
       {
         (isMyAccount === true && text === "My account") ?
         <ProfilePopup>
-          {/* <li><ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /></li> */}
-          <li>{user.username}</li>
+          <li>
+            <Link to={`/${path}`} data-testid={text}>
+              <ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} />
+            </Link>
+          </li>
           <li>
             <Link to={`/${path}`} data-testid={text}>
               {user.username}
             </Link>
-            {/* <Link to={`${Paths.PROFILE}/:${user && user.username}`}>{user.username}</Link> */}
           </li>
           <li>
             <Link to={`/${path}`} data-testid={text}>
