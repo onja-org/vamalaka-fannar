@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -10,7 +9,8 @@ import { fonts } from '../../globalStyles/fonts'
 import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { adsSelector } from '../../redux/slices/adsSlice'
 import { userSelector } from '../../redux/slices/userSlice'
-import { useSelector } from 'react-redux'
+import { openMyProfile, showProfile } from '../../redux/slices/showProfileSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 export const loggedIn = [
@@ -56,15 +56,11 @@ export interface LinkTypes {
 export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
   const offers = useSelector(adsSelector)
   const user = useSelector(userSelector)
-  const [isMyAccount, setIsMyAccount] = useState(false);
-
-  function openMyAccountProfile() {
-    if(text === "My account") {
-      setIsMyAccount(!isMyAccount)
-    }
-  }
+  const dispatch = useDispatch();
+  const isProfileOpen = useSelector(openMyProfile)
 
   const MyaccountNavigation = () => (<MyAccount><img src={imgSrc} alt={alt} /><span>{text}</span></MyAccount>)
+  const userOffers = offers && offers.filter((offer) => offer.username === user.username)
   const Profile = () => (
     <ProfilePopup>
       <li>
@@ -86,25 +82,34 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
       <li>Log out</li>
     </ProfilePopup>)
 
-  const userOffers = offers.filter((offer) => offer.username === user.username)
-  console.log(offers && offers[0]?.user?.photos[0]);
-  console.log(offers && offers[0]?.user?.photos[1]);
+// Working on the log out
+// Fixing the avatar image
+// Creating a new page for a specific user offer
+
+// Working on the path for the name of the user ====> (finished)
+// Replacing the hooks with redux ====> (finished)
+// Moving the profile popup outside of the nav link in the header ====> (finished)
+// Fixing the styles and the location of this component ====> (finished)
   
 
   return (
-    <Item onClick={() => openMyAccountProfile()}>
-      <img src={offers[0]?.user?.photos[1].url} alt={offers && offers[0]?.photos[0]?.info} />
-      {text === "My account" ? <MyaccountNavigation /> :
-        <Link to={`/${path}`} data-testid={text}>
-          <img src={imgSrc} alt={alt} />
-          <span>{text}</span>
-        </Link>
-      }
-      {(isMyAccount === true && text === "My account") ? <Profile /> : ""}
-    </Item>
+    <Container>
+      <Item onClick={() => (text === "My account" && dispatch(showProfile()))}>
+        {text === "My account" ? <MyaccountNavigation /> :
+          <Link to={`/${path}`} data-testid={text}>
+            <img src={imgSrc} alt={alt} />
+            <span>{text}</span>
+          </Link>
+        }
+      </Item>
+      {(isProfileOpen?.isProfileOpen === true && text === "My account") ? <Profile /> : ""}
+    </Container>
   )
 } 
 
+const Container = styled.div`
+
+`
 const ImageProfile = styled.img`
   border: 2px solid #000000;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
