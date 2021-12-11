@@ -11,8 +11,6 @@ import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { adsSelector } from '../../redux/slices/adsSlice'
 import { userSelector } from '../../redux/slices/userSlice'
 import { useSelector } from 'react-redux'
-import { Paths } from '../../paths'
-
 
 
 export const loggedIn = [
@@ -30,7 +28,6 @@ export const loggedIn = [
     text: 'My account',
   },
 ]
-
 export const login = [
   { path: 'language', imgSrc: language, alt: 'Languages', text: 'English' },
   {
@@ -52,7 +49,6 @@ export interface ItemType {
   alt: string
   text: string
 }
-
 export interface LinkTypes {
   item: Array<ItemType>
 }
@@ -68,53 +64,43 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
     }
   }
 
-  const Myaccount = () => (<MyAccount><img src={imgSrc} alt={alt} /><span>{text}</span></MyAccount>)
+  const MyaccountNavigation = () => (<MyAccount><img src={imgSrc} alt={alt} /><span>{text}</span></MyAccount>)
+  const Profile = () => (
+    <ProfilePopup>
+      <li>
+        <Link to={`/${path}`} data-testid={text}>
+          {/* <ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /> */}
+          <ImageProfile src={imgSrc} alt={offers && offers[0]?.photos[0].info} />
+        </Link>
+      </li>
+      <li>
+        <Link to={`/${path}`} data-testid={text}>
+          {user.username}
+        </Link>
+      </li>
+      <li>
+        <Link to={`/${path}`} data-testid={text}>
+          Offers <span>{userOffers && userOffers.length}</span>
+        </Link>
+      </li>
+      <li>Log out</li>
+    </ProfilePopup>)
+
   const userOffers = offers.filter((offer) => offer.username === user.username)
-  console.log(offers && offers[0]?.photos[0]);
+  console.log(offers && offers[0]?.user?.photos[0]);
+  console.log(offers && offers[0]?.user?.photos[1]);
   
 
   return (
     <Item onClick={() => openMyAccountProfile()}>
-      {
-        text === "My account" 
-        ?
-        <Myaccount />
-        :
+      <img src={offers[0]?.user?.photos[1].url} alt={offers && offers[0]?.photos[0]?.info} />
+      {text === "My account" ? <MyaccountNavigation /> :
         <Link to={`/${path}`} data-testid={text}>
           <img src={imgSrc} alt={alt} />
           <span>{text}</span>
         </Link>
       }
-      {/* 
-        Create a component for this chunck of code 
-        Replacing the hooks with redux
-        Fixing the styles and the location of this component
-        Working on the path for the name of the user
-        Working on the log out
-      */}
-    
-      {
-        (isMyAccount === true && text === "My account") ?
-        <ProfilePopup>
-          <li>
-            <Link to={`/${path}`} data-testid={text}>
-              <ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} />
-            </Link>
-          </li>
-          <li>
-            <Link to={`/${path}`} data-testid={text}>
-              {user.username}
-            </Link>
-          </li>
-          <li>
-            <Link to={`/${path}`} data-testid={text}>
-              Offers <span>{userOffers && userOffers.length}</span>
-            </Link>
-          </li>
-          <li>Log out</li>
-        </ProfilePopup>
-        : ""
-      }
+      {(isMyAccount === true && text === "My account") ? <Profile /> : ""}
     </Item>
   )
 } 
@@ -122,10 +108,7 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
 const ImageProfile = styled.img`
   border: 2px solid #000000;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
-  width: 76.7px;
-  height: 75px;
 `
-
 const Item = styled.button`  
   background: none;
   border: none;
@@ -157,8 +140,7 @@ const Item = styled.button`
     }
   }
 `
-
-const MyAccount = styled.div`
+const MyAccount = styled.span`
   ${fonts}
   font-family: 'Futura Std',Arial,Helvetica,sans-serif;
   font-size: 25px;
@@ -181,7 +163,6 @@ const MyAccount = styled.div`
     `}
   }
 `
-
 const ProfilePopup = styled.ul`
   position: absolute;
   top: 100px;
