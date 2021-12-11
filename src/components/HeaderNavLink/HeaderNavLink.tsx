@@ -63,23 +63,27 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
   const userOffers = offers && offers.filter((offer) => offer.username === user.username)
   const Profile = () => (
     <ProfilePopup>
-      <li>
+      <li onClick={() => dispatch(showProfile())}>
         <Link to={`/${path}`} data-testid={text}>
           {/* <ImageProfile src={offers && offers[0]?.photos[0]?.url} alt={offers && offers[0]?.photos[0].info} /> */}
           <ImageProfile src={imgSrc} alt={offers && offers[0]?.photos[0].info} />
         </Link>
       </li>
-      <li>
+      <li onClick={() => dispatch(showProfile())}>
         <Link to={`/${path}`} data-testid={text}>
           {user.username}
         </Link>
       </li>
-      <li>
-        <Link to={`/${path}`} data-testid={text}>
+      <li onClick={() => dispatch(showProfile())}>
+        <Link to='my-offer' data-testid={text}>
           Offers <span>{userOffers && userOffers.length}</span>
         </Link>
       </li>
-      <li>Log out</li>
+      <li onClick={() => dispatch(showProfile())}>
+        <Link to="/">
+          Log out
+        </Link>
+      </li>
     </ProfilePopup>)
 
 // Working on the log out
@@ -108,7 +112,7 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
 } 
 
 const Container = styled.div`
-
+  margin: 0;
 `
 const ImageProfile = styled.img`
   border: 2px solid #000000;
@@ -124,7 +128,7 @@ const Item = styled.button`
     ${fonts}
 
     font-family: 'Futura Std',Arial,Helvetica,sans-serif;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 30px;
     color: #041d42;
     text-decoration: none;
@@ -139,7 +143,7 @@ const Item = styled.button`
     span {
       margin-inline-start: 10px;
 
-      ${mediaQueries(null, 'ldg')`
+      ${mediaQueries(null, 'rmd')`
         display: none;
       `}
     }
@@ -163,7 +167,7 @@ const MyAccount = styled.span`
   span {
     margin-inline-start: 10px;
 
-    ${mediaQueries(null, 'ldg')`
+    ${mediaQueries(null, 'rmd')`
       display: none;
     `}
   }
@@ -174,13 +178,13 @@ const ProfilePopup = styled.ul`
   right: 0;
   max-width: 150px;
   background: linear-gradient(180deg, #fff5f1 0%, #feeae3 45.27%, #ffdbcc 94.31% );
-  padding: 20px;
+  padding: 20px 40px;
   z-index: 1;
   li {
     font-family: Futura Std;
     font-style: normal;
     font-weight: normal;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 30px;
     text-align: center;
     color: #041D42;

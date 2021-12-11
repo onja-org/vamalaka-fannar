@@ -24,7 +24,7 @@ const Label = styled.label`
   padding-bottom: 4px;
   border-bottom: 1px solid #041d42;
   display: flex;
-  width: 80%;
+  max-width: 80%;
   position: relative;
   gap: 12px;
 
@@ -37,8 +37,8 @@ const Label = styled.label`
     ${fonts}
     font-family: 'Futura Std', Arial, Helvetica, sans-serif;
     width: 75%;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 22px;
     color: #979797;
     background: transparent;
     border: none;
@@ -62,7 +62,7 @@ const Label = styled.label`
     }
   }
 
-  ${mediaQueries(null, 'lmd')`
+  ${mediaQueries(null, 'xL')`
     display: none;
   `}
 `

@@ -16,6 +16,6 @@ export const List = styled.ul`
   margin-left: auto;
 
   img {
-    max-width: 22px;
+    max-width: 20px;
   }
 `

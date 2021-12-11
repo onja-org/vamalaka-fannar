@@ -37,15 +37,9 @@ const HeaderStyles = styled.header`
   width: 100%;
 
   div {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 280px 1fr 1.5fr;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
-
-    @media (max-width: 920px) {
-      display: flex;
-      justify-content: space-between;
-    }
   }
 `
