@@ -19,6 +19,7 @@ export const fetchCategories = createAsyncThunk<
   const response = await sendQuery(getCategoriesQuery())
   const categories = response?.data?.data?.categories
 
+  console.log(categories , 'yeee')
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
       message: 'Failed to fetch categories.',
@@ -54,6 +55,7 @@ export const categoriesSlice = createSlice({
     })
 
     builder.addCase(fetchCategories.fulfilled, (state, { payload }) => {
+      console.log(state.categories , 'state.categories')
       state.categories = payload
       state.status = 'idle'
     })
@@ -78,5 +80,6 @@ export const categoriesSelector = createSelector(
   selectCategories,
   (categories) => categories
 )
+
 
 export default categoriesSlice.reducer

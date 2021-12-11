@@ -13,12 +13,13 @@ export const LoginPage = () => {
   const error = useSelector(userErrorLogin)
   const dispatch = useDispatch()
   const userStatus = useSelector(userStatusSelector)
-
+   console.log(userStatus , 'satusss')
   const [password, setPassword] = useState({
     inputPsw: '',
     isPasswordShown: false,
   })
 
+  console.log(password.isPasswordShown, "password")
   function handleSubmitLogin(username, password) {
     dispatch(
       fetchUserLogin({

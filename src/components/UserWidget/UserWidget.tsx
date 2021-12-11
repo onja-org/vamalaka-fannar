@@ -1,9 +1,9 @@
 
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Offer } from '../Offer/Offer'
-import { Paths } from '../../paths'
-import addSVG from "./icons/plus-circle.svg"
+import { useDispatch, useSelector } from 'react-redux'
+import { adsSelector } from '../../redux/slices/adsSlice'
+
+
 
 interface User {
   firstName: string
@@ -29,15 +29,25 @@ export interface OffersListProps {
   id: string
 }
 
-const UserWidget: React.FC<OffersListProps> = ({ offers, username, id }) => {
+const UserWidget: React.FC<OffersListProps> = () => {
+  const offers = useSelector(adsSelector)
+
+  const filterOffers = () => {
+   return offers.filter( name => name.username === 'Adolfia')
+  }
+  const userSeller = filterOffers()
+  const getTheUserName = userSeller.map(name => {
+  return name?.user?.username
+  })
+
+
   return (
         <ProfileLink>
-          <li>
-            <Link to={`${Paths.PROFILE}/:${username}`}>Preview</Link>
-          </li>
-          <li>
-            <Link to={`${Paths.PROFILE}/:${id}`}>Edit</Link>
-          </li>
+             <li>   
+               <img src={''}/>
+               <p>{getTheUserName[0]}</p>
+               <p><b>Offers : </b>{ userSeller.length}</p>
+             </li>        
         </ProfileLink>
   )
 }
@@ -51,7 +61,6 @@ const ProfileLink = styled.ul`
   display: inline;
   margin: 0;
   padding: 0;
-  background: orange;
 	visibility: hidden;
   opacity: 0;
   min-width: 5rem;
@@ -60,12 +69,13 @@ const ProfileLink = styled.ul`
   margin-top: 1rem;
 	left: 0;
   display: none;
+  width: 182px;
+  height: 253px;
 
   li {
     clear: both;
     width: 100%;
   }
-  li:hover {background: #555}
   a {
     text-decoration: underline;
     color: #979797;
@@ -76,25 +86,7 @@ const ProfileLink = styled.ul`
 
 
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-`
 
 
-//   ul li:hover {background: #555;}
-//   ul li:hover ul {display: block;}
-//   ul li ul {
-//     position: absolute;
-//     width: 200px;
-//     display: none;
-//   }
-//   ul li ul li { 
-//     background: #555; 
-//     display: block; 
-//   }
-//   ul li ul li a {display:block;} 
-//   ul li ul li:hover {background: #666;}
+
+

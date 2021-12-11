@@ -18,16 +18,21 @@ import { styled } from '@storybook/theming'
 import { IconSize, Loading } from '../components/Loading/Loading'
 import { FETCH_STATUS } from '../constants'
 import { SubtitleInfo } from '../components/SubtitleInfo/SubtitleInfo'
+import { fetchUpDateUser, updateUserSelector, updateUserStatusSelector } from '../redux/slices/updateUserSlice'
 
 export const HomePage = () => {
   const dispatch = useAppDispatch()
   const offers = useSelector(adsSelector)
   const offerStatus = useSelector(adsStatusSelector)
   const categories = useSelector(categoriesSelector)
-
+ 
+  const updateUser= useSelector(updateUserSelector)
+  const test = useSelector(updateUserStatusSelector)
+  console.log(updateUser , 'updateUser')
   useEffect(() => {
     dispatch(fetchAds([]))
     dispatch(fetchCategories([]))
+    dispatch(fetchUpDateUser([]))
   }, [dispatch])
 
   return (

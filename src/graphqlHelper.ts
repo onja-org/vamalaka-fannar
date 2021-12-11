@@ -32,3 +32,11 @@ export const registerMutation = (
 export const loginMutation = (username: string, password: string) => {
   return `mutation{login(username:"${username}", password:"${password}"){id,createdAt,email,username,token}}`
 }
+
+export const updateUserMutation = () => {
+  return `
+  mutation{updateUser(photos:[{url, info, isPrimary}, {url, info, isPrimary}]){id,email,username, role, photos{url, info, isPrimary}, firstName,lastName,address,city,state,country,phone,bio}}
+  `
+}
+
+

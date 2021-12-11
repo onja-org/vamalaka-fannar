@@ -74,7 +74,7 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
 
 const Item = styled.li`
 	display: block;
-	float: left;
+	float: right;
 	padding: 1rem;
 	position: relative;
 	text-decoration: none;
@@ -98,8 +98,6 @@ const Item = styled.li`
     border: none;
     background-color: transparent;
     align-items: center;
-       
-
     span:last-child {
       ${mediaQueries('xl', null)`
       width: 100px;
@@ -114,21 +112,22 @@ const Item = styled.li`
     }
   }
 `
-const Profile = styled.div`
+const Profile = styled.ul`
   h4 {
     font-size: 18px;
   }
   li {
-      background: darkorange;
+      background: #FFF5F1;
       display: block;
-      float: left;
+      float:  right;
       padding: 1rem;
       position: relative;
       text-decoration: none;
       transition-duration: 0.5s;
+
   }
   li:hover {
-	background: red;
+	background: #FFF5F1;
 	cursor: pointer;
   }
   li:hover > ul {
@@ -140,47 +139,8 @@ const Profile = styled.div`
     visibility: visible;
     opacity: 1;
     display: block;
-    
   }
+  
 
-`
-
-const ProfileLink = styled.ul`
-  padding: 0;
-  list-style: none;
-  display: inline;
-  margin: 0;
-  padding: 0;
-  background: orange;
-	visibility: hidden;
-  opacity: 0;
-  min-width: 5rem;
-   position: absolute;
-  transition: all 0.5s ease;
-  margin-top: 1rem;
-	left: 0;
-  display: none;
-
-  li {
-    clear: both;
-    width: 100%;
-  }
-  li:hover {background: #555}
-  a {
-    text-decoration: underline;
-    color: #979797;
-    display:block
-  }
-  }
-`
-
-
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
 `
 
