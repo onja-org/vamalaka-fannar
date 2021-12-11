@@ -36,27 +36,27 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
     <Container>
       <Wrapper>
         <div>
-      <h3>My account</h3>
-      <Profile>
-        <h5>Profile:</h5>
-        <ProfileLink>
-          <li>
-            <Link to={`${Paths.PROFILE}/:${username}`}>Preview</Link>
-          </li>
-          <li>
-            <Link to={`${Paths.PROFILE}/:${id}`}>Edit</Link>
-          </li>
-        </ProfileLink>
-      </Profile>
-      </div>
-      <Button label="Create new" type="button" onClick={() => {}} />
+          <h3>My account</h3>
+          <Profile>
+            <h5>Profile:</h5>
+            <ProfileLink>
+              <li>
+                <Link to={`${Paths.PROFILE}/:${username}`}>Preview</Link>
+              </li>
+              <li>
+                <Link to={`${Paths.PROFILE}/:${id}`}>Edit</Link>
+              </li>
+            </ProfileLink>
+          </Profile>
+        </div>
+        <Button label="Create new" type="button" onClick={() => { }} />
       </Wrapper>
       <OfferWrapper>
         <Wrapper>
-        <h4>Offers:</h4>
-        <Link to={`${Paths.CREATE_NEW_OFFER}`}>
-        <Button icon={addSVG} type="button" onClick={() => {}} label="Create new" />
-        </Link>
+          <h4>Offers:</h4>
+          <Link to={`${Paths.CREATE_NEW_OFFER}`}>
+            <Button icon={addSVG} type="button" onClick={() => { }} label="Create new" />
+          </Link>
         </Wrapper>
         <OfferList>
           {offers.map((offer) => (
