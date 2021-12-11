@@ -23,13 +23,15 @@ export const Header: FC<LinkTypes> = ({ item }) => {
         />
         <List>
           {item.map((link: ItemType) => (
-            <HeaderNavLink {...link} key={link.path} />
+            <HeaderNavLink {...link} key={link.path} >
+            </HeaderNavLink>
           ))}
         </List>
       </div>
     </HeaderStyles>
   )
 }
+
 
 const HeaderStyles = styled.header`
   margin: 0;
@@ -48,3 +50,4 @@ const HeaderStyles = styled.header`
     }
   }
 `
+

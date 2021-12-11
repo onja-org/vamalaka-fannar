@@ -4,11 +4,13 @@ import MyAccount from '../components/MyAccount/MyAccount'
 import { adsSelector } from '../redux/slices/adsSlice'
 
 export function MyAccountPage() {
-  const offers = useSelector(adsSelector)
+  const offers = useSelector(adsSelector);
+  
   return (
-    <Wrapper>
-      <MyAccount offers={offers} username={'username'} id={'123412132'} />
-    </Wrapper>
+    <div>
+      <MyAccount offers={offers} username={'username'} id={'123412132'} 
+      />
+    </div>
   )
 }
 
@@ -17,3 +19,4 @@ const Wrapper = styled.div`
   max-width: 1167px;
   margin: 0 auto;
 `
+

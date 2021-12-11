@@ -7,6 +7,7 @@ import account from '../../assets/account.svg'
 import signin from '../../assets/signin.svg'
 import { fonts } from '../../globalStyles/fonts'
 import { mediaQueries } from '../../mediaQueries/mediaQueries'
+import MyAccountDropdown from '../MyAccountDropdown/MyAccountDropdown'
 
 export const loggedIn = [
   { path: '#language', imgSrc: language, alt: 'Languages', text: 'English' },
@@ -50,9 +51,45 @@ export interface LinkTypes {
   item: Array<ItemType>
 }
 
+// export const Dropdown = loggedIn.forEach(function (arrayItem) {
+//   let x = arrayItem.path;
+//   if(x === "profile") {
+//     return (
+//       <div>
+//         <p>This is my account</p>
+//         <MyAccountDropdown />
+//       </div>
+//     )
+//   } else {
+//     <p>This is NOT my account</p>
+//   }
+// });
+
+const profileName = loggedIn.map(item =>(
+    <p>{item.text}</p>
+))
+
+console.log(profileName);
+
+
+
 export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => (
+  
   <Item>
-    <Link to={`/${path}`} data-testid={text}>
+    <Link to={`/${path === "My Account"
+        ? 
+        <Dropdown>
+          <Dropbtn>{profileName}</Dropbtn>
+          <Dropdowncontent>
+            <a href="#">a</a>
+            <a href="#">b</a>
+            <a href="#">c</a>
+          </Dropdowncontent>
+        </Dropdown> 
+        : 
+        <p>{text}</p>}
+        `} 
+        data-testid={text}>
       <img src={imgSrc} alt={alt} />
       <span>{text}</span>
     </Link>
@@ -79,5 +116,46 @@ const Item = styled.li`
         display: none;
       `}
     }
+  }
+`
+
+const Dropbtn = styled.div `
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  :hover {
+    background-color: #3e8e41;
+  }
+`;
+
+const Dropdown = styled.div ` 
+  position: relative;
+  display: inline-block;
+  :hover {
+    display: block;
+    background-color: #3e8e41;
+  }
+`
+
+const Dropdowncontent = styled.div `
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  a:hover {
+    background-color: #ddd;
+  }
+  :hover {
+    display: block;
   }
 `

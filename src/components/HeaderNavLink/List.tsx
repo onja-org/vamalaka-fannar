@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 
 export const ParentList: FC = ({ children }) => {
+  console.log(children);
+  
   return <List>{children}</List>
 }
 
