@@ -106,7 +106,13 @@ const initialState = {
 export const userSlice = createSlice({
   name: 'counter',
   initialState,
-  reducers: {},
+
+  reducers: {
+    logout: (state) => {
+      return state = initialState
+    }
+  },
+
   extraReducers: (builder) => {
     builder.addCase(fetchUserRegister.pending, (state) => {
       state.status = 'loading'
@@ -158,5 +164,7 @@ export const userStatusSelector = createSelector<RootState, any, any>(
   selectUserStatus,
   (status) => status
 )
+
+export const {logout} = userSlice.actions
 
 export default userSlice.reducer

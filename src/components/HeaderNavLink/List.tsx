@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 export const ParentList: FC = ({ children }) => {
+  
   return <List>{children}</List>
 }
 
@@ -16,6 +17,6 @@ export const List = styled.ul`
   width: max-content;
 
   img {
-    max-width: 31px;
+    max-width: 20px;
   }
 `

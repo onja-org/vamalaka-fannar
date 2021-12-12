@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC}  from 'react'
 import { Logo } from '../Logo/Logo'
 import styled from 'styled-components'
 import logo from '../Logo/images/vamalaka.svg'

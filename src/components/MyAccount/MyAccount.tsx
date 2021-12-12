@@ -49,7 +49,6 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
         </ProfileLink>
       </Profile>
       </div>
-      <Button label="Create new" type="button" onClick={() => {}} />
       </Wrapper>
       <OfferWrapper>
         <Wrapper>
