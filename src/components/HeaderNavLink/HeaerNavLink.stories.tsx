@@ -1,4 +1,3 @@
-import React from 'react'
 import { Story, Meta, addDecorator } from '@storybook/react'
 import {
   HeaderNavLink,
@@ -7,7 +6,7 @@ import {
   loggedIn,
   login,
 } from './HeaderNavLink'
-import { List } from './List'
+import { ListItem } from './List'
 import { MemoryRouter } from 'react-router'
 
 addDecorator((story) => (
@@ -20,11 +19,11 @@ export default {
 } as Meta
 
 const Template: Story<LinkTypes> = ({ item }) => (
-  <List>
+  <ListItem>
     {item.map((link: ItemType) => (
       <HeaderNavLink {...link} key={link.path} />
     ))}
-  </List>
+  </ListItem>
 )
 
 export const LoggedIn = Template.bind({})

@@ -72,21 +72,21 @@ export const RegisterAccount = () => {
   }
 
   const usernameErrorMessage =
-    userError?.message?.toString()
+    userError?.message?.toString()?.indexOf('CODE:EU2') 
       ? 'User name already exists'
       : ''
   const emailErrorMessage =
-    userError?.message?.toString()
+    userError?.message?.toString()?.indexOf('CODE:EU6')
       ? 'Email must be a valid email'
       : ''
 
   const passwordErrorMessage =
-    userError?.message?.toString()
+    userError?.message?.toString()?.indexOf('CODE:EU7')
       ? 'Password must be at least 8 characters long'
       : ''
 
   const confirmPasswordErrorMessage =
-    userError?.message?.toString()
+    userError?.message?.toString()?.indexOf('CODE:EU8')
       ? "Passwords doesn't match"
       : ''
 
