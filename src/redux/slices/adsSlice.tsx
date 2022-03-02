@@ -85,11 +85,11 @@ export const adsSlice = createSlice({
 export const selectAds = (state: RootState) => state.ads.ads
 export const selectStatus = (state: RootState) => state.ads.status
 
-export const adsSelector = createSelector<RootState, any[], any[]>(
+export const adsSelector = createSelector(
   selectAds,
   (ads) => ads
 )
-export const adsStatusSelector = createSelector<RootState, string, string>(
+export const adsStatusSelector = createSelector(
   selectStatus,
   (status) => status
 )

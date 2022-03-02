@@ -62,6 +62,7 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
           {offers.map((offer) => (
             <li key={offer.id}>
               <Offer
+                id={offer.id}
                 offerName={offer.title}
                 amount={25}
                 amountOfProduct={27}

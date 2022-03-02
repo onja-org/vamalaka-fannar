@@ -12,16 +12,18 @@ export interface SellerInfoProperties {
     country: string
     city: string
   }
+  username: string
 }
 
 export const SellerPreviewInfo: React.FC<SellerInfoProperties> = ({
   image,
   name,
   location,
+  username,
 }) => {
   return (
     <Container>
-      <Image src={image} alt={`${name.firstName}'s profile picture`} />
+      <Image src={image} alt={`${username}'s profile picture`} />
       <Description>
         {name.firstName} {name.lastName} | {location.city} | {location.country}
       </Description>

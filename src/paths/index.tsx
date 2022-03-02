@@ -6,5 +6,6 @@ export enum Paths {
   LANGUAGE = '/language',
   HOW_IT_WORKS = '/how-it-works',
   PROFILE = '/profile',
-  CREATE_NEW_OFFER = '/create-new-offer'
+  CREATE_NEW_OFFER = '/create-new-offer',
+  OFFER = '/offer'
 }
