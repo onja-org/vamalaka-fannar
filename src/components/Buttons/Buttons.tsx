@@ -9,6 +9,7 @@ export interface ButtonProps {
   onClick?: (event: React.MouseEvent) => void
   type: 'button' | 'submit' | 'reset' | undefined
   icon?: string
+  id?: string
 }
 const ButtonStyled = styled.button<ButtonProps>`
   ${fonts}
@@ -51,10 +52,12 @@ const Button: React.FC<ButtonProps> = ({
   type,
   icon,
   onClick,
+  id
 }) => {
   return (
     <>
       <ButtonStyled
+        id={id}
         label={label}
         disabled={disabled}
         isPrimary={isPrimary}

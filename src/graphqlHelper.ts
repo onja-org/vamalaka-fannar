@@ -32,3 +32,9 @@ export const registerMutation = (
 export const loginMutation = (username: string, password: string) => {
   return `mutation{login(username:"${username}", password:"${password}"){id,createdAt,email,username,token}}`
 }
+
+export const getOfferDetailsById = (id: string) => {
+  return `{
+    getad(id: "${id}"){id,title,body,category{title,id}, user{username, email, id}}
+  }`
+}

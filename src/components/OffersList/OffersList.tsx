@@ -35,6 +35,7 @@ export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
     <OffersListContainer>
       {offers.map((offer) => (
         <Offer
+          id={offer.id}
           key={offer.id}
           offerName={offer.title}
           amount={25}

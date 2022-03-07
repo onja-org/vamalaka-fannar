@@ -9,6 +9,7 @@ import { MyAccountPage } from './pages/MyAccount'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
 import { CreateNewOffer } from './pages/CreateNewOfferPage'
+import { OfferDetailPage } from './pages/OfferDetailPage';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path={Paths.CREATE_NEW_OFFER}>
             <CreateNewOffer/>
+          </Route>
+          <Route path={`${Paths.OFFER}/:offerId`}>
+            <OfferDetailPage/>
           </Route>
         </GenericContainerPage>
       </Switch>
