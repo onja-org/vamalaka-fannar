@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export interface TextAreaProps {
-    onChange: (e: any) => void
+    onChange?: (e: any) => void
     textDescription: string,
     label: string,
     isTall: boolean

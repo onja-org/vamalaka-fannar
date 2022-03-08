@@ -97,10 +97,10 @@ export interface InputProps {
   errorMes?: string
   label?: string
   placeholder: string
-  value: string
+  value?: string
   type: string
   isError?: boolean
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
   handleShowPassword?: () => void
   textPsw?: string
   name?: string
@@ -114,6 +114,7 @@ export const Input: React.FC<InputProps> = ({
   errorMes,
   handleShowPassword,
   textPsw,
+  value,
   name,
 }) => {
   return (
@@ -127,6 +128,7 @@ export const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         type={type}
         onChange={onChange}
+        value={value}
         name={name}
         required
       />

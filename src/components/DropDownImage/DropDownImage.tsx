@@ -5,8 +5,8 @@ import Button from '../Buttons/Buttons'
 import dropDownSvg from './drop-image.svg'
 
 export interface dropDownProps {
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
-  image: string
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
+  image?: string
   alt: string
   name: string
 }
