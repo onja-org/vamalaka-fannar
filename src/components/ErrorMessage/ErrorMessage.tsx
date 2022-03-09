@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
-interface ErrorMessage  {
+interface ErrorMessageProp  {
     message : string
 }
 
-export const ErrorMessage: React.FC<ErrorMessage> = ({
+export const ErrorMessage: React.FC<ErrorMessageProp> = ({
     message
   }) => {
     return (

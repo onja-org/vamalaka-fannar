@@ -94,13 +94,13 @@ export const EditOffer = () => {
         })
       )
     },
-    [dispatch, submitData]
+    [dispatch, submitData,id]
   )
 
   useEffect(() => {
     dispatch(fetchCategories([]))
     dispatch(fetchOfferById({ id }))
-  }, [])
+  }, [dispatch, id])
 
   const categoryName = categories.find(category => category.id === submitData?.categoryid)?.title
 

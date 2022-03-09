@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import Styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 
-const EditDescriptionProp = Styled.div`
+const EditDescriptionStyle = Styled.div`
 ${fonts}
   display : flex;
   flex-direction : column; 
@@ -44,11 +44,11 @@ export const EditDescription: FC<EditDescriptionProp> = ({
   onChange
 }) => {
   return (
-    <EditDescriptionProp>
+    <EditDescriptionStyle>
       <label htmlFor='description'>{label}</label>
       <textarea id='description' value={textdescription} name='description' onChange={onChange}>
         {textdescription}
       </textarea>
-    </EditDescriptionProp>
+    </EditDescriptionStyle>
   )
 }
