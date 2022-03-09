@@ -81,12 +81,12 @@ export const RegisterAccount = () => {
       : ''
 
   const passwordErrorMessage =
-    userError?.message?.toString()?.indexOf('CODE:EU7')
+    userError?.message?.toString()?.indexOf('CODE:EU7') 
       ? 'Password must be at least 8 characters long'
       : ''
 
   const confirmPasswordErrorMessage =
-    userError?.message?.toString()?.indexOf('CODE:EU8')
+    userError?.message?.toString()?.indexOf('CODE:EU8') 
       ? "Passwords doesn't match"
       : ''
 
