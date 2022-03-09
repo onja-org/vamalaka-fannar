@@ -24,17 +24,51 @@ export const registerMutation = (
   password: string,
   email: string,
   confirmPassword: string,
-  role: string
+  role: string,
 ) => {
-  return `mutation{register(registerInput:{username:"${username}", password:"${password}", confirmPassword:"${confirmPassword}",email:"${email}", role:"${role}"}){id,createdAt,email,username,token}}`
-}
-
-export const loginMutation = (username: string, password: string) => {
-  return `mutation{login(username:"${username}", password:"${password}"){id,createdAt,email,username,token}}`
-}
-
-export const getOfferDetailsById = (id: string) => {
-  return `{
-    getad(id: "${id}"){id,title,body,category{title,id}, user{username, email, id}}
+  return `mutation{
+    register(
+      registerInput:{
+        username:"${username}",
+        password:"${password}",
+        confirmPassword:"${confirmPassword}",
+        email:"${email}", 
+        role:"${role}",
+      }
+    ){
+      id,
+      createdAt,
+      email,
+      username,
+      token,
+      }
+    }
   }`
+}
+
+export const loginMutation = (
+  username: string, 
+  password: string
+  ) => {
+  return `mutation{
+    login(username:"${username}",
+    password:"${password}",
+    ){
+      id,
+      createdAt,
+      email,
+      username,
+      token,
+      photos{url,isPrimary}
+    }
+  }`
+}
+
+
+export const getUserOffers = (
+  userId: string,
+  ) => {
+return `{
+  getUserAds(userId:"${userId}"){id,title,body,category{title}, user{username, email}}
+}`
 }

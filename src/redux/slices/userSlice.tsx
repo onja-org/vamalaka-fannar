@@ -10,8 +10,15 @@ type FetchUserLoginError = {
   message: string
 }
 
+interface Photo {
+  url: string,
+  isPrimary: boolean
+}
+
 interface UserData {
   username: string
+  photos: Photo
+  id: string
 }
 
 interface UserRegister {
@@ -31,7 +38,7 @@ interface UserLogin {
   password: string
 }
 interface LoginFormPayload {
-  login: UserLogin
+  login: UserData
 }
 
 export const fetchUserRegister = createAsyncThunk<
@@ -97,7 +104,7 @@ export const fetchUserLogin = createAsyncThunk<
 })
 
 const initialState = {
-  user: { username: '', password: '' } as UserData,
+  user: { id: '', username: '', password: '', photos: {url:'', isPrimary:false} } as any,
   status: '',
   registerError: null as fetchUserRegisterError | null,
   loginError: null as FetchUserLoginError | null,
@@ -125,7 +132,7 @@ export const userSlice = createSlice({
       state.loginError = null
     })
     builder.addCase(fetchUserLogin.fulfilled, (state, { payload }) => {
-      state.user = payload?.login
+      state.user = payload.login
       state.status = 'idle'
     })
     builder.addCase(fetchUserLogin.rejected, (state, { payload }) => {

@@ -1,11 +1,7 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
-export const ParentList: FC = ({ children }) => {
-  return <List>{children}</List>
-}
-
-export const List = styled.ul`
+export const ListItem = styled.li`
   padding: 0;
   margin: 0;
   display: flex;
@@ -18,4 +14,10 @@ export const List = styled.ul`
   img {
     max-width: 31.25px;
   }
-`
+  `;
+
+export const ParentList: FC = ({ children }) => {
+  return <ListItem>{children}</ListItem>
+}
+
+
