@@ -1,23 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Offer } from '../Offer/Offer'
-interface User {
-  firstName: string
-  lastName: string
-}
-// export photo interface and use it in offer
+import { SellerInfoProperties } from '../SellerPreviewInfo/SellerPreviewInfo'
+
 export interface Photo {
   url: string
   info: string
   isPrimary: boolean
 }
+
 interface OfferData {
   id: string
   title: string
   body: string
-  username: User
+  user: SellerInfoProperties
   photos: Photo[]
-  user: any
 }
 export interface OffersListProps {
   offers: OfferData[]
@@ -33,9 +30,8 @@ const OffersListContainer = styled.ul`
 export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
   return (
     <OffersListContainer>
-      {offers.map((offer) => (
-        <Offer
-          id={offer.id}
+      {offers.map((offer) => {        
+        return <Offer
           key={offer.id}
           offerName={offer.title}
           amount={25}
@@ -49,14 +45,14 @@ export const OffersList: React.FC<OffersListProps> = ({ offers }) => {
           isLearnEnabled={true}
           isFavourited={false}
           favoriteButtonText='Add to favourite'
-          name={offer.username}
           offerDescription={offer.body}
-          profile={offer.user.photos[0]?.url}
+          user={offer.user}
           ratingDescription={''}
           star={0}
           unit={''}
+          id={offer.id}
         />
-      ))}
+      })}
     </OffersListContainer>
   )
 }

@@ -5,7 +5,7 @@ import { ImageWithinOffer } from '../ImageWithinOffer/ImageWithinOffer';
 import { HeaderOfOffer } from '../HeaderOfOffer/HeaderOfOffer';
 import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer';
 import { Rating } from '../rating/Rating';
-import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo';
+import { SellerInfoProperties, SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo';
 import { DescriptionOffer } from '../DescriptionOffer/descriptionOffer';
 import styled from 'styled-components';
 import edit from './icons/edit.svg';
@@ -24,7 +24,7 @@ export  interface OfferDetailsProps {
   stars: number
   ratingDescription: string
   amountOfProduct: any
-  profile: string
+  user: SellerInfoProperties
   name: {
     firstName: string
     lastName: string
@@ -50,7 +50,7 @@ const OfferDetail:React.FC<OfferDetailsProps> = ({
   ratingDescription,
   amountOfProduct,
   name,
-  profile,
+  user,
   offerDescription,
   location,
   username,
@@ -107,7 +107,7 @@ const OfferDetail:React.FC<OfferDetailsProps> = ({
                 <span>({amountOfProduct})</span>
               </div>
             </RateContainer>
-            <SellerPreviewInfo image={profile} username={username} name={name} location={location} />
+            <SellerPreviewInfo photos={user.photos} username={username} location={location} />
             <DescriptionOffer text={offerDescription} />
             <MoreButton>
               <Button

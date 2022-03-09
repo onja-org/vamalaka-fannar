@@ -1,41 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
+import { BACKEND_URL } from '../../localHost';
+import testAccount from '../../assets/testAccount.png'
+import { Link } from 'react-router-dom';
+import { Paths } from '../../paths';
 
+interface UserPhoto {
+  url: string
+  isPrimary: boolean
+}
+
+export interface Location {
+  country: string
+  city: string
+}
 export interface SellerInfoProperties {
-  image: string
-  name: {
-    firstName: string
-    lastName: string
-  }
-  location: {
-    country: string
-    city: string
-  }
   username: string
+  photos: UserPhoto[]
+  location: Location
 }
 
 export const SellerPreviewInfo: React.FC<SellerInfoProperties> = ({
-  image,
-  name,
-  location,
+  photos,
   username,
+  location,
 }) => {
+
+  const getPhotoUrl = photos?.map(el => el.url)
+  const photoSrc = `${BACKEND_URL}/uploads/${getPhotoUrl?.[0]}`;
+  const userPhoto = getPhotoUrl?.[0] === undefined ? `${testAccount}` : photoSrc;
+
   return (
     <Container>
-      <Image src={image} alt={`${username}'s profile picture`} />
-      <Description>
-        {name.firstName} {name.lastName} | {location.city} | {location.country}
-      </Description>
+      <Link to={`${Paths.PROFILE}/:${username}`}>
+        <Image src={userPhoto} alt={`${username}'s profile picture`} />
+        <Description>
+          {username} | {location.city} | {location.country}
+        </Description>
+      </Link>
     </Container>
   )
 }
 
 const Container = styled('div')`
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
+  a{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+  
 `
 const Image = styled('img')`
   box-sizing: border-box;

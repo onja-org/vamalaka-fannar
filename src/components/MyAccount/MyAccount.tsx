@@ -6,12 +6,7 @@ import deleteIcon from './icons/delete.svg'
 import { Offer } from '../Offer/Offer'
 import { Paths } from '../../paths'
 import addSVG from "./icons/plus-circle.svg"
-
-
-interface User {
-  firstName: string
-  lastName: string
-}
+import { SellerInfoProperties } from '../SellerPreviewInfo/SellerPreviewInfo'
 
 export interface Photo {
   url: string
@@ -22,7 +17,7 @@ interface OfferData {
   id: string
   title: string
   body: string
-  username: User
+  username: SellerInfoProperties
   photos: Photo[]
 }
 
@@ -76,9 +71,8 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
                 isLearnEnabled={true}
                 isFavourited={false}
                 favoriteButtonText='Add to favourite'
-                name={offer.username}
+                user={offer.username}
                 offerDescription={offer.body}
-                profile={''}
                 ratingDescription={''}
                 star={0}
                 unit={''}
