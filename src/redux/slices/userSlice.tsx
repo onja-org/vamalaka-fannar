@@ -18,7 +18,11 @@ interface Photo {
 interface UserData {
   username: string
   photos: Photo
-  id: string
+  createdAt?: string
+  email?:string
+  id?:string
+  token?:string
+  
 }
 
 interface UserRegister {

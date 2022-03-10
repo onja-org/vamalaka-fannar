@@ -5,6 +5,8 @@ import { routerMiddleware, connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import categoriesReducer from './slices/categoriesSlice'
 import userOfferReducer from './slices/userOfferSlice'
+import addOfferByIdReducer from "./slices/offerByIdSlice"
+import {offerUpdateAddSliceReducer} from "./slices/offerByIdSlice"
 
 export const history = createBrowserHistory()
 
@@ -13,7 +15,9 @@ export const rootReducer = combineReducers({
   user: userReducer,
   ads: adsReducer,
   categories: categoriesReducer,
-  userOffers: userOfferReducer
+  userOffers: userOfferReducer,
+  getad: addOfferByIdReducer,
+  updatead:offerUpdateAddSliceReducer
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

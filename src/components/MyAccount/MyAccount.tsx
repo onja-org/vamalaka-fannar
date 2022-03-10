@@ -7,6 +7,7 @@ import { Offer } from '../Offer/Offer'
 import { Paths } from '../../paths'
 import addSVG from "./icons/plus-circle.svg"
 
+
 interface User {
   firstName: string
   lastName: string
@@ -83,7 +84,14 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
                 unit={''}
               />
               <ImageButton>
-                <Button label='EDIT' type='button' icon={edit} />
+              <Link
+               to={`/edit-offer/${offer.id}`}>
+                <Button 
+                label='EDIT' 
+                type='button' 
+                icon={edit}
+                onClick={() => {}} />
+                </Link>
                 <Button label='DELETE' type='button' icon={deleteIcon} />
               </ImageButton>
             </li>
