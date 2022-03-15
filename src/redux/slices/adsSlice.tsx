@@ -7,26 +7,21 @@ type FetchAdsError = {
   message: string
 }
 
-// possible errors.
 export const fetchAds = createAsyncThunk<
   any[],
   string[],
   { rejectValue: FetchAdsError }
 >(
   'ads/fetch',
-  // and the `rejectWithValue` function:
   async (limit: string[], thunkApi) => {
-    // console.log(limit, limit)
     const response = await sendQuery(getAdsQuery())
     const ads = response?.data?.data?.ads
 
     if (response.status !== 200) {
-      // Return the error message:
       return thunkApi.rejectWithValue({
         message: 'Failed to fetch todos.',
       })
     }
-
     return ads
   }
 )
