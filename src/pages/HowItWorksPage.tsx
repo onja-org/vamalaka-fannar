@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { DisplayDiscover } from '../components/Discover/DisplayDiscover'
 import { LearnMore } from '../components/IntroContent/LearnMoreContent'

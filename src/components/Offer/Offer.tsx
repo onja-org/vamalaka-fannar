@@ -10,6 +10,7 @@ import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Photo } from '../OffersList/OffersList'
 import { BACKEND_URL } from '../../localhostURL'
+import { Link } from 'react-router-dom'
 
 const flexLayout = css`
   display: flex;
@@ -42,6 +43,7 @@ export interface OfferProps {
     country: string
     city: string
   }
+  id: string
 }
 
 // window.innerWidth + "px"=> get the width of the device
@@ -64,6 +66,7 @@ export const Offer: React.FC<OfferProps> = ({
   profile,
   name,
   location,
+  id
 }) => {
   const outlineHeart = isFavourited ? (
     'hello'
@@ -95,14 +98,16 @@ export const Offer: React.FC<OfferProps> = ({
             <span>({amountOfProduct})</span>
           </RatingContainer>
         </ProductDetails>
-        <SellerPreviewInfo image={profile} name={name} location={location} />
+        <SellerPreviewInfo image={profile} username={name.firstName} name={name} location={location} />
         <DescriptionOffer text={offerDescription} />
         <ButtonContainer>
-          <Buttons
-            type='button'
-            isPrimary={isLearnEnabled}
-            label={detailButtonText}
-          />
+          <Link to={`/offer/${id}`}>
+            <Buttons
+              type='button'
+              isPrimary={isLearnEnabled}
+              label={detailButtonText}
+            />
+          </Link>
           <FavoriteButton>{outlineHeart}</FavoriteButton>
           <AddFavoriteButtonContainer>
             <Buttons type='button' label={favoriteButtonText} />

@@ -39,7 +39,7 @@ your GraphQL project will run on http://localhost:4000/graphql
 - add a random name to your connection and in the field connection string put the following connection string
   (mongodb://mongo/myappdb)
 
-### DB data achiving and restoring
+### DB data archiving and restoring
 
 After launching docker containers
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { mediaQueries } from '../../mediaQueries/mediaQueries'
 import { Paths } from '../../paths'
 
 export interface LogoProps {
@@ -22,14 +23,11 @@ const Container = styled.h1`
   text-align: start;
 `
 const Image = styled.img`
-  max-width: 100%;
+  width: 100%;
   margin-inline-start: 0;
+  max-width: 200px;
 
-  @media (min-width: 362px) {
-    width: 242px;
-  }
-
-  @media (min-width: 834px) {
-    width: 346px;
-  }
+  ${mediaQueries("md", null)`
+      max-width: 346px;   
+  `}
 `

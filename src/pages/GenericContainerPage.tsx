@@ -108,7 +108,7 @@ const HeaderContainer = styled.div`
 const TopContainerStyles = styled.div`
   background: linear-gradient(
     180deg,
-    #fff5f1 0%,
+    #fff5f1 30%,
     #feeae3 45.27%,
     #ffdbcc 94.31%
   );
@@ -118,12 +118,6 @@ const TopContainerStyles = styled.div`
   ${mediaQueries(null, 'md')`
     min-height: 644px;
   `}
-
-  ${mediaQueries('xL', null)`
-  
-  }
-    
- `}
 `
 
 const FooterContainer = styled.div`

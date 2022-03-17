@@ -9,10 +9,12 @@ import { MyAccountPage } from './pages/MyAccount'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
 import { CreateNewOffer } from './pages/CreateNewOfferPage'
+import { EditOffer } from './pages/EditOfferPage'
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
+      
       <Switch>
         <GenericContainerPage>
           <Route path={Paths.DEFAULT} exact>
@@ -34,12 +36,15 @@ function App() {
             <MyAccountPage />
           </Route>
           <Route path={Paths.CREATE_NEW_OFFER}>
-            <CreateNewOffer/>
+            <CreateNewOffer />
+          </Route>
+          <Route path={Paths.EDITOFFER}>
+            <EditOffer />
           </Route>
         </GenericContainerPage>
       </Switch>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

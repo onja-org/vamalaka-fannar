@@ -5,6 +5,7 @@ export enum Paths {
   REGISTER_ACCOUNT = '/register-account',
   LANGUAGE = '/language',
   HOW_IT_WORKS = '/how-it-works',
+  CREATE_NEW_OFFER = '/create-new-offer',
   PROFILE = '/profile',
-  CREATE_NEW_OFFER = '/create-new-offer'
+  EDITOFFER = '/edit-offer/:id'
 }
