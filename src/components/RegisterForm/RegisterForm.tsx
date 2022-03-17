@@ -204,7 +204,7 @@ const Container = styled.form`
   max-width: 426px;
   margin: auto;
   display: grid;
-  padding: 34px 0 17px;
+  padding: 16px 0 17px;
 
   ${mediaQueries(null, 'lmd')`
     padding-bottom: calc(34px + 12px);
@@ -235,7 +235,6 @@ export const Wrapper = styled.div`
 `
 const InputPasswordWrapper = styled.div`
   position: relative;
-  margin-block-end: 25px;
   max-width: 548px;
 `
 

@@ -70,7 +70,11 @@ const RoleOptionContainer = styled.div`
     padding: 52px 14px;
 
     ${mediaQueries('lmd', null)`
-      padding: 92px 14px;
+      padding: 28px 14px 0 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
     `}
   }
   ${mediaQueries('lmd', null)`
