@@ -8,18 +8,20 @@ export interface dropDownProps {
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
   image: string
   alt: string
-  name: string
+  file: string
+  previewImage: string
 }
 
-export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, name }) => {
+export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, file, previewImage }) => {
   return (
     <Container>
-      <Label htmlFor={name}>
-        <DropDownInput 
-        type='file' 
-        name={name} 
-        id={name}
-        onChange={onChange} />
+      <Label htmlFor={file}>
+        <DropDownInput
+          type='file'
+          name={file}
+          id={file}
+          onChange={onChange}
+          multiple />
         <Image src={dropDownSvg} alt={alt} />
       </Label>
       <ContentWrapper>
@@ -27,6 +29,9 @@ export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, name }) 
         <p>or</p>
       </ContentWrapper>
       <Button type='button' label='Browse' />
+      <div>
+        <img src={previewImage} alt={alt} />
+      </div>
     </Container>
   )
 }
@@ -40,6 +45,7 @@ const Container = styled.div`
 const Image = styled.img`
   width: 100%;
   margin-inline-start: 0;
+  cursor: pointer;
 `
 const Label = styled.label`
 `
