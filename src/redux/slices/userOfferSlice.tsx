@@ -3,7 +3,8 @@ import {
   createSelector,
   createSlice,
 } from '@reduxjs/toolkit'
-import { getUserOffers, sendQuery } from '../../graphqlHelper'
+import { FETCH_STATUS } from '../../constants'
+import { createNewOffer, getUserOffers, sendQuery } from '../../graphqlHelper'
 import { AppDispatch, RootState } from '../store'
 
 type FetchUserOffersError = {
@@ -13,10 +14,12 @@ type FetchUserOffersError = {
 interface UserOffersCategory {
   title: string
 }
+
 interface UserOffersUser {
   email: string
   username: string
 }
+
 interface UserOffersData {
   id: string
   user: UserOffersUser
@@ -31,6 +34,26 @@ interface UserOffersPayload {
 
 interface UserId {
   userId: string
+}
+
+interface newOfferData {
+  id: string
+  title: string
+  body: string
+  price: number
+  unit: string
+  currency: string
+  categoryId: string
+  amountOfProduct: number
+  photos: {
+    url:string
+    info: string
+    isPrimary: boolean
+  }
+}
+
+interface newOfferPayload {
+  newOffer: newOfferData
 }
 
 export const fetchUserOffers = createAsyncThunk<
@@ -51,7 +74,41 @@ export const fetchUserOffers = createAsyncThunk<
       message: 'Failed to fetch userOffers',
     })
   }
+
+  const errorMessage = response?.data?.errors
+  if (errorMessage) {
+    return thunkApi.rejectWithValue({
+      message: errorMessage?.[0].message,
+    })
+  }
   return userOffers
+})
+
+export const fetchCreateNewOffer = createAsyncThunk<
+  newOfferPayload,
+  newOfferData,
+  {
+    dispatch: AppDispatch
+    state: RootState
+    rejectValue: FetchUserOffersError
+  }
+>('fetchCreateNewOffer/fetch', async (getNewOffers, thunkApi) => {
+  const {title, body,currency,unit, price,categoryId,amountOfProduct, photos } = getNewOffers;  
+  const response = await sendQuery(createNewOffer(title, body,currency,unit, price,categoryId,amountOfProduct, photos))
+  const newOffer = response.data.data
+  
+  if (response.status !== 200) {
+    return thunkApi.rejectWithValue({
+      message: 'Failed to fetch userOffers',
+    })
+  }
+  const errorMessage = response?.data?.errors
+  if (errorMessage) {
+    return thunkApi.rejectWithValue({
+      message: errorMessage?.[0].message,
+    })
+  }
+  return newOffer
 })
 
 const initialState = {
@@ -64,21 +121,64 @@ const initialState = {
       username: ''
     },
     body: ''
-  }
+  },
+  newOffer: {
+    id: '',
+    title: '',
+    body: '',
+    price: 0,
+    unit: '',
+    currency: '',
+    categoryId: '',
+    amountOfProduct: 0,
+    photos: {
+      url:'',
+      info: '',
+      isPrimary: false
+    }
+  },
+  status: '',
+  error: null as FetchUserOffersError | null,
 }
 export const userOffersSlice = createSlice({
   name: 'userOffer',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchUserOffers.pending, (state) => {
+      state.status = FETCH_STATUS.LOADING
+      state.error = null
+    })
     builder.addCase(fetchUserOffers.fulfilled, (state, { payload }) => {      
       state.userOffers = payload.getUserAds
+      state.status = FETCH_STATUS.IDLE
+    })
+    builder.addCase(fetchUserOffers.rejected, (state, { payload }) => {
+      if (payload) state.error = payload
+      state.status = FETCH_STATUS.IDLE
+    })
+    builder.addCase(fetchCreateNewOffer.pending, (state, { payload }) => {
+      if (payload) state.error = payload
+      state.status = FETCH_STATUS.LOADING
+    })
+    builder.addCase(fetchCreateNewOffer.fulfilled, (state, { payload }) => {      
+      state.newOffer = payload.newOffer
+      state.status = FETCH_STATUS.IDLE
+    })
+    builder.addCase(fetchCreateNewOffer.rejected, (state, { payload }) => {
+      if (payload) state.error = payload
+      state.status = FETCH_STATUS.IDLE
     })
   },
 })
 
+export const selectStatus = (state: RootState) => state.ads.status
 export const selectUserOffers = (state: RootState) => state.userOffers.userOffers;
 
+export const userOffersStatusSelector = createSelector(
+  selectStatus,
+  (status) => status
+)
 export const userOffersSelector = createSelector(
   selectUserOffers,
   (userOffers) => userOffers

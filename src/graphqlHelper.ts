@@ -8,8 +8,7 @@ export const sendQuery = (query: any, variables?: any): Promise<any> => {
   })
 }
 
-
-export const sendAuthorizedQuery = (query: any, token: string, variables?: any,): Promise<any> => {
+export const sendAuthorizedQuery = (query: string, token: string, variables?: any,): Promise<any> => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
@@ -58,9 +57,9 @@ export const registerMutation = (
 }
 
 export const loginMutation = (
-  username: string, 
+  username: string,
   password: string
-  ) => {
+) => {
   return `mutation{
     login(username:"${username}",
     password:"${password}",
@@ -78,8 +77,8 @@ export const loginMutation = (
 
 export const getUserOffers = (
   userId: string,
-  ) => {
-return `{
+) => {
+  return `{
   getUserAds(userId:"${userId}"){id,title,body,category{title}, user{username, email}}
 }`
 }
@@ -110,4 +109,47 @@ export const updateAd = (
   ${Boolean(unit) ? `unit:"${unit}"` : ''}
   ${Boolean(amountOfProduct) ? `amountOfProduct:${amountOfProduct}` : ''}
   ${Boolean(categoryId) ? `categoryId:"${categoryId}"` : ''}){ id,title,body,photos{url},currency,price,unit,amountOfProduct}}`
+}
+
+export const createNewOffer = (
+  title: string,
+  body: string,
+  currency: string,
+  unit: string,
+  price: number,
+  categoryId: string,
+  amountOfProduct: number,
+  photos: {
+    url: string,
+    info: string,
+    isPrimary: boolean,
+  },
+) => {
+  return `mutation{
+    createAd(
+      title:"${title}",
+      body:"${body}",
+      currency: "${currency}",
+      unit: "${unit}",
+      price: ${price},
+      category:"${categoryId}"
+      amountOfProduct: ${amountOfProduct},
+      photos:${photos},
+    )
+    {
+      id,
+      title,
+      body,
+      currency,
+      unit,
+      price,
+      amountOfProduct,
+     categoryId,
+      photos{
+        url,
+        isPrimary,
+        info
+      },
+    }
+  }`
 }

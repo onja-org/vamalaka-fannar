@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import { FETCH_STATUS } from '../../constants'
 import { sendQuery, registerMutation, loginMutation } from '../../graphqlHelper'
 import { AppDispatch, RootState } from '../store'
 
@@ -120,28 +121,28 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUserRegister.pending, (state) => {
-      state.status = 'loading'
+      state.status = FETCH_STATUS.LOADING
       state.registerError = null
     })
     builder.addCase(fetchUserRegister.fulfilled, (state, { payload }) => {
       state.user = payload?.register
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
     builder.addCase(fetchUserRegister.rejected, (state, { payload }) => {
       if (payload) state.registerError = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
     builder.addCase(fetchUserLogin.pending, (state) => {
-      state.status = 'loading'
+      state.status =  FETCH_STATUS.LOADING
       state.loginError = null
     })
     builder.addCase(fetchUserLogin.fulfilled, (state, { payload }) => {
       state.user = payload.login
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
     builder.addCase(fetchUserLogin.rejected, (state, { payload }) => {
       if (payload) state.loginError = payload
-      state.status = 'idle'
+      state.status = FETCH_STATUS.IDLE
     })
   },
 })
