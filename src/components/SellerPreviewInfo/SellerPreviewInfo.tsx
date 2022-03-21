@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import { BACKEND_URL } from '../../localHost';
+import { BACKEND_URL } from '../../localhostURL';
 import testAccount from '../../assets/testAccount.png'
 import { Link } from 'react-router-dom';
 import { Paths } from '../../paths';

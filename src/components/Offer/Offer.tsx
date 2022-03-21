@@ -9,7 +9,7 @@ import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Photo } from '../OffersList/OffersList'
-import { BACKEND_URL } from '../../localHost'
+import { BACKEND_URL } from '../../localhostURL'
 import { SellerInfoProperties } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Link } from 'react-router-dom'
 
