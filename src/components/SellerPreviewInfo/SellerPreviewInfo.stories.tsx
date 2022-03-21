@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react'
-import SellerPrevImage from '../../stories/assets/seller-prev-img.png'
 import { SellerPreviewInfo, SellerInfoProperties } from './SellerPreviewInfo'
+// import testAccount from '../../assets/testAccount.png'
 
 export default {
   title: 'Components/Seller preview information',
@@ -16,11 +16,8 @@ const Template: Story<SellerInfoProperties> = (args) => (
 
 export const SellerPreview = Template.bind({})
 SellerPreview.args = {
-  image: SellerPrevImage,
-  name: {
-    firstName: 'Eliud',
-    lastName: 'Kipchoge',
-  },
+  photos: [],
+  username: 'Adolfia',
   location: {
     country: 'Madagascar',
     city: 'Mahanoro',

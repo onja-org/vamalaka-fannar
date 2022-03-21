@@ -20,7 +20,14 @@ OfferDetailsComponent.args = {
   amountOfProduct: 27,
   offerDescription:
     'This is a very detailed description that is absolutely necessary for being attractive to customers...',
-  profile: SellerPrevImage,
+  user: {
+    username: 'Eliud',
+    photos:[],
+    location: {
+      country: 'Madagascar',
+      city: 'Toamasina'
+    }
+  },
   name: {
     firstName: 'Eliud',
     lastName: 'Kipchoge',

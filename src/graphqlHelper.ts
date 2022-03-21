@@ -20,7 +20,7 @@ export const sendAuthorizedQuery = (query: any, token: string, variables?: any,)
 
 export const getAdsQuery = () => {
   return `{
-          ads{title, createdAt, id, username,comments{body, id, username}, photos{url, info, isPrimary}, user{username, photos{url}}}
+          ads{id,title,body,category{title,id}, user{username, email, id, photos{url,isPrimary}}, photos{url, info, isPrimary}}
       }`
 }
 

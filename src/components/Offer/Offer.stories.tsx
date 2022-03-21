@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react'
 import { Offer, OfferProps } from './Offer'
-import SellerPrevImage from '../../stories/assets/seller-prev-img.png'
+import testAccount from '../../assets/testAccount.png'
 
 export default {
   title: 'Offer/Offer',
@@ -24,11 +24,6 @@ OfferComponent.args = {
   isFavourited: false,
   detailButtonText: 'See details',
   favoriteButtonText: 'Add to favourite',
-  profile: SellerPrevImage,
-  name: {
-    firstName: 'Eliud',
-    lastName: 'Kipchoge',
-  },
   location: {
     country: 'Madagascar',
     city: 'Mahanoro',

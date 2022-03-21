@@ -9,7 +9,8 @@ import { PriceOfOffer } from '../PriceOfOffer/PriceOfOffer'
 import { Rating } from '../rating/Rating'
 import { SellerPreviewInfo } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Photo } from '../OffersList/OffersList'
-import { BACKEND_URL } from '../../localhostURL'
+import { BACKEND_URL } from '../../localHost'
+import { SellerInfoProperties } from '../SellerPreviewInfo/SellerPreviewInfo'
 import { Link } from 'react-router-dom'
 
 const flexLayout = css`
@@ -34,19 +35,13 @@ export interface OfferProps {
   detailButtonText: string
   favoriteButtonText?: string
   isFavourited?: boolean
-  profile: string
-  name: {
-    firstName: string
-    lastName: string
-  }
+  user: SellerInfoProperties
   location: {
     country: string
     city: string
   }
   id: string
 }
-
-// window.innerWidth + "px"=> get the width of the device
 
 export const Offer: React.FC<OfferProps> = ({
   photos,
@@ -63,8 +58,7 @@ export const Offer: React.FC<OfferProps> = ({
   detailButtonText,
   favoriteButtonText,
   isFavourited,
-  profile,
-  name,
+  user,
   location,
   id
 }) => {
@@ -83,8 +77,8 @@ export const Offer: React.FC<OfferProps> = ({
       />
     </svg>
   )
-
-  const imageSrc = `${BACKEND_URL}/uploads/${photos?.[0]?.url}?width=322&height=225&message=${name}`
+  
+  const imageSrc = `${BACKEND_URL}/uploads/${photos?.[0].url}?width=322&height=225&message=${user?.username}`;
   return (
     <OfferStyle>
       <ImageWithinOffer src={imageSrc} alt={imageDescription} />
@@ -98,7 +92,8 @@ export const Offer: React.FC<OfferProps> = ({
             <span>({amountOfProduct})</span>
           </RatingContainer>
         </ProductDetails>
-        <SellerPreviewInfo image={profile} username={name.firstName} name={name} location={location} />
+
+        <SellerPreviewInfo username={user?.username} photos={user?.photos} location={{ city: `${location.city}`, country: `${location.country}` }} />
         <DescriptionOffer text={offerDescription} />
         <ButtonContainer>
           <Link to={`/offer/${id}`}>
