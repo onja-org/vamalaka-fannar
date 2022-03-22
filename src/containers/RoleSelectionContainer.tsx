@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { DescriptionOffer } from '../components/DescriptionOffer/descriptionOffer'
 import { Option } from '../components/RoleSelectOption/RoleSelectOption'
-import userIcon from '../stories/assets/user.svg'
-import briefcaseIcon from '../stories/assets/briefcase.svg'
 import { Login } from '../components/Login/Login'
 import { mediaQueries } from '../mediaQueries/mediaQueries'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -15,10 +13,6 @@ export const RoleSelectionContainer: React.FC = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false)
   const handleRoleButton = (e) => {
     setIsRegisterOpen(true)
-  }
-
-  const handleBackButton = () => {
-    setIsRegisterOpen(false)
   }
 
   return (
@@ -37,8 +31,6 @@ export const RoleSelectionContainer: React.FC = () => {
                 onClick={handleRoleButton}
                 label='Buyer'
                 text='Personal account to manage all you activities.'
-                src={userIcon}
-                alt='User icon'
                 value='Buyer'
               />
             </div>
@@ -47,8 +39,6 @@ export const RoleSelectionContainer: React.FC = () => {
                 onClick={handleRoleButton}
                 label='Seller'
                 text='Own or belong to a company, this is for you.'
-                src={briefcaseIcon}
-                alt='Briefcase icon'
                 value='Seller'
               />
             </div>
@@ -85,7 +75,4 @@ const ButtonWrapper = styled.div`
   padding-top: 36px;
   display: grid;
   gap: 28px;
-`
-const RoleSelectionWrapper = styled.div`
-  padding: 52px 0;
 `

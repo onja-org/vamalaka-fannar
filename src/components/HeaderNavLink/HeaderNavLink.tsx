@@ -80,7 +80,7 @@ export const HeaderNavLink: FC<ItemType> = ({ path, text, imgSrc, alt }) => {
 
 const ItemTextStyle = ` 
   ${fonts}
-  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
+c  font-family: 'Futura Std', Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
   line-height: 30px;
   color: #041d42;

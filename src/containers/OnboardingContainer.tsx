@@ -42,7 +42,6 @@ const MainContainer = styled.div`
     `}
   }
 `
-
 const ImageContainer = styled.div`
   background-color: #041d42;
   margin: 0;
@@ -79,13 +78,8 @@ const RoleOptionContainer = styled.div`
   }
   ${mediaQueries('lmd', null)`
     flex-basis: 50%;
-    padding: calc(36px - 14px * 2) 0;
-  & > div {
-      height: 100%;
-    }
   `}
 `
-
 const Heading = styled.h3`
   font-family: Futura Std;
   font-style: normal;

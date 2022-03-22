@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { DescriptionOffer } from '../components/DescriptionOffer/descriptionOffer'
 import { Option } from '../components/RoleSelectOption/RoleSelectOption'
-import userIcon from '../stories/assets/user.svg'
-import briefcaseIcon from '../stories/assets/briefcase.svg'
 import { Login } from '../components/Login/Login'
 import { OnboardingContainer } from '../containers/OnboardingContainer'
 import { Fragment, useState } from 'react'
@@ -39,8 +37,6 @@ export const OnboardingPage = () => {
                 onClick={handleRoleButton}
                 label='Buyer'
                 text='Personal account to manage all you activities.'
-                src={userIcon}
-                alt='User icon'
                 value='Buyer'
               />
             </div>
@@ -49,8 +45,6 @@ export const OnboardingPage = () => {
                 onClick={handleRoleButton}
                 label='Seller'
                 text='Own or belong to a company, this is for you.'
-                src={briefcaseIcon}
-                alt='Briefcase icon'
                 value='Seller'
               />
             </div>
