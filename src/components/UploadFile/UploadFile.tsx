@@ -22,7 +22,7 @@ export const UploadFile = ({ image }) => {
     setPreviewFile(fileUrl)
     setFile(currentFile)
     console.log('file Url', fileUrl)
-    console.log('file list', currentFile);    
+    console.log('file list', currentFile);
   }
 
   function handleCancelClick() {
@@ -45,28 +45,30 @@ export const UploadFile = ({ image }) => {
 
   return (
     <Container>
-      {loading
-        ? <div><Loading size={60} /><p>...Proccess...</p></div>
-        : <>
-          {file 
-            ?
-            <DisplayedDroppedFiles
-              cancelClick={handleCancelClick}
-              uploadClick={handleUploadFileClick}
-              onChangeDescription={(e) => handleTextDescription(e.target.value)}
-              fileName={file}
-              textDescription={textDescription}
-            />
-            :
-            <DropDownImage
-              onChange={(e: any) => getFile(e)}
-              image={image} alt={`${file} image from computer`}
-              file='file-upload'
-              previewImage= {previewFile}
-            />
-          }
-        </>
-      }
+      <div>
+        {loading
+          ? <div><Loading size={60} /><p>...Proccess...</p></div>
+          : <>
+            {file
+              ?
+              <DisplayedDroppedFiles
+                cancelClick={handleCancelClick}
+                uploadClick={handleUploadFileClick}
+                onChangeDescription={(e) => handleTextDescription(e.target.value)}
+                fileName={file}
+                textDescription={textDescription}
+              />
+              :
+              <DropDownImage
+                onChange={(e: any) => getFile(e)}
+                image={image} alt={`${file} image from computer`}
+                file='file-upload'
+                previewImage={previewFile}
+              />
+            }
+          </>
+        }
+      </div>
     </Container>)
 }
 

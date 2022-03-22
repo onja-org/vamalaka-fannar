@@ -13,6 +13,7 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { Link } from "react-router-dom";
 import { Paths } from "../paths";
+// import { UploadFile } from "../components/UploadFile/UploadFile";
 
 export interface NewFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
