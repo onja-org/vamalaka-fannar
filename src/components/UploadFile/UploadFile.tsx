@@ -4,25 +4,21 @@ import styled from "styled-components";
 import { DropDownImage } from "../DropDownImage/DropDownImage";
 import { DisplayedDroppedFiles } from "../DisplayedDroppedFile/DisplayedDroppedFile.stories";
 import { Loading } from "../Loading/Loading";
+import { fonts } from "../../globalStyles/fonts";
 
 export interface UploadFileProps {
   image: string
-  onChange: () => {}
+  onChange: () => void
 }
 
 export const UploadFile = ({ image }) => {
   const [file, setFile] = useState('')
-  const [previewFile, setPreviewFile] = useState('')
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
-  function getFile(e: any) {
-    const currentFile = e.target.files[0]
-    const fileUrl = URL.createObjectURL(currentFile)
-    setPreviewFile(fileUrl)
-    setFile(currentFile)
-    console.log('file Url', fileUrl)
+  function getFile(currentFile: string) {
     console.log('file list', currentFile);
+    setFile(currentFile)    
   }
 
   function handleCancelClick() {
@@ -34,27 +30,33 @@ export const UploadFile = ({ image }) => {
       setLoading(!loading)
       setTimeout(() => {
         setLoading(false)
-      }, 1000);
+      }, 2000);
       if (!loading) { setFile('') }
     }
   }
 
-  function handleTextDescription(text: string) {
-    setTextDescription(text)
+  function handleTextDescription(text: any) {
+    setTextDescription(text.target.value)
   }
 
   return (
-    <Container>
-      <div>
+    <Container>    
         {loading
-          ? <div><Loading size={60} /><p>...Proccess...</p></div>
+          ? 
+          <LoadingStyle>
+            
+            <Loading size={80} />
+            <LoadingTextStyle>
+              still uploading your image.....
+            </LoadingTextStyle>
+          </LoadingStyle>
           : <>
             {file
               ?
               <DisplayedDroppedFiles
                 cancelClick={handleCancelClick}
                 uploadClick={handleUploadFileClick}
-                onChangeDescription={(e) => handleTextDescription(e.target.value)}
+                onChangeDescription={(e:any) => handleTextDescription(e)}
                 fileName={file}
                 textDescription={textDescription}
               />
@@ -62,16 +64,24 @@ export const UploadFile = ({ image }) => {
               <DropDownImage
                 onChange={(e: any) => getFile(e)}
                 image={image} alt={`${file} image from computer`}
-                file='file-upload'
-                previewImage={previewFile}
+                file='file-uploads'
               />
             }
           </>
         }
-      </div>
     </Container>)
 }
 
 const Container = styled.div`
-
+  padding-top: 160px;
 `
+
+const LoadingStyle = styled.div`
+  text-align: center;
+`;
+
+const LoadingTextStyle = styled.p`
+  ${fonts}
+  font-size: 20px;
+  color: rgb(0, 150, 255);
+`;

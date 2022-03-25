@@ -1,37 +1,40 @@
 import React from 'react'
+import { FileUploader } from 'react-drag-drop-files'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import Button from '../Buttons/Buttons'
 import dropDownSvg from './drop-image.svg'
 
 export interface dropDownProps {
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChange: (fileName: string) => void
   image: string
   alt: string
   file: string
-  previewImage: string
 }
+const fileTypes = ["jpg", "jpeg", "png"];
 
-export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, file, previewImage }) => {
+export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, file }) => {
   return (
     <Container>
       <Label htmlFor={file}>
-        <DropDownInput
-          type='file'
-          name={file}
-          id={file}
-          onChange={onChange}
-          multiple />
-        <Image src={dropDownSvg} alt={alt} />
+        <FileUploader
+          handleChange={(file) => onChange(file.name)} name="file" types={fileTypes}>
+          <Image src={dropDownSvg} alt={alt} />
+        </FileUploader>
+
       </Label>
       <ContentWrapper>
-        <p>Drag and drop an image here</p>
-        <p>or</p>
+        <DropText>Drag and drop an image here</DropText>
+        <DropText>or</DropText>
       </ContentWrapper>
-      <Button type='button' label='Browse' />
-      <div>
-        <img src={previewImage} alt={alt} />
-      </div>
+      <BrowseInput>
+        <Text>Browse</Text>
+        <Input
+          type='file'
+          name={file}
+          onChange={(e) => onChange(e?.target?.value)}
+          multiple
+        />
+      </BrowseInput>
     </Container>
   )
 }
@@ -48,17 +51,41 @@ const Image = styled.img`
   cursor: pointer;
 `
 const Label = styled.label`
-`
+position: relative;
+top: 40px;
 
-const DropDownInput = styled.input`
-  visibility: hidden;
 `
+const BrowseInput = styled.div`
+  position: relative;
+  box-shadow: -3px 3px rgba(21, 140, 177, 0.3), 3px -3px rgba(252, 70, 43, 0.3); 
+`;
+
+const Text = styled.p`
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-family: 'Garamond';
+  font-size: 24px;
+  line-height: 27px;
+  margin: 0;
+`;
+
+const Input = styled.input.attrs({ type: 'file' })`
+  overflow: hidden;
+  padding: 1rem;
+  width: 75px;
+  opacity: 0;
+  cursor: pointer;
+  background: #FFFFFF;
+`;
+
 const ContentWrapper = styled.div`
   ${fonts}
   font-size: 20px;
   line-height: 24px;
   color: #979797;
-  p {
-    margin-top: 0;
-  }
 `
+const DropText = styled.p`
+  ${fonts}
+`;
+
