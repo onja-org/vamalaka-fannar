@@ -5,19 +5,31 @@ import { DropDownImage } from "../DropDownImage/DropDownImage";
 import { DisplayedDroppedFiles } from "../DisplayedDroppedFile/DisplayedDroppedFile.stories";
 import { Loading } from "../Loading/Loading";
 import { fonts } from "../../globalStyles/fonts";
+import axios from "axios";
+import { BACKEND_URL } from "../../localhostURL";
 
 export interface UploadFileProps {
   image: string
   onChange: () => void
 }
 
-export const UploadFile = ({ image }) => {
+export const UploadFile = ({image}) => {  
   const [file, setFile] = useState('')
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
   function getFile(currentFile: string) {
-    console.log('file list', currentFile);
+    const reader = new FileReader();
+    const blob = new Blob()
+    reader.readAsDataURL(blob)
+    reader.onload=() => {
+      const URL = `${BACKEND_URL}/upload`;
+      const formData = currentFile;
+      return axios.post(URL, formData)
+      .then(response => console.log('response', response)
+      )
+    }
+    
     setFile(currentFile)    
   }
 
@@ -43,8 +55,7 @@ export const UploadFile = ({ image }) => {
     <Container>    
         {loading
           ? 
-          <LoadingStyle>
-            
+          <LoadingStyle>            
             <Loading size={80} />
             <LoadingTextStyle>
               still uploading your image.....
