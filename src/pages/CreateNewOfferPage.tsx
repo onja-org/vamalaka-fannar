@@ -11,9 +11,7 @@ import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS } from '../constan
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
-import { Link } from "react-router-dom";
-import { Paths } from "../paths";
-// import { UploadFile } from "../components/UploadFile/UploadFile";
+import { UploadFile } from "../components/UploadFile/UploadFile";
 
 export interface NewFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
@@ -166,23 +164,11 @@ export const CreateNewOffer = () => {
               onClick={() => { }}
               type={'button'}
             />
-            <Link to={Paths.PROFILE}>
-              <Button
-                type={'button'}
-                label={'Preview'}
-                isPrimary={false}
-                onClick={() => { }}
-              />
-            </Link>
-            <Button
-              type={'button'}
-              label={'Delete'}
-              isPrimary={true}
-              onClick={() => { }}
-            />
+             <Button icon={''} type="button" onClick={() => {}} label="Create new" />
           </WrapperButton>
         </Form>
       </WapperEditOffer>
+      <UploadFile image={''}/>
     </Wrapper>
   )
 }
@@ -192,6 +178,8 @@ const Wrapper = styled.div`
   background-color: #fff;
   max-width: 1167px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 2fr 20px;
 `
 
 export const Form = styled.form`

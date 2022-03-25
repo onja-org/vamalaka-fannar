@@ -11,5 +11,4 @@ const Template: Story<dropDownProps> = (args) => <DropDownImage {...args} />
 export const dropDown = Template.bind({})
 dropDown.args= {
   file: 'file-upload',
-  previewImage: 'display-image'
 }
