@@ -5,20 +5,20 @@ import { fonts } from '../../globalStyles/fonts'
 import { UploadedFiles } from '../UploadedFiles/UploadedFiles'
 import dropDownSvg from './drop-image.svg'
 
-export interface dropDownProps {
-  onChange: (fileName: string) => void
+export interface DropDownProps {
+  onChange: (files: File) => void
   image: string
   alt: string
   file: string
 }
 const fileTypes = ["jpg", "jpeg", "png"];
 
-export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, file, image }) => {
+export const DropDownImage: React.FC<DropDownProps> = ({ onChange, alt, file, image }) => {
   return (
     <Container>
       <Label htmlFor={file}>
         <FileUploader
-          handleChange={(file) => onChange(file.name)} name="file" types={fileTypes}>
+          handleChange={(file) => onChange(file)} name="file" types={fileTypes}>
           <Image src={dropDownSvg} alt={alt} />
         </FileUploader>
 
@@ -32,8 +32,7 @@ export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, file, im
         <Input
           type='file'
           name={file}
-          onChange={(e) => onChange(e?.target?.value)}
-          multiple
+          onChange={(e) => onChange(e?.target?.files?.[0] as File)}
         />
       </BrowseInput>
       <UploadedFiles image={image} alt={alt}/>

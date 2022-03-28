@@ -168,6 +168,8 @@ export const CreateNewOffer = () => {
           </WrapperButton>
         </Form>
       </WapperEditOffer>
+      {// add onchange and receive object {url:"avatar-clove-1633680562459-442152569.jpg", info:"dry clove", isPrimary:true} store it here in state array 
+}
       <UploadFile image={''}/>
     </Wrapper>
   )
