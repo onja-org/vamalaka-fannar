@@ -13,37 +13,36 @@ export interface UploadFileProps {
   onChange: () => void
 }
 
-export const UploadFile = ({image}) => {  
-  const [file, setFile] = useState('')
+export const UploadFile = ({ image }) => {
+  const [file, setFile] = useState<File|null>()
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
-  function getFile(currentFile: string) {
-    const reader = new FileReader();
-    const blob = new Blob()
-    reader.readAsDataURL(blob)
-    reader.onload=() => {
-      const URL = `${BACKEND_URL}/upload`;
-      const formData = currentFile;
-      return axios.post(URL, formData)
-      .then(response => console.log('response', response)
-      )
-    }
-    
-    setFile(currentFile)    
+  function getFile(currentFile:File) {
+    console.log('currentFile::::::',currentFile);
+    setFile(currentFile)
   }
 
   function handleCancelClick() {
-    setFile('')
+    setFile(null)
   }
 
-  function handleUploadFileClick() {
+  const handleUploadFileClick = async()=> {
     if (file && textDescription) {
-      setLoading(!loading)
-      setTimeout(() => {
+      setLoading(true)
+      const formData = new FormData()
+      const URL = `${BACKEND_URL}/upload`;
+    console.log('file::::::',file);
+      
+      formData.append('avatar', file)
+    const response = await axios.post(URL, formData)
+        // .then(response => console.log('response', response)
+        // )
+   
         setLoading(false)
-      }, 2000);
-      if (!loading) { setFile('') }
+
+        setFile(null)
+
     }
   }
 
@@ -52,34 +51,34 @@ export const UploadFile = ({image}) => {
   }
 
   return (
-    <Container>    
-        {loading
-          ? 
-          <LoadingStyle>            
-            <Loading size={80} />
-            <LoadingTextStyle>
-              still uploading your image.....
-            </LoadingTextStyle>
-          </LoadingStyle>
-          : <>
-            {file
-              ?
-              <DisplayedDroppedFiles
-                cancelClick={handleCancelClick}
-                uploadClick={handleUploadFileClick}
-                onChangeDescription={(e:any) => handleTextDescription(e)}
-                fileName={file}
-                textDescription={textDescription}
-              />
-              :
-              <DropDownImage
-                onChange={(e: any) => getFile(e)}
-                image={image} alt={`${file} image from computer`}
-                file='file-uploads'
-              />
-            }
-          </>
-        }
+    <Container>
+      {loading
+        ?
+        <LoadingStyle>
+          <Loading size={80} />
+          <LoadingTextStyle>
+            still uploading your image.....
+          </LoadingTextStyle>
+        </LoadingStyle>
+        : <>
+          {Boolean(file)
+            ?
+            <DisplayedDroppedFiles
+              cancelClick={handleCancelClick}
+              uploadClick={handleUploadFileClick}
+              onChangeDescription={(e: any) => handleTextDescription(e)}
+              fileName={file?.name||''}
+              textDescription={textDescription}
+            />
+            :
+            <DropDownImage
+              onChange={(e: any) => getFile(e)}
+              image={image} alt={`${file} image from computer`}
+              file='file-uploads'
+            />
+          }
+        </>
+      }
     </Container>)
 }
 
