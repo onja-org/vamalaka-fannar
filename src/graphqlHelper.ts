@@ -17,6 +17,13 @@ export const sendAuthorizedQuery = (query: string, token: string, variables?: an
   }, config)
 }
 
+export const sendUpload = (upload: any) => {
+  return axios.post(`${BACKEND_URL}/upload`, {upload})
+}
+
+export const uploadFile = () => {
+  
+}
 export const getAdsQuery = () => {
   return `{
           ads{id,title,body,category{title,id}, user{username, email, id, photos{url,isPrimary}}, photos{url, info, isPrimary}}
