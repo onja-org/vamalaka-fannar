@@ -12,6 +12,7 @@ import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
+import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
@@ -75,6 +76,7 @@ export const CreateNewOffer = () => {
   const setPrice = ({ target }) => { setNewOffers({ ...newOffers, price: target.value }) }
   const setUnit = ({ target }) => { setNewOffers({ ...newOffers, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffers, currency: target.value }) }
+  const setUploadedImages = ({target}) => {setNewOffers({...newOffers, photos: target.value })}
 
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -87,7 +89,9 @@ export const CreateNewOffer = () => {
     dispatch(fetchCategories([]))
   }, [dispatch])
 
-  
+  const UPLOADED_IMAGE = `${BACKEND_URL}/upload/${formData.photos.url}?width=322&height=225`
+  const UPLOADED_DESCRIPTION = `${BACKEND_URL}/${formData.photos.info}` 
+
   return (
     <Wrapper>
       <WapperEditOffer>
@@ -164,13 +168,13 @@ export const CreateNewOffer = () => {
               onClick={() => { }}
               type={'button'}
             />
-             <Button icon={''} type="button" onClick={() => {}} label="Create new" />
+            <Button icon={''} type="button" onClick={() => { }} label="Create new" />
           </WrapperButton>
         </Form>
       </WapperEditOffer>
       {// add onchange and receive object {url:"avatar-clove-1633680562459-442152569.jpg", info:"dry clove", isPrimary:true} store it here in state array 
-}
-      <UploadFile image={''}/>
+      }
+      <UploadFile image={UPLOADED_IMAGE} onChange={setUploadedImages}/>
     </Wrapper>
   )
 }

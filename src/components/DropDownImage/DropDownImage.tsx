@@ -2,7 +2,7 @@ import React from 'react'
 import { FileUploader } from 'react-drag-drop-files'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import { UploadedFiles } from '../UploadedFiles/UploadedFiles'
+import { ManageRoundedImage } from '../ManageRoundedImages/ManageRoundedImage'
 import dropDownSvg from './drop-image.svg'
 
 export interface DropDownProps {
@@ -10,10 +10,15 @@ export interface DropDownProps {
   image: string
   alt: string
   file: string
+  onImageClick: () => void
+  onImageDelete: () => void
+
 }
 const fileTypes = ["jpg", "jpeg", "png"];
 
-export const DropDownImage: React.FC<DropDownProps> = ({ onChange, alt, file, image }) => {
+export const DropDownImage: React.FC<DropDownProps> = (
+  { onChange, alt, file, image, onImageClick, onImageDelete }
+) => {
   return (
     <Container>
       <Label htmlFor={file}>
@@ -35,7 +40,7 @@ export const DropDownImage: React.FC<DropDownProps> = ({ onChange, alt, file, im
           onChange={(e) => onChange(e?.target?.files?.[0] as File)}
         />
       </BrowseInput>
-      <UploadedFiles image={image} alt={alt}/>
+      <ManageRoundedImage onClickImage={onImageClick} onDeleteImage={onImageDelete} imageSource={image} alt='' emptyImage='' showStar />
     </Container>
   )
 }

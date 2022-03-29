@@ -13,13 +13,13 @@ export interface UploadFileProps {
   onChange: () => void
 }
 
-export const UploadFile = ({ image }) => {
-  const [file, setFile] = useState<File|null>()
+export const UploadFile = ({image, onChange }) => {
+  const [file, setFile] = useState<File | null>()
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
-  function getFile(currentFile:File) {
-    console.log('currentFile::::::',currentFile);
+  function getFile(currentFile: File) {
+    console.log('currentFile::::::', currentFile);
     setFile(currentFile)
   }
 
@@ -27,21 +27,20 @@ export const UploadFile = ({ image }) => {
     setFile(null)
   }
 
-  const handleUploadFileClick = async()=> {
+  const handleUploadFileClick = async () => {
     if (file && textDescription) {
       setLoading(true)
       const formData = new FormData()
       const URL = `${BACKEND_URL}/upload`;
-    console.log('file::::::',file);
-      
-      formData.append('avatar', file)
-    const response = await axios.post(URL, formData)
-        // .then(response => console.log('response', response)
-        // )
-   
-        setLoading(false)
+      console.log('file::::::', file);
 
-        setFile(null)
+      formData.append('avatar', file)
+      const response = await axios.post(URL, formData);
+      console.log('response::::::', response);
+
+      setLoading(false)
+
+      setFile(null)
 
     }
   }
@@ -67,7 +66,7 @@ export const UploadFile = ({ image }) => {
               cancelClick={handleCancelClick}
               uploadClick={handleUploadFileClick}
               onChangeDescription={(e: any) => handleTextDescription(e)}
-              fileName={file?.name||''}
+              fileName={file?.name || ''}
               textDescription={textDescription}
             />
             :
@@ -75,6 +74,8 @@ export const UploadFile = ({ image }) => {
               onChange={(e: any) => getFile(e)}
               image={image} alt={`${file} image from computer`}
               file='file-uploads'
+              onImageClick={() => console.log("clicked image")}
+              onImageDelete={() => console.log('image deleted')}
             />
           }
         </>
