@@ -47,35 +47,42 @@ export interface NewFormProps {
 }
 
 const initialThumbnails = [
- { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-  { imageSource: '',
-  emptyImage:true,
-  alt: "",
-  showStar: false},
-
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
 ]
 
 export const CreateNewOffer = () => {
@@ -86,11 +93,7 @@ export const CreateNewOffer = () => {
   const formData = {
     id: '',
     title: '',
-    photos: {
-      url: '',
-      info: '',
-      isPrimary: false,
-    },
+    photos: [] as any[],
     body: '',
     amountOfProduct: 0,
     price: 0,
@@ -102,17 +105,27 @@ export const CreateNewOffer = () => {
     }
   }
 
-  const [newOffers, setNewOffers] = React.useState(formData);
-  const setTitle = ({ target }) => { setNewOffers({ ...newOffers, title: target.value }) }
-  const setDescription = ({ target }) => { setNewOffers({ ...newOffers, body: target.value }) }
-  const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffers, amountOfProduct: target.value }) }
-  const setPrice = ({ target }) => { setNewOffers({ ...newOffers, price: target.value }) }
-  const setUnit = ({ target }) => { setNewOffers({ ...newOffers, unit: target.value }) }
-  const setCurrency = ({ target }) => { setNewOffers({ ...newOffers, currency: target.value }) }
-  const setUploadedImages = ({target}) => {setNewOffers({...newOffers, photos: target.value })}
-  console.log('newOffers::::::',newOffers);
+  const [newOffer, setNewOffers] = React.useState(formData);
+  const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
+  const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }) }
+  const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
+  const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
+  const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
+  const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value }) }
+  const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
+  console.log('newOffers::::::', newOffer);
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
+  const handleImageUploadSucces = (filename, description) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
+    imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
+    setImageThumbnails([...imageThumbnails])
+  }
+
+  useEffect(() => {
+
+
+  }, newOffer.photos)
 
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -132,13 +145,10 @@ export const CreateNewOffer = () => {
     dispatch(fetchCategories([]))
   }, [dispatch])
 
-  // console.log('formData.photos.url::::::',formData.photos);
-  // const UPLOADED_IMAGE = `${BACKEND_URL}/upload/${formData.photos.url}?width=322&height=225`
-  // const UPLOADED_DESCRIPTION = `${BACKEND_URL}/${formData.photos.info}` 
-
+ 
   return (
     <Wrapper>
-      <WapperEditOffer>
+      <WrapperEditOffer>
         <HeaderEditOffer>Create New Offer</HeaderEditOffer>
         <Form>
           <FormEditDetail>
@@ -147,13 +157,13 @@ export const CreateNewOffer = () => {
               placeholder={'Product name'}
               inputType={'text'}
               inputId={'product'}
-              inputValue={newOffers.title}
+              inputValue={newOffer.title}
               onChange={setTitle}
             />
             <Input
               inputId={'product'}
               inputType={'text'}
-              inputValue={newOffers.body}
+              inputValue={newOffer.body}
               placeholder={'write the descripton of you offer'}
               label={'Description*'}
               onChange={setDescription}
@@ -170,7 +180,7 @@ export const CreateNewOffer = () => {
               placeholder={'45'}
               inputType={''}
               inputId={'number'}
-              inputValue={String(newOffers.price)}
+              inputValue={String(newOffer.price)}
               onChange={setPrice}
             />
             <DropDown
@@ -194,7 +204,7 @@ export const CreateNewOffer = () => {
               placeholder={''}
               inputType={''}
               inputId={'amout'}
-              inputValue={String(newOffers.amountOfProduct)}
+              inputValue={String(newOffer.amountOfProduct)}
               onChange={setAmountOfProduct}
             />
           </FormEditDetail>
@@ -209,11 +219,12 @@ export const CreateNewOffer = () => {
             <Button icon={''} type="button" onClick={() => { }} label="Create new" />
           </WrapperButton>
         </Form>
-      </WapperEditOffer>
-      {// add onchange and receive object {url:"avatar-clove-1633680562459-442152569.jpg", info:"dry clove", isPrimary:true} store it here in state array 
-      }
-      <UploadFile onChange={setUploadedImages}/>
-      <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
+      </WrapperEditOffer>
+      <ThumbnailWrapper>
+        <UploadFile onUploadSuccess={handleImageUploadSucces} />
+        <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
+      </ThumbnailWrapper>
+
     </Wrapper>
   )
 }
@@ -231,7 +242,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 `
-export const WapperEditOffer = styled.div`
+export const WrapperEditOffer = styled.div`
   width: 80%;
   margin: auto;
 `
@@ -262,4 +273,5 @@ export const FormEditDetail = styled.div`
     padding-left: 30px;
   }
   `
-
+const ThumbnailWrapper = styled.div`
+`;

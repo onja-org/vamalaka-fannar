@@ -1,4 +1,6 @@
 import React from "react"
+import styled from "styled-components"
+import { BACKEND_URL } from "../../localhostURL";
 import { ManageImageProps, ManageRoundedImage } from "../ManageRoundedImages/ManageRoundedImage"
 
 interface ThumbnailGridProps {
@@ -8,19 +10,25 @@ interface ThumbnailGridProps {
 
 }
 
+const URL = `${BACKEND_URL}/uploads/`;
+
+
 export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage }: ThumbnailGridProps) => {
 
 
 
     return (
-        <ul>
+        <Wrapper>
             {thumbs.map(thumb =>
-                <li>
-                    <ManageRoundedImage imageSource={thumb.imageSource}
-                        alt={thumb.alt} onClickImage={() => onClickImage(thumb.imageSource || "")} showStar={thumb.showStar} onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} />
-                </li>
+                <ManageRoundedImage imageSource={`${URL}${thumb.imageSource}`}
+                    alt={thumb.alt} onClickImage={() => onClickImage(thumb.imageSource || "")} showStar={thumb.showStar} onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} />
             )}
 
-        </ul>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  `
