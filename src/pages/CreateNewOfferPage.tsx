@@ -12,6 +12,7 @@ import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
+import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
@@ -45,6 +46,38 @@ export interface NewFormProps {
 
 }
 
+const initialThumbnails = [
+ { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+  { imageSource: '',
+  emptyImage:true,
+  alt: "",
+  showStar: false},
+
+]
+
 export const CreateNewOffer = () => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
@@ -77,6 +110,9 @@ export const CreateNewOffer = () => {
   const setUnit = ({ target }) => { setNewOffers({ ...newOffers, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffers, currency: target.value }) }
   const setUploadedImages = ({target}) => {setNewOffers({...newOffers, photos: target.value })}
+  console.log('newOffers::::::',newOffers);
+
+  const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
 
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -85,12 +121,20 @@ export const CreateNewOffer = () => {
     []
   )
 
+  const handleThumbnailClick = (src: string) => {
+
+  }
+  const handleThumbnailDelete = (src: string) => {
+
+  }
+
   useEffect(() => {
     dispatch(fetchCategories([]))
   }, [dispatch])
 
-  const UPLOADED_IMAGE = `${BACKEND_URL}/upload/${formData.photos.url}?width=322&height=225`
-  const UPLOADED_DESCRIPTION = `${BACKEND_URL}/${formData.photos.info}` 
+  // console.log('formData.photos.url::::::',formData.photos);
+  // const UPLOADED_IMAGE = `${BACKEND_URL}/upload/${formData.photos.url}?width=322&height=225`
+  // const UPLOADED_DESCRIPTION = `${BACKEND_URL}/${formData.photos.info}` 
 
   return (
     <Wrapper>
@@ -162,19 +206,14 @@ export const CreateNewOffer = () => {
               type={'submit'}
               onClick={(e) => submitNewOffer(e)}
             />
-            <Button
-              label={'Reset'}
-              isPrimary={true}
-              onClick={() => { }}
-              type={'button'}
-            />
             <Button icon={''} type="button" onClick={() => { }} label="Create new" />
           </WrapperButton>
         </Form>
       </WapperEditOffer>
       {// add onchange and receive object {url:"avatar-clove-1633680562459-442152569.jpg", info:"dry clove", isPrimary:true} store it here in state array 
       }
-      <UploadFile image={UPLOADED_IMAGE} onChange={setUploadedImages}/>
+      <UploadFile onChange={setUploadedImages}/>
+      <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
     </Wrapper>
   )
 }

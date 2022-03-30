@@ -30,14 +30,12 @@ export const GridManageImages: React.FC<GridImageProps> = () => {
       />
       <ManageRoundedImage
         imageSource={''}
-        emptyImage={emptyImage}
         alt='start image'
         showStar={false}
         onClickImage={() => {}}
       />
       <ManageRoundedImage
         imageSource={''}
-        emptyImage={emptyImage}
         alt='start image'
         showStar={false}
         onClickImage={() => {}}

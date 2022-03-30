@@ -9,11 +9,10 @@ import axios from "axios";
 import { BACKEND_URL } from "../../localhostURL";
 
 export interface UploadFileProps {
-  image: string
   onChange: () => void
 }
 
-export const UploadFile = ({image, onChange }) => {
+export const UploadFile = ({ onChange }) => {
   const [file, setFile] = useState<File | null>()
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
@@ -31,12 +30,10 @@ export const UploadFile = ({image, onChange }) => {
     if (file && textDescription) {
       setLoading(true)
       const formData = new FormData()
-      const URL = `${BACKEND_URL}/upload`;
-      console.log('file::::::', file);
-
       formData.append('avatar', file)
-      const response = await axios.post(URL, formData);
-      console.log('response::::::', response);
+      const URL = `${BACKEND_URL}/upload`;
+     const response = await axios.post(URL, formData);
+    console.log('response::::::', response);
 
       setLoading(false)
 
@@ -72,7 +69,7 @@ export const UploadFile = ({image, onChange }) => {
             :
             <DropDownImage
               onChange={(e: any) => getFile(e)}
-              image={image} alt={`${file} image from computer`}
+              alt={''}
               file='file-uploads'
               onImageClick={() => console.log("clicked image")}
               onImageDelete={() => console.log('image deleted')}

@@ -3,15 +3,17 @@ import React from 'react'
 import { RoundedCornerImage } from '../RoundedCornerImage/RoundedCornerImage'
 import crossImage from '../../images/x-circle.svg'
 import starImage from '../../images/star.svg'
+import emptyImage from '../../images/empty-image.svg'
 
 export interface ManageImageProps {
   imageSource: string | undefined
-  emptyImage?: string
+
   alt: string
   showStar?: boolean
   onClickImage: () => void
   onDeleteImage?: () => void
 }
+
 
 export const ManageRoundedImage: React.FC<ManageImageProps> = ({
   alt,
@@ -19,8 +21,9 @@ export const ManageRoundedImage: React.FC<ManageImageProps> = ({
   showStar,
   onClickImage: onImageClik,
   onDeleteImage,
-  emptyImage,
+  
 }) => {
+  console.log('imageSource::::::',imageSource);
   return (
     <Container>
       <Wrapper>
