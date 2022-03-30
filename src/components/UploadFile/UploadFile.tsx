@@ -9,15 +9,15 @@ import axios from "axios";
 import { BACKEND_URL } from "../../localhostURL";
 
 export interface UploadFileProps {
-  onChange: () => void
+  onUploadSuccess: (filename: string, description: string) => void
 }
 
-export const UploadFile = ({ onChange }) => {
+export const UploadFile = ({ onUploadSuccess }) => {
   const [file, setFile] = useState<File | null>()
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
-  function getFile(currentFile: File) {
+  function handleChange(currentFile: File) {
     console.log('currentFile::::::', currentFile);
     setFile(currentFile)
   }
@@ -38,6 +38,7 @@ export const UploadFile = ({ onChange }) => {
       setLoading(false)
 
       setFile(null)
+      onUploadSuccess(response.data.filenames[0], textDescription)
 
     }
   }
@@ -68,7 +69,7 @@ export const UploadFile = ({ onChange }) => {
             />
             :
             <DropDownImage
-              onChange={(e: any) => getFile(e)}
+              onChange={(e: any) => handleChange(e)}
               alt={''}
               file='file-uploads'
               onImageClick={() => console.log("clicked image")}
