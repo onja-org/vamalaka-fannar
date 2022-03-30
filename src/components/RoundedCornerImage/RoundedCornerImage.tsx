@@ -12,6 +12,7 @@ export const RoundedCornerImage: React.FC<RoundImageProps> = ({
   imageSource,
   onClick,
 }) => {
+  console.log('imageSource::::::',imageSource);
   return (
     <Container>
       <Image onClick={onClick} src={imageSource} alt={alt} />

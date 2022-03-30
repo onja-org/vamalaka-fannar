@@ -7,7 +7,6 @@ import dropDownSvg from './drop-image.svg'
 
 export interface DropDownProps {
   onChange: (files: File) => void
-  image: string
   alt: string
   file: string
   onImageClick: () => void
@@ -17,8 +16,9 @@ export interface DropDownProps {
 const fileTypes = ["jpg", "jpeg", "png"];
 
 export const DropDownImage: React.FC<DropDownProps> = (
-  { onChange, alt, file, image, onImageClick, onImageDelete }
+  { onChange, alt, file, onImageClick, onImageDelete }
 ) => {
+  console.log('file::::::',file);
   return (
     <Container>
       <Label htmlFor={file}>
@@ -40,7 +40,7 @@ export const DropDownImage: React.FC<DropDownProps> = (
           onChange={(e) => onChange(e?.target?.files?.[0] as File)}
         />
       </BrowseInput>
-      <ManageRoundedImage onClickImage={onImageClick} onDeleteImage={onImageDelete} imageSource={image} alt='' emptyImage='' showStar />
+      <ManageRoundedImage onClickImage={onImageClick} onDeleteImage={onImageDelete} imageSource={file} alt='' showStar />
     </Container>
   )
 }

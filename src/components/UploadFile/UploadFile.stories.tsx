@@ -11,5 +11,5 @@ const Template: Story<UploadFileProps> = (args) => <UploadFile {...args} />
 
 export const UploadFiles = Template.bind({})
 UploadFiles.args = {
-    image: 'a'
+    
 }

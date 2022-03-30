@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { FETCH_STATUS } from '../../constants'
-import { sendQuery, getAdsQuery } from '../../graphqlHelper'
+import { sendQuery, getAdsQuery  } from '../../graphqlHelper'
 import { RootState } from '../store'
 
 type FetchAdsError = {
