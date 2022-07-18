@@ -20,7 +20,7 @@ export const PageFooterFirstView = Template.bind({})
 PageFooterFirstView.args = {
   footerLinks: [
     {
-      summary: 'Madamada sugi',
+      summary: 'Madamada',
       links: [
         { linkContent: 'about', linkUrl: '#about' },
         { linkContent: 'careers', linkUrl: '#careers' },
