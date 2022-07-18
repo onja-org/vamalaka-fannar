@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router'
 import { PageFooter, Props } from './PageFooter'
 
 addDecorator((story) => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  <MemoryRouter initialEntries={['/']}>{story() as any}</MemoryRouter>
 ))
 
 export default {

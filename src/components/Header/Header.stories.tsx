@@ -10,7 +10,7 @@ export default {
 } as Meta
 
 addDecorator((story) => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  <MemoryRouter initialEntries={['/']}>{story() as any}</MemoryRouter>
 ))
 
 const Template: Story<LinkTypes> = (args) => <Header {...args} />
