@@ -4,7 +4,7 @@ import { Login, LoginProps } from './Login'
 import { MemoryRouter } from 'react-router'
 
 addDecorator((story) => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  <MemoryRouter initialEntries={['/']}>{story() as any}</MemoryRouter>
 ))
 
 export default {

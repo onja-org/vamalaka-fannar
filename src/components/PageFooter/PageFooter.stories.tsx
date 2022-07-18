@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router'
 import { PageFooter, Props } from './PageFooter'
 
 addDecorator((story) => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  <MemoryRouter initialEntries={['/']}>{story() as any}</MemoryRouter>
 ))
 
 export default {
@@ -20,7 +20,7 @@ export const PageFooterFirstView = Template.bind({})
 PageFooterFirstView.args = {
   footerLinks: [
     {
-      summary: 'Madamada',
+      summary: 'Madamada sugi',
       links: [
         { linkContent: 'about', linkUrl: '#about' },
         { linkContent: 'careers', linkUrl: '#careers' },
