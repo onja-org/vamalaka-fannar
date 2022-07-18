@@ -31,6 +31,5 @@ ImageNoStar.args = {
 
 export const EmptyImage = Template.bind({})
 EmptyImage.args = {
-  showStar: false,
-  emptyImage: emptyImage,
+  showStar: false
 }
