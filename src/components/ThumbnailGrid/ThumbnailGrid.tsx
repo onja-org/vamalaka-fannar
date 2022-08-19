@@ -10,17 +10,18 @@ interface ThumbnailGridProps {
     thumbs: Omit<ManageImageProps, "onClickImage" | "onDeleteImage">[]
     onClickImage: (imageName: string) => void
     onDeleteImage: (imageName: string) => void
+    
 
 }
 
 const URL = `${BACKEND_URL}/uploads/`;
 
 
-export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage }: ThumbnailGridProps) => {
+export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailGridProps) => {
 
     return (
         <Wrapper>
-            {thumbs.map(thumb =>{
+            {thumbs.map((thumb) =>{
                 const imageSource= thumb.imageSource ?`${URL}${thumb.imageSource}`:''
 
             return <>
@@ -30,7 +31,7 @@ export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage }: Thumbnail
                     alt={thumb.alt}
                     onClickImage={() => onClickImage(thumb.imageSource || "")}
                     showStar={thumb.showStar}
-                  onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} />
+                    onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
             </>}
             )}
 

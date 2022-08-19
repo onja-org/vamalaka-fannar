@@ -122,6 +122,7 @@ export const CreateNewOffer = (text) => {
     imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
     
     setImageThumbnails([...imageThumbnails])
+    checkIfOnlyImageAsignStar(imageThumbnails)
   }
 
   useEffect(() => {
@@ -136,30 +137,65 @@ export const CreateNewOffer = (text) => {
     []
   )
 
+// Check if the thumnail that checked already has the star
+// If yes 
+// I do nothing
+// If not
+// Remove from the other thumbnailGrid
+// And add it to the current clicked
+
+const checkIfOnlyImageAsignStar = (imageThumbnails) => {
+  const thumnailsWithImage = imageThumbnails.filter((thumb) => thumb.imageSource !== '')
+  if(thumnailsWithImage.length === 1) {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+    imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
+
+    setImageThumbnails([...imageThumbnails])
+  }
+
+}
+
+
   const handleThumbnailClick = (src: string) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
-    if(index == 0) {
-      imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
-     
-    } 
-    
-    // if(index == 1) {
-    //   imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
-      
-    // }
 
-    
-  
-    setImageThumbnails([...imageThumbnails])
+    const hasStar = imageThumbnails[index].showStar
+    const isEmpty = imageThumbnails[index].imageSource === "" 
+
+    if(hasStar || isEmpty) {
+      return
+    }
+    else {
+      const clearedStars = imageThumbnails.map((thumnail) => ({...thumnail, showStar: false}) )
+      clearedStars[index]={...clearedStars[index], showStar: true} 
+      setImageThumbnails([...clearedStars])
+
+    }
+
     
   }
 
 
   const handleThumbnailDelete = (src: string) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
+    const hasStar = imageThumbnails[index].showStar
     imageThumbnails[index]={...imageThumbnails[index], imageSource: '', alt: '', showStar: false}
+
    
-    setImageThumbnails([...imageThumbnails])
+    if(!hasStar) {
+   
+      setImageThumbnails([...imageThumbnails])
+    }
+  else {
+    const firstIndexImage = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+    imageThumbnails[firstIndexImage]={...imageThumbnails[firstIndexImage], showStar: true} 
+    setImageThumbnails([...imageThumbnails])  
+  }
+
+
+
+
+    checkIfOnlyImageAsignStar(imageThumbnails)
   }
 
   useEffect(() => {
