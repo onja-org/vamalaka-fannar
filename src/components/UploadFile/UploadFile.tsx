@@ -7,18 +7,30 @@ import { Loading } from "../Loading/Loading";
 import { fonts } from "../../globalStyles/fonts";
 import axios from "axios";
 import { BACKEND_URL } from "../../localhostURL";
+import { ManageImageProps } from "../ManageRoundedImages/ManageRoundedImage";
+import { LimiteThumbnail } from "../LimiteThumbnail/LimiteThumbnail";
+import React from "react";
+
 
 export interface UploadFileProps {
-  onUploadSuccess: (filename: string, description: string) => void
+  onUploadSuccess: (filename: string, description: string) => void;
+  text: string
+  thumbs: Omit<ManageImageProps, "onClickImage" | "onDeleteImage">[]
+  
 }
 
-export const UploadFile = ({ onUploadSuccess }) => {
+
+
+export const UploadFile = ({ onUploadSuccess, thumbs, text}) => { 
+
+  
+  const filteredEmptyImages = thumbs.filter(img => img.imageSource !== '')
+
   const [file, setFile] = useState<File | null>()
   const [textDescription, setTextDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
   function handleChange(currentFile: File) {
-    console.log('currentFile::::::', currentFile);
     setFile(currentFile)
   }
 
@@ -32,8 +44,7 @@ export const UploadFile = ({ onUploadSuccess }) => {
       const formData = new FormData()
       formData.append('avatar', file)
       const URL = `${BACKEND_URL}/upload`;
-     const response = await axios.post(URL, formData);
-    console.log('response::::::', response);
+      const response = await axios.post(URL, formData);
 
       setLoading(false)
 
@@ -61,12 +72,15 @@ export const UploadFile = ({ onUploadSuccess }) => {
           {Boolean(file)
             ?
             <DisplayedDroppedFiles
-              cancelClick={handleCancelClick}
-              uploadClick={handleUploadFileClick}
-              onChangeDescription={(e: any) => handleTextDescription(e)}
-              fileName={file?.name || ''}
-              textDescription={textDescription}
-            />
+            cancelClick={handleCancelClick}
+            uploadClick={handleUploadFileClick}
+            onChangeDescription={(e: any) => handleTextDescription(e)}
+            fileName={file?.name || ''}
+            textDescription={textDescription}
+          />
+         
+            :  filteredEmptyImages.length >= 6 
+            ? <LimiteThumbnail text={'Maximum number of 6 images reached.Please remove existing one to upload new'}/> 
             :
             <DropDownImage
               onChange={(e: any) => handleChange(e)}
@@ -94,3 +108,7 @@ const LoadingTextStyle = styled.p`
   font-size: 20px;
   color: rgb(0, 150, 255);
 `;
+function img(img: any, arg1: (string: any) => void) {
+  throw new Error("Function not implemented.");
+}
+

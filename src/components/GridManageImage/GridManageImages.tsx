@@ -15,30 +15,35 @@ export const GridManageImages: React.FC<GridImageProps> = () => {
         showStar={true}
         alt='start image'
         onClickImage={() => {}}
+        onDeleteImage={() => {}}
       />
       <ManageRoundedImage
         imageSource={imageNoStar}
         showStar={false}
         alt='start image'
         onClickImage={() => {}}
+        onDeleteImage={() => {}}
       />
       <ManageRoundedImage
         imageSource={imageNoStar}
         showStar={false}
         alt='start image'
         onClickImage={() => {}}
+        onDeleteImage={() => {}}
       />
       <ManageRoundedImage
         imageSource={''}
         alt='start image'
         showStar={false}
         onClickImage={() => {}}
+        onDeleteImage={() => {}}
       />
       <ManageRoundedImage
         imageSource={''}
         alt='start image'
         showStar={false}
         onClickImage={() => {}}
+        onDeleteImage={() => {}}
       />
     </Wrapper>
   )

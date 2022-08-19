@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import emptyImage from '../../images/empty-image.svg'
 
 export interface RoundImageProps {
   imageSource?: string | undefined
@@ -12,7 +13,7 @@ export const RoundedCornerImage: React.FC<RoundImageProps> = ({
   imageSource,
   onClick,
 }) => {
-  console.log('imageSource::::::',imageSource);
+  
   return (
     <Container>
       <Image onClick={onClick} src={imageSource} alt={alt} />
@@ -23,11 +24,11 @@ export const RoundedCornerImage: React.FC<RoundImageProps> = ({
 const Container = styled.h1`
   text-align: start;
   img {
-    width: 100%;
+    width: 75px;
   }
 `
 const Image = styled.img`
   margin-inline-start: 0;
   border-radius: 10px;
-  background: #c4c4c4;
+  // background: #c4c4c4;
 `

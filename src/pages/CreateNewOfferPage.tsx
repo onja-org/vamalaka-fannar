@@ -13,9 +13,10 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
-import { BACKEND_URL } from "../localhostURL";
+// import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
+  text: string;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   id: string;
   title: string;
@@ -85,7 +86,7 @@ const initialThumbnails = [
   },
 ]
 
-export const CreateNewOffer = () => {
+export const CreateNewOffer = (text) => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
   const categories = useSelector(categoriesSelector)
@@ -112,20 +113,21 @@ export const CreateNewOffer = () => {
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
   const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value }) }
-  const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
-  console.log('newOffers::::::', newOffer);
+  // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
+
   const handleImageUploadSucces = (filename, description) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
     imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
+    
     setImageThumbnails([...imageThumbnails])
   }
 
   useEffect(() => {
 
 
-  }, newOffer.photos)
+  }, [newOffer.photos])
 
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -135,10 +137,29 @@ export const CreateNewOffer = () => {
   )
 
   const handleThumbnailClick = (src: string) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
+    if(index == 0) {
+      imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
+     
+    } 
+    
+    // if(index == 1) {
+    //   imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
+      
+    // }
 
+    
+  
+    setImageThumbnails([...imageThumbnails])
+    
   }
-  const handleThumbnailDelete = (src: string) => {
 
+
+  const handleThumbnailDelete = (src: string) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
+    imageThumbnails[index]={...imageThumbnails[index], imageSource: '', alt: '', showStar: false}
+   
+    setImageThumbnails([...imageThumbnails])
   }
 
   useEffect(() => {
@@ -221,7 +242,7 @@ export const CreateNewOffer = () => {
         </Form>
       </WrapperEditOffer>
       <ThumbnailWrapper>
-        <UploadFile onUploadSuccess={handleImageUploadSucces} />
+        <UploadFile thumbs={imageThumbnails} onUploadSuccess={handleImageUploadSucces} text={text}/>
         <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
       </ThumbnailWrapper>
 

@@ -15,10 +15,12 @@ export interface DropDownProps {
 }
 const fileTypes = ["jpg", "jpeg", "png"];
 
+const acceptedInputFiles = fileTypes.map(type => `image/${type}`).join(', ')
+
+
 export const DropDownImage: React.FC<DropDownProps> = (
   { onChange, alt, file, onImageClick, onImageDelete }
 ) => {
-  console.log('file::::::',file);
   return (
     <Container>
       <Label htmlFor={file}>
@@ -37,10 +39,10 @@ export const DropDownImage: React.FC<DropDownProps> = (
         <Input
           type='file'
           name={file}
+          accept={acceptedInputFiles}
           onChange={(e) => onChange(e?.target?.files?.[0] as File)}
         />
       </BrowseInput>
-      <ManageRoundedImage onClickImage={onImageClick} onDeleteImage={onImageDelete} imageSource={file} alt='' showStar />
     </Container>
   )
 }
