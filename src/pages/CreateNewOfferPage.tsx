@@ -13,6 +13,7 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
+import { title } from "process";
 // import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
@@ -89,7 +90,9 @@ const initialThumbnails = [
 export const CreateNewOffer = (text) => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
+ 
   const categories = useSelector(categoriesSelector)
+  
   const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
   const formData = {
     id: '',
@@ -106,13 +109,22 @@ export const CreateNewOffer = (text) => {
     }
   }
 
+
+
   const [newOffer, setNewOffers] = React.useState(formData);
+  
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
-  const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }) }
+  
+
+
+  const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }); }
   const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
+  
   const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
-  const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value }) }
+  const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
+ 
+  //  console.log('setCurrency::::::',setCurrency(newOffer);
   // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
@@ -133,6 +145,7 @@ export const CreateNewOffer = (text) => {
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
       event?.preventDefault()
+      
     },
     []
   )
@@ -261,13 +274,13 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-            <Button
+            {/* <Button
               label={'Save changes'}
               isPrimary={true}
               type={'submit'}
               onClick={(e) => submitNewOffer(e)}
-            />
-            <Button icon={''} type="button" onClick={() => { }} label="Create new" />
+            /> */}
+            <Button icon={''} type="button" onClick={(e) =>  submitNewOffer(e)} label="Create new" />
           </WrapperButton>
         </Form>
       </WrapperEditOffer>
