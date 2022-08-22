@@ -137,12 +137,6 @@ export const CreateNewOffer = (text) => {
     []
   )
 
-// Check if the thumnail that checked already has the star
-// If yes 
-// I do nothing
-// If not
-// Remove from the other thumbnailGrid
-// And add it to the current clicked
 
 const checkIfOnlyImageAsignStar = (imageThumbnails) => {
   const thumnailsWithImage = imageThumbnails.filter((thumb) => thumb.imageSource !== '')
