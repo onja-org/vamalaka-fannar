@@ -36,7 +36,7 @@ interface UserId {
   userId: string
 }
 
-interface newOfferData {
+interface NewOfferData {
   id: string
   title: string
   body: string
@@ -52,8 +52,8 @@ interface newOfferData {
   }
 }
 
-interface newOfferPayload {
-  newOffer: newOfferData
+interface NewOfferPayload {
+  newOffer: NewOfferData
 }
 
 export const fetchUserOffers = createAsyncThunk<
@@ -85,8 +85,8 @@ export const fetchUserOffers = createAsyncThunk<
 })
 
 export const fetchCreateNewOffer = createAsyncThunk<
-  newOfferPayload,
-  newOfferData,
+  NewOfferPayload,
+  NewOfferData,
   {
     dispatch: AppDispatch
     state: RootState

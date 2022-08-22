@@ -1,32 +1,48 @@
 import React from 'react'
+import { FileUploader } from 'react-drag-drop-files'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import Button from '../Buttons/Buttons'
+import { ManageRoundedImage } from '../ManageRoundedImages/ManageRoundedImage'
 import dropDownSvg from './drop-image.svg'
 
-export interface dropDownProps {
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
-  image: string
+export interface DropDownProps {
+  onChange: (files: File) => void
   alt: string
-  name: string
-}
+  file: string
+  onImageClick: () => void
+  onImageDelete: () => void
 
-export const DropDownImage: React.FC<dropDownProps> = ({ onChange, alt, name }) => {
+}
+const fileTypes = ["jpg", "jpeg", "png"];
+
+const acceptedInputFiles = fileTypes.map(type => `image/${type}`).join(', ')
+
+
+export const DropDownImage: React.FC<DropDownProps> = (
+  { onChange, alt, file, onImageClick, onImageDelete }
+) => {
   return (
     <Container>
-      <Label htmlFor={name}>
-        <DropDownInput 
-        type='file' 
-        name={name} 
-        id={name}
-        onChange={onChange} />
-        <Image src={dropDownSvg} alt={alt} />
+      <Label htmlFor={file}>
+        <FileUploader
+          handleChange={(file) => onChange(file)} name="file" types={fileTypes}>
+          <Image src={dropDownSvg} alt={alt} />
+        </FileUploader>
+
       </Label>
       <ContentWrapper>
-        <p>Drag and drop an image here</p>
-        <p>or</p>
+        <DropText>Drag and drop an image here</DropText>
+        <DropText>or</DropText>
       </ContentWrapper>
-      <Button type='button' label='Browse' />
+      <BrowseInput>
+        <Text>Browse</Text>
+        <Input
+          type='file'
+          name={file}
+          accept={acceptedInputFiles}
+          onChange={(e) => onChange(e?.target?.files?.[0] as File)}
+        />
+      </BrowseInput>
     </Container>
   )
 }
@@ -40,19 +56,44 @@ const Container = styled.div`
 const Image = styled.img`
   width: 100%;
   margin-inline-start: 0;
+  cursor: pointer;
 `
 const Label = styled.label`
-`
+position: relative;
+top: 40px;
 
-const DropDownInput = styled.input`
-  visibility: hidden;
 `
+const BrowseInput = styled.div`
+  position: relative;
+  box-shadow: -3px 3px rgba(21, 140, 177, 0.3), 3px -3px rgba(252, 70, 43, 0.3); 
+`;
+
+const Text = styled.p`
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-family: 'Garamond';
+  font-size: 24px;
+  line-height: 27px;
+  margin: 0;
+`;
+
+const Input = styled.input.attrs({ type: 'file' })`
+  overflow: hidden;
+  padding: 1rem;
+  width: 75px;
+  opacity: 0;
+  cursor: pointer;
+  background: #FFFFFF;
+`;
+
 const ContentWrapper = styled.div`
   ${fonts}
   font-size: 20px;
   line-height: 24px;
   color: #979797;
-  p {
-    margin-top: 0;
-  }
 `
+const DropText = styled.p`
+  ${fonts}
+`;
+

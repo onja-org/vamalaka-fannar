@@ -11,10 +11,13 @@ import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS } from '../constan
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
-import { Link } from "react-router-dom";
-import { Paths } from "../paths";
+import { UploadFile } from "../components/UploadFile/UploadFile";
+import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
+import { title } from "process";
+// import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
+  text: string;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   id: string;
   title: string;
@@ -45,19 +48,56 @@ export interface NewFormProps {
 
 }
 
-export const CreateNewOffer = () => {
+const initialThumbnails = [
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+  {
+    imageSource: '',
+    emptyImage: true,
+    alt: "",
+    showStar: false
+  },
+]
+
+export const CreateNewOffer = (text) => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
+ 
   const categories = useSelector(categoriesSelector)
+  
   const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
   const formData = {
     id: '',
     title: '',
-    photos: {
-      url: '',
-      info: '',
-      isPrimary: false,
-    },
+    photos: [] as any[],
     body: '',
     amountOfProduct: 0,
     price: 0,
@@ -69,29 +109,110 @@ export const CreateNewOffer = () => {
     }
   }
 
-  const [newOffers, setNewOffers] = React.useState(formData);
-  const setTitle = ({ target }) => { setNewOffers({ ...newOffers, title: target.value }) }
-  const setDescription = ({ target }) => { setNewOffers({ ...newOffers, body: target.value }) }
-  const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffers, amountOfProduct: target.value }) }
-  const setPrice = ({ target }) => { setNewOffers({ ...newOffers, price: target.value }) }
-  const setUnit = ({ target }) => { setNewOffers({ ...newOffers, unit: target.value }) }
-  const setCurrency = ({ target }) => { setNewOffers({ ...newOffers, currency: target.value }) }
+
+
+  const [newOffer, setNewOffers] = React.useState(formData);
+  
+  const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
+  
+
+
+  const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }); }
+  const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
+  const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
+  
+  const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
+  const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
+ 
+  //  console.log('setCurrency::::::',setCurrency(newOffer);
+  // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
+
+  const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
+
+  const handleImageUploadSucces = (filename, description) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
+    imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
+    
+    setImageThumbnails([...imageThumbnails])
+    checkIfOnlyImageAsignStar(imageThumbnails)
+  }
+
+  useEffect(() => {
+
+
+  }, [newOffer.photos])
 
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
       event?.preventDefault()
+      
     },
     []
   )
+
+
+const checkIfOnlyImageAsignStar = (imageThumbnails) => {
+  const thumnailsWithImage = imageThumbnails.filter((thumb) => thumb.imageSource !== '')
+  if(thumnailsWithImage.length === 1) {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+    imageThumbnails[index]={...imageThumbnails[index], showStar: true} 
+
+    setImageThumbnails([...imageThumbnails])
+  }
+
+}
+
+
+  const handleThumbnailClick = (src: string) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
+
+    const hasStar = imageThumbnails[index].showStar
+    const isEmpty = imageThumbnails[index].imageSource === "" 
+
+    if(hasStar || isEmpty) {
+      return
+    }
+    else {
+      const clearedStars = imageThumbnails.map((thumnail) => ({...thumnail, showStar: false}) )
+      clearedStars[index]={...clearedStars[index], showStar: true} 
+      setImageThumbnails([...clearedStars])
+
+    }
+
+    
+  }
+
+
+  const handleThumbnailDelete = (src: string) => {
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === src)
+    const hasStar = imageThumbnails[index].showStar
+    imageThumbnails[index]={...imageThumbnails[index], imageSource: '', alt: '', showStar: false}
+
+   
+    if(!hasStar) {
+   
+      setImageThumbnails([...imageThumbnails])
+    }
+  else {
+    const firstIndexImage = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+    imageThumbnails[firstIndexImage]={...imageThumbnails[firstIndexImage], showStar: true} 
+    setImageThumbnails([...imageThumbnails])  
+  }
+
+
+
+
+    checkIfOnlyImageAsignStar(imageThumbnails)
+  }
 
   useEffect(() => {
     dispatch(fetchCategories([]))
   }, [dispatch])
 
-  
+ 
   return (
     <Wrapper>
-      <WapperEditOffer>
+      <WrapperEditOffer>
         <HeaderEditOffer>Create New Offer</HeaderEditOffer>
         <Form>
           <FormEditDetail>
@@ -100,13 +221,13 @@ export const CreateNewOffer = () => {
               placeholder={'Product name'}
               inputType={'text'}
               inputId={'product'}
-              inputValue={newOffers.title}
+              inputValue={newOffer.title}
               onChange={setTitle}
             />
             <Input
               inputId={'product'}
               inputType={'text'}
-              inputValue={newOffers.body}
+              inputValue={newOffer.body}
               placeholder={'write the descripton of you offer'}
               label={'Description*'}
               onChange={setDescription}
@@ -123,7 +244,7 @@ export const CreateNewOffer = () => {
               placeholder={'45'}
               inputType={''}
               inputId={'number'}
-              inputValue={String(newOffers.price)}
+              inputValue={String(newOffer.price)}
               onChange={setPrice}
             />
             <DropDown
@@ -147,41 +268,27 @@ export const CreateNewOffer = () => {
               placeholder={''}
               inputType={''}
               inputId={'amout'}
-              inputValue={String(newOffers.amountOfProduct)}
+              inputValue={String(newOffer.amountOfProduct)}
               onChange={setAmountOfProduct}
             />
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-            <Button
+            {/* <Button
               label={'Save changes'}
               isPrimary={true}
               type={'submit'}
               onClick={(e) => submitNewOffer(e)}
-            />
-            <Button
-              label={'Reset'}
-              isPrimary={true}
-              onClick={() => { }}
-              type={'button'}
-            />
-            <Link to={Paths.PROFILE}>
-              <Button
-                type={'button'}
-                label={'Preview'}
-                isPrimary={false}
-                onClick={() => { }}
-              />
-            </Link>
-            <Button
-              type={'button'}
-              label={'Delete'}
-              isPrimary={true}
-              onClick={() => { }}
-            />
+            /> */}
+            <Button icon={''} type="button" onClick={(e) =>  submitNewOffer(e)} label="Create new" />
           </WrapperButton>
         </Form>
-      </WapperEditOffer>
+      </WrapperEditOffer>
+      <ThumbnailWrapper>
+        <UploadFile thumbs={imageThumbnails} onUploadSuccess={handleImageUploadSucces} text={text}/>
+        <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
+      </ThumbnailWrapper>
+
     </Wrapper>
   )
 }
@@ -191,13 +298,15 @@ const Wrapper = styled.div`
   background-color: #fff;
   max-width: 1167px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 2fr 20px;
 `
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
 `
-export const WapperEditOffer = styled.div`
+export const WrapperEditOffer = styled.div`
   width: 80%;
   margin: auto;
 `
@@ -228,4 +337,5 @@ export const FormEditDetail = styled.div`
     padding-left: 30px;
   }
   `
-
+const ThumbnailWrapper = styled.div`
+`;
