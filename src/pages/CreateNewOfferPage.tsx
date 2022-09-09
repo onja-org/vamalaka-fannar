@@ -6,6 +6,7 @@ import Input from "../components/Input/Input";
 import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
 import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
+import {fetchUserOffers} from '../redux/slices/userOfferSlice'
 import { useEffect } from 'react'
 import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS } from '../constants'
 import { useAppDispatch } from '../redux/hooks'
@@ -13,6 +14,8 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
+import { event } from "cypress/types/jquery";
+import { any } from "cypress/types/bluebird";
 // import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {
@@ -112,10 +115,9 @@ export const CreateNewOffer = (text) => {
 
   const [newOffer, setNewOffers] = React.useState(formData);
   
+ 
+
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
-  
-
-
   const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }); }
   const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
@@ -144,9 +146,24 @@ export const CreateNewOffer = (text) => {
   const submitNewOffer = React.useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
       event?.preventDefault()
-      
+      dispatch(
+        fetchUserOffers({ 
+          id: '',
+          title: event.currentTarget.title.value,
+          photos: [] as any[],
+          body: event.currentTarget.body.value,
+          amountOfProduct: event.currentTarget.amountOfProduct.value,
+          price: event.currentTarget.price.value,
+          unit: event.currentTarget.unit.value,
+          currency: event.currentTarget.currency.value,
+          category: {
+            title: event.currentTarget.title.value,
+            id: event.currentTarget.id.value,
+          }
+        })
+      )
     },
-    []
+    [dispatch]
   )
 
 
