@@ -13,7 +13,6 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
-import { title } from "process";
 // import { BACKEND_URL } from "../localhostURL";
 
 export interface NewFormProps {

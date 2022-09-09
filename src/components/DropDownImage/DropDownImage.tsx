@@ -2,7 +2,6 @@ import React from 'react'
 import { FileUploader } from 'react-drag-drop-files'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
-import { ManageRoundedImage } from '../ManageRoundedImages/ManageRoundedImage'
 import dropDownSvg from './drop-image.svg'
 
 export interface DropDownProps {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { RoundedCornerImage } from '../RoundedCornerImage/RoundedCornerImage'
 import crossImage from '../../images/x-circle.svg'
 import starImage from '../../images/star.svg'
