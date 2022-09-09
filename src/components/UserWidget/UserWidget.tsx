@@ -94,7 +94,7 @@ export const UserWidget: FunctionComponent<UserWidgetProps> = ({
   const userOffers = useSelector(userOffersSelector);
   const dispatch = useAppDispatch()
   const userId = user?.id
-  const userPhoto = `${BACKEND_URL}/uploads/${user.photos[0]?.url}`;
+  const userPhoto = `${BACKEND_URL}/uploads/${user.photos?.[0]?.url}`;
   const offersNumber = Object.keys(userOffers).length;
 
   useEffect(() => {

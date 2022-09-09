@@ -34,27 +34,16 @@ export const registerMutation = (
   password: string,
   email: string,
   confirmPassword: string,
-  role: string,
-) => {
-  return `mutation{
-    register(
-      registerInput:{
-        username:"${username}",
-        password:"${password}",
-        confirmPassword:"${confirmPassword}",
-        email:"${email}", 
-        role:"${role}",
-      }
-    ){
-      id,
+  role: string
+) => `mutation{
+  register(registerInput:{username:"${username}",password:"${password}",confirmPassword:"${confirmPassword}",email:"${email}",role:"${role}"})
+    { id,
       createdAt,
       email,
       username,
-      token,
-      }
-    }
-  }`
-}
+      token
+    }}`;
+
 
 export const loginMutation = (
   username: string,

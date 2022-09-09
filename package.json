@@ -24,7 +24,7 @@
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "storybook-addon-redux-listener": "^0.1.7",
     "styled-components": "^5.3.0",
