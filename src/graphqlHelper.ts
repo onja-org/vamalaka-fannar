@@ -108,12 +108,14 @@ export const createNewOffer = (
   price: number,
   categoryId: string,
   amountOfProduct: number,
-  photos: {
+  photos: [{
     url: string,
     info: string,
     isPrimary: boolean,
-  },
+  }],
 ) => {
+
+  console.log('photos:helperrrrrrr:::::',photos);
   return `mutation{
     createAd(
       title:"${title}",
@@ -121,7 +123,7 @@ export const createNewOffer = (
       currency: "${currency}",
       unit: "${unit}",
       price: ${price},
-      category:"${categoryId}"
+      categoryId:"${categoryId}"
       amountOfProduct: ${amountOfProduct},
       photos:${photos},
     )
@@ -133,12 +135,6 @@ export const createNewOffer = (
       unit,
       price,
       amountOfProduct,
-     categoryId,
-      photos{
-        url,
-        isPrimary,
-        info
-      },
     }
   }`
 }

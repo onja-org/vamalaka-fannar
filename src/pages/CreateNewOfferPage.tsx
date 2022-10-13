@@ -7,13 +7,14 @@ import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
 import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
 import { useEffect } from 'react'
-import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS } from '../constants'
+import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS,CATEGORIES_DROP_DOWN_OPTIONS } from '../constants'
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import {fetchCreateNewOffer} from "../redux/slices/userOfferSlice"
+
 
 
 
@@ -106,10 +107,12 @@ export const CreateNewOffer = (text) => {
     price: 0,
     unit: '',
     currency: '',
-    category: {
-      title: '',
-      id: '',
-    }
+    categoryId:''
+
+    // category: {
+    //   title: '',
+    //   id: '',
+    // }
   }
 
 
@@ -118,12 +121,9 @@ export const CreateNewOffer = (text) => {
   
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
   
-
-
   const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }); }
   const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
-  
   const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
  
@@ -142,31 +142,37 @@ export const CreateNewOffer = (text) => {
 
   useEffect(() => {
 
-
+  
   }, [newOffer.photos])
 
  
   const submitNewOffer = React.useCallback(
     
     (event: React.MouseEvent<Element, MouseEvent>) => {
+    // console.log('currentTarget::::::',event.currentTarget);
+    // console.log('newOffer::::::',newOffer);
+    console.log('newOffer.title::::::',newOffer.title);
+
       event?.preventDefault()
       dispatch(
         fetchCreateNewOffer({
           id: '',
-          title: (event.currentTarget as any).title.value,
-          photos: {url: '',
+          title: newOffer.title,
+          photos: [{url: '',
             info: '',
-            isPrimary: false},
-          body: (event.currentTarget as any).body.value,
-          amountOfProduct: (event.currentTarget as any).amountOfProduct.value,
-          price: (event.currentTarget as any).price.value,
-          unit: (event.currentTarget as any).unit.value,
-          currency: (event.currentTarget as any).currency.value,
-          categoryId: (event.currentTarget as any).categoryId.value,
+            isPrimary: false}],
+          body:newOffer.body,
+          amountOfProduct: newOffer.amountOfProduct,
+          price: newOffer.price,
+          unit: newOffer.unit,
+          currency:newOffer.currency,
+          categoryId: newOffer.categoryId,
         })
       )
+    
     },
-    [dispatch]
+    [dispatch, newOffer]
+   
   )
 
 
@@ -234,6 +240,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
       <WrapperEditOffer>
         <HeaderEditOffer>Create New Offer</HeaderEditOffer>
         <Form  onSubmit={submitNewOffer as any}>
+        {/* onSubmit={submitNewOffer as any} */}
           <FormEditDetail>
             <Input
               label={'Product name*'}
@@ -252,7 +259,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               onChange={setDescription}
             />
             <DropDown
-              options={categoriesOptions}
+              options={CATEGORIES_DROP_DOWN_OPTIONS}
               placeholder={'SELECT CATEGORY'}
               name={'select the category'}
               id={'category'}

@@ -45,11 +45,11 @@ interface NewOfferData {
   currency: string
   categoryId: string
   amountOfProduct: number
-  photos: {
+  photos: [{
     url:string
     info: string
     isPrimary: boolean
-  }
+  }]
 }
 
 interface NewOfferPayload {
@@ -93,7 +93,9 @@ export const fetchCreateNewOffer = createAsyncThunk<
     rejectValue: FetchUserOffersError
   }
 >('fetchCreateNewOffer/fetch', async (getNewOffers, thunkApi) => {
+  console.log('getNewOffers::::::',getNewOffers);
   const {title, body,currency,unit, price,categoryId,amountOfProduct, photos } = getNewOffers;  
+  console.log('title, body,currency,unit, price,categoryId,amountOfProduct, photos::::::',title, body,currency,unit, price,categoryId,amountOfProduct, photos);
   const response = await sendQuery(createNewOffer(title, body,currency,unit, price,categoryId,amountOfProduct, photos))
   const newOffer = response.data.data
   
@@ -162,7 +164,7 @@ export const userOffersSlice = createSlice({
       state.status = FETCH_STATUS.LOADING
     })
     builder.addCase(fetchCreateNewOffer.fulfilled, (state, { payload }) => {      
-      state.newOffer = payload.newOffer
+      state.newOffer = payload.newOffer as any
       state.status = FETCH_STATUS.IDLE
     })
     builder.addCase(fetchCreateNewOffer.rejected, (state, { payload }) => {

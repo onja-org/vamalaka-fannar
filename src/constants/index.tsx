@@ -12,6 +12,12 @@ export enum CURRENCIES {
 export enum UNIT {
   SPECIES = 'SPECIES'
 }
+
+export enum CATEGORIES {
+  ONE = "ONE",
+  TWO = "TWO",
+  THREE = "THREE"
+}
 export const CURRENCIES_DROP_DOWN_OPTIONS = [
   {label : CURRENCIES.EURO, value :CURRENCIES.EURO},
   {label : CURRENCIES.MGA, value :CURRENCIES.MGA},
@@ -21,3 +27,9 @@ export const CURRENCIES_DROP_DOWN_OPTIONS = [
 export const UNIT_DROP_DOWN_OPTIONS = [ 
   {label : UNIT.SPECIES, value :UNIT.SPECIES},
 ] 
+
+export const CATEGORIES_DROP_DOWN_OPTIONS = [
+  {label : CATEGORIES.ONE, value :CATEGORIES.ONE},
+  {label : CATEGORIES.TWO, value :CATEGORIES.TWO},
+  {label : CATEGORIES.THREE, value :CATEGORIES.THREE}
+]
