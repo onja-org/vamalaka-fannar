@@ -4,7 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { FETCH_STATUS } from '../../constants'
-import { createNewOffer, getUserOffers, sendQuery } from '../../graphqlHelper'
+import { createNewOffer, getUserOffers, sendAuthorizedQuery, sendQuery } from '../../graphqlHelper'
 import { AppDispatch, RootState } from '../store'
 
 type FetchUserOffersError = {
@@ -92,11 +92,16 @@ export const fetchCreateNewOffer = createAsyncThunk<
     state: RootState
     rejectValue: FetchUserOffersError
   }
->('fetchCreateNewOffer/fetch', async (getNewOffers, thunkApi) => {
-  console.log('getNewOffers::::::',getNewOffers);
-  const {title, body,currency,unit, price,categoryId,amountOfProduct, photos } = getNewOffers;  
-  console.log('title, body,currency,unit, price,categoryId,amountOfProduct, photos::::::',title, body,currency,unit, price,categoryId,amountOfProduct, photos);
-  const response = await sendQuery(createNewOffer({title, body,currency,unit, price,categoryId,amountOfProduct, photos}))
+  >('fetchCreateNewOffer/fetch', async (newOfferPayload, thunkApi) => {
+    const { title, body, currency, unit, price, categoryId, amountOfProduct, photos } = newOfferPayload;
+
+    const token = thunkApi.getState().user.user.token || ''
+
+
+    const { query, variables } = createNewOffer({title, body, currency, unit, price, categoryId, amountOfProduct, photos})
+
+    const response = await sendAuthorizedQuery(query, token, variables)
+
   const newOffer = response.data.data
   
   if (response.status !== 200) {

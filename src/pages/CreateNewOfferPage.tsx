@@ -113,6 +113,7 @@ export const CreateNewOffer = (text) => {
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
   const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
+  const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
   //  console.log('setCurrency::::::',setCurrency(newOffer);
   // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
@@ -253,6 +254,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               name={'select the category'}
               id={'category'}
               label={'Category*'}
+              onChange={setCategory}
             />
             <Input
               label={'Price'}
