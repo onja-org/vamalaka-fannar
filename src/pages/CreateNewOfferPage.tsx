@@ -267,7 +267,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
             />
             <Input
               label={'Price'}
-              placeholder={'45'}
+              placeholder={''}
               inputType={''}
               inputId={'number'}
               inputValue={String(newOffer.price)}
