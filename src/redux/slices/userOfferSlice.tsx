@@ -36,15 +36,15 @@ interface UserId {
   userId: string
 }
 
-interface NewOfferData {
+export interface NewOfferData {
   id: string
   title: string
   body: string
-  price: number
+  price: number | null
   unit: string
   currency: string
   categoryId: string
-  amountOfProduct: number
+  amountOfProduct: number | null
   photos: [{
     url:string
     info: string
@@ -96,7 +96,7 @@ export const fetchCreateNewOffer = createAsyncThunk<
   console.log('getNewOffers::::::',getNewOffers);
   const {title, body,currency,unit, price,categoryId,amountOfProduct, photos } = getNewOffers;  
   console.log('title, body,currency,unit, price,categoryId,amountOfProduct, photos::::::',title, body,currency,unit, price,categoryId,amountOfProduct, photos);
-  const response = await sendQuery(createNewOffer(title, body,currency,unit, price,categoryId,amountOfProduct, photos))
+  const response = await sendQuery(createNewOffer({title, body,currency,unit, price,categoryId,amountOfProduct, photos}))
   const newOffer = response.data.data
   
   if (response.status !== 200) {

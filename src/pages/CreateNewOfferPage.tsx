@@ -13,33 +13,16 @@ import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
-import {fetchCreateNewOffer} from "../redux/slices/userOfferSlice"
+import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
 
 
 
 
 // import { BACKEND_URL } from "../localhostURL";
 
-export interface NewFormProps {
+export interface NewFormProps  extends NewOfferData{
   text: string;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  id: string;
-  title: string;
-  photos: {
-    url: string;
-    info: string;
-    isPrimary: boolean;
-  }
-  body: string;
-  amountOfProduct: number;
-  price: number;
-  unit: string;
-  currency: string;
-  category: {
-    title: string;
-    id: string;
-  };
-  categoryid: string;
   user: {
     username: string;
     email: string;
@@ -49,7 +32,11 @@ export interface NewFormProps {
     }
     id: string;
   };
-
+  category: {
+    title: string;
+    id: string;
+  };
+  
 }
 
 const initialThumbnails = [
@@ -103,8 +90,8 @@ export const CreateNewOffer = (text) => {
     title: '',
     photos: [] as any[],
     body: '',
-    amountOfProduct: 0,
-    price: 0,
+    amountOfProduct: null,
+    price: null,
     unit: '',
     currency: '',
     categoryId:''
@@ -269,10 +256,10 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
             />
             <Input
               label={'Price'}
-              placeholder={''}
+              placeholder={'enter the price'}
               inputType={''}
               inputId={'number'}
-              inputValue={String(newOffer.price)}
+              inputValue={newOffer.price||''}
               onChange={setPrice}
             />
             <DropDown
@@ -293,10 +280,10 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
             />
             <Input
               label={'Amount available'}
-              placeholder={''}
+              placeholder={'0'}
               inputType={''}
               inputId={'amout'}
-              inputValue={String(newOffer.amountOfProduct)}
+              inputValue={newOffer.amountOfProduct || ''}
               onChange={setAmountOfProduct}
             />
           </FormEditDetail>

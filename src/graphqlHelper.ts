@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Photo } from './components/MyAccount/MyAccount'
 import { BACKEND_URL } from './localhostURL'
+import { NewOfferData } from './redux/slices/userOfferSlice'
 
 export const sendQuery = (query: any, variables?: any): Promise<any> => {
   return axios.post(`${BACKEND_URL}/graphql?`, {
@@ -101,18 +102,7 @@ export const updateAd = (
 }
 
 export const createNewOffer = (
-  title: string,
-  body: string,
-  currency: string,
-  unit: string,
-  price: number,
-  categoryId: string,
-  amountOfProduct: number,
-  photos: [{
-    url: string,
-    info: string,
-    isPrimary: boolean,
-  }],
+{title, body,currency,unit, price,categoryId,amountOfProduct, photos}:Omit<NewOfferData, "id"> 
 ) => {
 
   console.log('photos:helperrrrrrr:::::',photos);
