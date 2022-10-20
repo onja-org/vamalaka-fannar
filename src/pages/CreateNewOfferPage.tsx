@@ -319,8 +319,10 @@ const Wrapper = styled.div`
   background-color: #fff;
   max-width: 1167px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 3fr 2fr 20px;
+  @media (min-width: 460px) {
+    display: grid;
+    grid-template-columns: 3fr 2fr 20px;
+  }
 `
 
 export const Form = styled.form`
@@ -359,4 +361,9 @@ export const FormEditDetail = styled.div`
   }
   `
 const ThumbnailWrapper = styled.div`
+@media (max-width: 460px) {
+margin-left: 20px
+}
 `;
+
+const WrapperGrid = styled.div``
