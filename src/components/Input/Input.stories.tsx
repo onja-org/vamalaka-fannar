@@ -40,12 +40,12 @@ emailInput.args = {
   onChange: () => null,
 }
 
-// export const numberInput = Template.bind({})
-// numberInput.args = {
-//   placeholder: '0',
-//   label: 'number',
-//   inputType: 'text',
-//   inputId: 'inputNumber',
-//   inputValue: 'string',
-//   onChange: () => null,
-// }
+export const numberInput = Template.bind({})
+numberInput.args = {
+  placeholder: '0',
+  label: 'number',
+  inputType: 'text',
+  inputId: 'inputNumber',
+  inputValue: 'string',
+  onChange: () => null,
+}

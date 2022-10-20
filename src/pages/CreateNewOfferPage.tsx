@@ -131,14 +131,16 @@ export const CreateNewOffer = (text) => {
   // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
-
   const handleImageUploadSucces = (filename, description) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
     imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
     
     setImageThumbnails([...imageThumbnails])
     checkIfOnlyImageAsignStar(imageThumbnails)
+   
   }
+
+
 
   useEffect(() => {
 
@@ -149,18 +151,18 @@ export const CreateNewOffer = (text) => {
   const submitNewOffer = React.useCallback(
     
     (event: React.MouseEvent<Element, MouseEvent>) => {
-    // console.log('currentTarget::::::',event.currentTarget);
-    // console.log('newOffer::::::',newOffer);
-    console.log('newOffer.title::::::',newOffer.title);
-
+    
+    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+    console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
+ 
       event?.preventDefault()
       dispatch(
         fetchCreateNewOffer({
-          id: '',
+          id: `${index}`,
           title: newOffer.title,
-          photos: [{url: '',
-            info: '',
-            isPrimary: false}],
+          photos: [{url: `${imageThumbnails[index].imageSource}`,
+            info: `${imageThumbnails[index].alt}`,
+            isPrimary: true}],
           body:newOffer.body,
           amountOfProduct: newOffer.amountOfProduct,
           price: newOffer.price,
