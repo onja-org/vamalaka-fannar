@@ -21,12 +21,12 @@ export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailG
 
     return (
         <Wrapper>
-            {thumbs.map((thumb) =>{
+            {thumbs.map((thumb, index) =>{
                 const imageSource= thumb.imageSource ?`${URL}${thumb.imageSource}`:''
 
             return <>
                 <ManageRoundedImage
-                    key={thumb.imageSource}
+                    key={index}
                     imageSource={imageSource}
                     alt={thumb.alt}
                     onClickImage={() => onClickImage(thumb.imageSource || "")}

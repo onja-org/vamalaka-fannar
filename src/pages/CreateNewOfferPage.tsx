@@ -14,7 +14,7 @@ import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
-
+import loadingIcon from '../icons/small-load-icon.png'
 
 
 
@@ -105,6 +105,7 @@ export const CreateNewOffer = (text) => {
 
 
   const [newOffer, setNewOffers] = React.useState(formData);
+  const [isShownButton, setIsShownButton] = React.useState(false)
   
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
   
@@ -139,10 +140,9 @@ export const CreateNewOffer = (text) => {
   const submitNewOffer = React.useCallback(
     
     (event: React.MouseEvent<Element, MouseEvent>) => {
-    
+    setIsShownButton(true)
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
     console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
- 
       event?.preventDefault()
       dispatch(
         fetchCreateNewOffer({
@@ -291,8 +291,8 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-            {/* <Button icon={''} type="button" onClick={(e) =>  submitNewOffer(e)} label="Create new" /> */}
-            <Button icon={''} type="submit" label="Create new" />
+            <Button icon={''} type="submit" label="Create new" disabled={isShownButton} isPrimary={false}/>
+           {isShownButton &&   <Button icon={loadingIcon} type="button" label="learnMore" isPrimary={true}/>}
           </WrapperButton>
         </Form>
       </WrapperEditOffer>
