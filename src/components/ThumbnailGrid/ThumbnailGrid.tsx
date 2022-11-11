@@ -17,22 +17,21 @@ interface ThumbnailGridProps {
 const URL = `${BACKEND_URL}/uploads/`;
 
 
-export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailGridProps) => {
+export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailGridProps, index) => {
 
     return (
         <Wrapper>
             {thumbs.map((thumb, index) =>{
                 const imageSource= thumb.imageSource ?`${URL}${thumb.imageSource}`:''
 
-            return <>
+            return <div key={index}>
                 <ManageRoundedImage
-                    key={index}
                     imageSource={imageSource}
                     alt={thumb.alt}
                     onClickImage={() => onClickImage(thumb.imageSource || "")}
                     showStar={thumb.showStar}
                     onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
-            </>}
+            </div>}
             )}
 
         </Wrapper>
