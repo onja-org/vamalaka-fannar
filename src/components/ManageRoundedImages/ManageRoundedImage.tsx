@@ -63,13 +63,13 @@ const Wrapper = styled.div`
 
 const Star = styled.img`
   position: absolute;
-  top: 15px;
+  top: -5px;
   left: -7px;
   max-width: 20px;
 `
 const Cross = styled.img`
   position: absolute;
   left: 60px;
-  top: 16px;
+  top: -5px;
   max-width: 20px;
 `

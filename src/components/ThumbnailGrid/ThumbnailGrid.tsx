@@ -25,13 +25,13 @@ export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailG
                 const imageSource= thumb.imageSource ?`${URL}${thumb.imageSource}`:''
 
             return <div key={index}>
-                <ManageRoundedImage
-                    imageSource={imageSource}
-                    alt={thumb.alt}
-                    onClickImage={() => onClickImage(thumb.imageSource || "")}
-                    showStar={thumb.showStar}
-                    onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
-            </div>}
+                         <ManageRoundedImage
+                            imageSource={imageSource}
+                            alt={thumb.alt}
+                            onClickImage={() => onClickImage(thumb.imageSource || "")}
+                            showStar={thumb.showStar}
+                            onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
+                  </div>}
             )}
 
         </Wrapper>
