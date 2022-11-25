@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components'
 import Button from "../components/Buttons/Buttons";
+import { Link} from 'react-router-dom';
+import { Paths } from '../paths';
 import { DropDown } from "../components/DropDown/DropDown";
 import Input from "../components/Input/Input";
 import { fonts } from "../globalStyles/fonts";
@@ -14,7 +16,7 @@ import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
-import loadingIcon from '../icons/small-load-icon.png'
+import loadingIcon from '../icons/small-load-icon.png';
 
 
 
@@ -132,36 +134,42 @@ export const CreateNewOffer = (text) => {
 
 
   useEffect(() => {
+  // const timeout = setTimeout(() => { console.log("wait a minut")}, 2000)
 
-  
+
   }, [newOffer.photos])
 
  
   const submitNewOffer = React.useCallback(
     
     (event: React.MouseEvent<Element, MouseEvent>) => {
-    setIsShownButton(true)
-    const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
-    console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
-      event?.preventDefault()
-      dispatch(
-        fetchCreateNewOffer({
-          id: `${index}`,
-          title: newOffer.title,
-          photos: [{url: `${imageThumbnails[index].imageSource}`,
-            info: `${imageThumbnails[index].alt}`,
-            isPrimary: true}],
-          body:newOffer.body,
-          amountOfProduct: newOffer.amountOfProduct,
-          price: newOffer.price,
-          unit: newOffer.unit,
-          currency:newOffer.currency,
-          categoryId: newOffer.categoryId,
-        })
-      )
-    
+   
+      setIsShownButton(true)
+      const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+      console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
+        event?.preventDefault()
+        dispatch(
+          fetchCreateNewOffer({
+            id: `${index}`,
+            title: newOffer.title,
+            photos: [{url: `${imageThumbnails[index].imageSource}`,
+              info: `${imageThumbnails[index].alt}`,
+              isPrimary: true}],
+            body:newOffer.body,
+            amountOfProduct: newOffer.amountOfProduct,
+            price: newOffer.price,
+            unit: newOffer.unit,
+            currency:newOffer.currency,
+            categoryId: newOffer.categoryId,
+          })
+        )
+  
+   
+        
     },
+    
     [dispatch, newOffer]
+    
    
   )
 
@@ -230,7 +238,6 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
       <WrapperEditOffer>
         <HeaderEditOffer>Create New Offer</HeaderEditOffer>
         <Form  onSubmit={submitNewOffer as any}>
-        {/* onSubmit={submitNewOffer as any} */}
           <FormEditDetail>
             <Input
               label={'Product name*'}
@@ -291,8 +298,15 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-            <Button icon={''} type="submit" label="Create new" disabled={isShownButton} isPrimary={false}/>
-           {isShownButton &&   <Button icon={loadingIcon} type="button" label="learnMore" isPrimary={true}/>}
+          <Link to={`${Paths.OFFER_ID}`}>
+            <Button
+              icon={isShownButton ? loadingIcon : "" } 
+              type="submit" 
+              label={ isShownButton ? "Learn More": "Create new" } 
+              disabled={isShownButton} 
+              isPrimary={ isShownButton ? true : false}
+              />
+            </Link>
           </WrapperButton>
         </Form>
       </WrapperEditOffer>

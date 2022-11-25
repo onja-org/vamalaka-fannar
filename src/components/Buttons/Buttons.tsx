@@ -63,6 +63,7 @@ const Button: React.FC<ButtonProps> = ({
         isPrimary={isPrimary}
         onClick={onClick}
         type={type}>
+        
         {icon && <img src={icon} alt='icon' />}
         <span>{label}</span>
       </ButtonStyled>
