@@ -1,13 +1,13 @@
 import React from "react";
 import styled from 'styled-components'
 import Button from "../components/Buttons/Buttons";
-import { Link} from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import { Paths } from '../paths';
 import { DropDown } from "../components/DropDown/DropDown";
 import Input from "../components/Input/Input";
 import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
-import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
+import { fetchCategories } from '../redux/slices/categoriesSlice'
 import { useEffect } from 'react'
 import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS,CATEGORIES_DROP_DOWN_OPTIONS } from '../constants'
 import { useAppDispatch } from '../redux/hooks'
@@ -17,7 +17,6 @@ import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
 import loadingIcon from '../icons/small-load-icon.png';
-
 
 
 // import { BACKEND_URL } from "../localhostURL";
@@ -83,10 +82,11 @@ const initialThumbnails = [
 export const CreateNewOffer = (text) => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
+  const history = useHistory();
  
-  const categories = useSelector(categoriesSelector)
+  // const categories = useSelector(categoriesSelector)
   
-  const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
+  // const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
   const formData = {
     id: '',
     title: '',
@@ -107,7 +107,8 @@ export const CreateNewOffer = (text) => {
 
 
   const [newOffer, setNewOffers] = React.useState(formData);
-  const [isShownButton, setIsShownButton] = React.useState(false)
+  const [isShownButton, setIsShownButton] = React.useState(false);
+  const [isDisable, setIsDisable] = React.useState(false)
   
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
   
@@ -118,7 +119,6 @@ export const CreateNewOffer = (text) => {
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
   const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
-  //  console.log('setCurrency::::::',setCurrency(newOffer);
   // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
@@ -134,8 +134,6 @@ export const CreateNewOffer = (text) => {
 
 
   useEffect(() => {
-  // const timeout = setTimeout(() => { console.log("wait a minut")}, 2000)
-
 
   }, [newOffer.photos])
 
@@ -145,6 +143,13 @@ export const CreateNewOffer = (text) => {
     (event: React.MouseEvent<Element, MouseEvent>) => {
    
       setIsShownButton(true)
+      setTimeout(() => {
+        setIsShownButton(false)
+        setIsDisable(true)
+      }, 2000)
+
+    
+      
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
       console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
         event?.preventDefault()
@@ -163,9 +168,6 @@ export const CreateNewOffer = (text) => {
             categoryId: newOffer.categoryId,
           })
         )
-  
-   
-        
     },
     
     [dispatch, newOffer]
@@ -298,15 +300,16 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-          <Link to={`${Paths.OFFER_ID}`}>
             <Button
-              icon={isShownButton ? loadingIcon : "" } 
+              icon={isShownButton ? loadingIcon : ""} 
+              isPrimary={isShownButton ? true : false}
               type="submit" 
-              label={ isShownButton ? "Learn More": "Create new" } 
-              disabled={isShownButton} 
-              isPrimary={ isShownButton ? true : false}
-              />
-            </Link>
+              label={isShownButton ? "Learn More": "Create new" } 
+              disabled={isDisable ? true : false} 
+              onClick = { () => setTimeout(()  => {
+                history.push(`${Paths.OFFER_ID}`)
+              }, 2000)}
+              /> 
           </WrapperButton>
         </Form>
       </WrapperEditOffer>
@@ -314,7 +317,6 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
         <UploadFile thumbs={imageThumbnails} onUploadSuccess={handleImageUploadSucces} text={text}/>
         <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
       </ThumbnailWrapper>
-
     </Wrapper>
   )
 }
@@ -371,4 +373,4 @@ margin-left: 20px
 }
 `;
 
-const WrapperGrid = styled.div``
+
