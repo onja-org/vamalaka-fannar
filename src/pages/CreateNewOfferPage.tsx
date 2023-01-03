@@ -146,7 +146,7 @@ export const CreateNewOffer = (text) => {
       setTimeout(() => {
         setIsShownButton(false)
         setIsDisable(true)
-      }, 2000)
+      }, 1000)
 
     
       
