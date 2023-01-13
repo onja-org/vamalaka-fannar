@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { RoundedCornerImage } from '../RoundedCornerImage/RoundedCornerImage'
 import crossImage from '../../images/x-circle.svg'
 import starImage from '../../images/star.svg'
@@ -63,13 +63,13 @@ const Wrapper = styled.div`
 
 const Star = styled.img`
   position: absolute;
-  top: 15px;
+  top: -5px;
   left: -7px;
   max-width: 20px;
 `
 const Cross = styled.img`
   position: absolute;
   left: 60px;
-  top: 16px;
+  top: -5px;
   max-width: 20px;
 `

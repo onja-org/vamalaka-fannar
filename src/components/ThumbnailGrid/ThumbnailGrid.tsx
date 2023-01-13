@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { BACKEND_URL } from "../../localhostURL";
 import { ManageImageProps, ManageRoundedImage } from "../ManageRoundedImages/ManageRoundedImage"
@@ -17,22 +17,21 @@ interface ThumbnailGridProps {
 const URL = `${BACKEND_URL}/uploads/`;
 
 
-export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailGridProps) => {
+export const ThumbnailGrid = ({ thumbs, onClickImage, onDeleteImage}: ThumbnailGridProps, index) => {
 
     return (
         <Wrapper>
-            {thumbs.map((thumb) =>{
+            {thumbs.map((thumb, index) =>{
                 const imageSource= thumb.imageSource ?`${URL}${thumb.imageSource}`:''
 
-            return <>
-                <ManageRoundedImage
-                    key={thumb.imageSource}
-                    imageSource={imageSource}
-                    alt={thumb.alt}
-                    onClickImage={() => onClickImage(thumb.imageSource || "")}
-                    showStar={thumb.showStar}
-                    onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
-            </>}
+            return <div key={index}>
+                         <ManageRoundedImage
+                            imageSource={imageSource}
+                            alt={thumb.alt}
+                            onClickImage={() => onClickImage(thumb.imageSource || "")}
+                            showStar={thumb.showStar}
+                            onDeleteImage={() => onDeleteImage(thumb.imageSource || " ")} /> 
+                  </div>}
             )}
 
         </Wrapper>

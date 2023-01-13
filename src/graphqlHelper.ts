@@ -1,33 +1,39 @@
 import axios from 'axios'
 import { Photo } from './components/MyAccount/MyAccount'
 import { BACKEND_URL } from './localhostURL'
+import { NewOfferData } from './redux/slices/userOfferSlice'
 
+import { gql, request } from "graphql-request";
 export const sendQuery = (query: any, variables?: any): Promise<any> => {
   return axios.post(`${BACKEND_URL}/graphql?`, {
     query,
-  })
-}
+  });
+};
 
-export const sendAuthorizedQuery = (query: string, token: string, variables?: any,): Promise<any> => {
+export const sendAuthorizedQuery = (
+  query: string,
+  token: string,
+  variables?: any
+): Promise<any> => {
+
   const config = {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
-  return axios.post(`${BACKEND_URL}/graphql?`, {
-    query,
-  }, config)
-}
+
+  return request(`${BACKEND_URL}/graphql?`, query, variables, config.headers);
+};
 
 export const getAdsQuery = () => {
   return `{
           ads{id,title,body,category{title,id}, user{username, email, id, photos{url,isPrimary}}, photos{url, info, isPrimary}}
-      }`
-}
+      }`;
+};
 
 export const getCategoriesQuery = () => {
   return `{
           categories{title, id, description}
-      }`
-}
+      }`;
+};
 
 export const registerMutation = (
   username: string,
@@ -44,11 +50,7 @@ export const registerMutation = (
       token
     }}`;
 
-
-export const loginMutation = (
-  username: string,
-  password: string
-) => {
+export const loginMutation = (username: string, password: string) => {
   return `mutation{
     login(username:"${username}",
     password:"${password}",
@@ -60,22 +62,18 @@ export const loginMutation = (
       token,
       photos{url,isPrimary}
     }
-  }`
-}
+  }`;
+};
 
-
-export const getUserOffers = (
-  userId: string,
-) => {
+export const getUserOffers = (userId: string) => {
   return `{
   getUserAds(userId:"${userId}"){id,title,body,category{title}, user{username, email}}
-}`
-}
-
+}`;
+};
 
 export const getOfferById = (id: string) => {
-  return `{getad(id:"${id}"){id,title,body,price,unit,amountOfProduct,category{title,id},currency,price,user{username, email, id}}}`
-}
+  return `{getad(id:"${id}"){id,title,body,price,unit,amountOfProduct,category{title,id},currency,price,user{username, email, id}}}`;
+};
 
 export const updateAd = (
   id: string,
@@ -88,57 +86,64 @@ export const updateAd = (
   amountOfProduct?: number,
   categoryId?: string
 ) => {
-
   return `mutation{updatead(id:"${id}"
-  ${Boolean(title) ? `title:"${title}"` : ''} 
-  ${Boolean(body) ? `body:"${body}"` : ''}
-  ${Boolean(photos) ? `photos:"${photos}"` : ''}
-  ${Boolean(currency) ? `currency:"${currency}"` : ''}
-  ${Boolean(price) ? `price:${price}` : ''}
-  ${Boolean(unit) ? `unit:"${unit}"` : ''}
-  ${Boolean(amountOfProduct) ? `amountOfProduct:${amountOfProduct}` : ''}
-  ${Boolean(categoryId) ? `categoryId:"${categoryId}"` : ''}){ id,title,body,photos{url},currency,price,unit,amountOfProduct}}`
-}
+  ${Boolean(title) ? `title:"${title}"` : ""} 
+  ${Boolean(body) ? `body:"${body}"` : ""}
+  ${Boolean(photos) ? `photos:"${photos}"` : ""}
+  ${Boolean(currency) ? `currency:"${currency}"` : ""}
+  ${Boolean(price) ? `price:${price}` : ""}
+  ${Boolean(unit) ? `unit:"${unit}"` : ""}
+  ${Boolean(amountOfProduct) ? `amountOfProduct:${amountOfProduct}` : ""}
+  ${
+    Boolean(categoryId) ? `categoryId:"${categoryId}"` : ""
+  }){ id,title,body,photos{url},currency,price,unit,amountOfProduct}}`;
+};
 
 export const createNewOffer = (
-  title: string,
-  body: string,
-  currency: string,
-  unit: string,
-  price: number,
-  categoryId: string,
-  amountOfProduct: number,
-  photos: {
-    url: string,
-    info: string,
-    isPrimary: boolean,
-  },
+{title, body,currency,unit, price,categoryId,amountOfProduct, photos}:Omit<NewOfferData, "id"> 
+
 ) => {
-  return `mutation{
-    createAd(
-      title:"${title}",
-      body:"${body}",
-      currency: "${currency}",
-      unit: "${unit}",
-      price: ${price},
-      category:"${categoryId}"
-      amountOfProduct: ${amountOfProduct},
-      photos:${photos},
-    )
-    {
-      id,
-      title,
-      body,
-      currency,
-      unit,
-      price,
-      amountOfProduct,
-     categoryId,
-      photos{
-        url,
-        isPrimary,
-        info
-      },
+  const query = gql`
+    mutation createAd(
+      $title: String!
+      $body: String!
+      $photos: [PhotoInput]
+      $currency: String
+      $price: Float
+      $unit: String
+      $amountOfProduct: Float
+      $categoryId: ID!
+    ) {
+      createAd(
+        title: $title
+        body: $body
+        photos: $photos
+        currency: $currency
+        price: $price
+        unit: $unit
+        amountOfProduct: $amountOfProduct
+        categoryId: $categoryId
+      ) {
+        id
+        title
+        body
+        currency
+        unit
+        price
+        amountOfProduct
+      }
     }
-  }`
-}
+  `;
+  const variables = {
+    title,
+    body,
+    currency,
+    unit,
+    price: parseFloat(price as unknown as string),
+    categoryId,
+    amountOfProduct: parseFloat(amountOfProduct as unknown as string),
+    photos,
+  };
+  return { query, variables };
+};
+

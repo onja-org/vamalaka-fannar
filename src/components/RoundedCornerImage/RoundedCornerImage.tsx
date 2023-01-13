@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import emptyImage from '../../images/empty-image.svg'
+
 
 export interface RoundImageProps {
   imageSource?: string | undefined

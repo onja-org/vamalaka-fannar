@@ -4,7 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { FETCH_STATUS } from '../../constants'
-import { createNewOffer, getUserOffers, sendQuery } from '../../graphqlHelper'
+import { createNewOffer, getUserOffers, sendAuthorizedQuery, sendQuery } from '../../graphqlHelper'
 import { AppDispatch, RootState } from '../store'
 
 type FetchUserOffersError = {
@@ -36,20 +36,20 @@ interface UserId {
   userId: string
 }
 
-interface NewOfferData {
+export interface NewOfferData {
   id: string
   title: string
   body: string
-  price: number
+  price: number | null
   unit: string
   currency: string
   categoryId: string
-  amountOfProduct: number
-  photos: {
+  amountOfProduct: number | null
+  photos: [{
     url:string
     info: string
     isPrimary: boolean
-  }
+  }]
 }
 
 interface NewOfferPayload {
@@ -92,9 +92,16 @@ export const fetchCreateNewOffer = createAsyncThunk<
     state: RootState
     rejectValue: FetchUserOffersError
   }
->('fetchCreateNewOffer/fetch', async (getNewOffers, thunkApi) => {
-  const {title, body,currency,unit, price,categoryId,amountOfProduct, photos } = getNewOffers;  
-  const response = await sendQuery(createNewOffer(title, body,currency,unit, price,categoryId,amountOfProduct, photos))
+  >('fetchCreateNewOffer/fetch', async (newOfferPayload, thunkApi) => {
+    const { title, body, currency, unit, price, categoryId, amountOfProduct, photos } = newOfferPayload;
+
+    const token = thunkApi.getState().user.user.token || ''
+
+
+    const { query, variables } = createNewOffer({title, body, currency, unit, price, categoryId, amountOfProduct, photos})
+
+    const response = await sendAuthorizedQuery(query, token, variables)
+
   const newOffer = response.data.data
   
   if (response.status !== 200) {
@@ -162,7 +169,7 @@ export const userOffersSlice = createSlice({
       state.status = FETCH_STATUS.LOADING
     })
     builder.addCase(fetchCreateNewOffer.fulfilled, (state, { payload }) => {      
-      state.newOffer = payload.newOffer
+      state.newOffer = payload.newOffer as any
       state.status = FETCH_STATUS.IDLE
     })
     builder.addCase(fetchCreateNewOffer.rejected, (state, { payload }) => {

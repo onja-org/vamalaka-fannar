@@ -1,12 +1,9 @@
-import console from 'console'
+
 import { useState } from 'react'
 import styled from 'styled-components'
 import { fonts } from '../../globalStyles/fonts'
 import Button from '../Buttons/Buttons'
 import { Input } from '../Input/Input'
-import { LimiteThumbnail } from '../LimiteThumbnail/LimiteThumbnail'
-import { TextArea } from '../TextArea/TextArea'
-import { ThumbnailGrid } from '../ThumbnailGrid/ThumbnailGrid'
 
 export interface DisplayedDroppedFileProps {
   cancelClick: () => void,

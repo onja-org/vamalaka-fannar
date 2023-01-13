@@ -1,41 +1,29 @@
 import React from "react";
 import styled from 'styled-components'
 import Button from "../components/Buttons/Buttons";
+import { useHistory} from 'react-router-dom';
+import { Paths } from '../paths';
 import { DropDown } from "../components/DropDown/DropDown";
 import Input from "../components/Input/Input";
 import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
-import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
+import { fetchCategories } from '../redux/slices/categoriesSlice'
 import { useEffect } from 'react'
-import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS } from '../constants'
+import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS,CATEGORIES_DROP_DOWN_OPTIONS } from '../constants'
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
 import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
-import { title } from "process";
+import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
+import loadingIcon from '../icons/small-load-icon.png';
+
+
 // import { BACKEND_URL } from "../localhostURL";
 
-export interface NewFormProps {
+export interface NewFormProps  extends NewOfferData{
   text: string;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  id: string;
-  title: string;
-  photos: {
-    url: string;
-    info: string;
-    isPrimary: boolean;
-  }
-  body: string;
-  amountOfProduct: number;
-  price: number;
-  unit: string;
-  currency: string;
-  category: {
-    title: string;
-    id: string;
-  };
-  categoryid: string;
   user: {
     username: string;
     email: string;
@@ -45,7 +33,11 @@ export interface NewFormProps {
     }
     id: string;
   };
-
+  category: {
+    title: string;
+    id: string;
+  };
+  
 }
 
 const initialThumbnails = [
@@ -90,64 +82,87 @@ const initialThumbnails = [
 export const CreateNewOffer = (text) => {
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
+  const history = useHistory();
  
-  const categories = useSelector(categoriesSelector)
-  
-  const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
   const formData = {
     id: '',
     title: '',
     photos: [] as any[],
     body: '',
-    amountOfProduct: 0,
-    price: 0,
+    amountOfProduct: null,
+    price: null,
     unit: '',
     currency: '',
-    category: {
-      title: '',
-      id: '',
-    }
+    categoryId:''
   }
 
 
 
   const [newOffer, setNewOffers] = React.useState(formData);
+  const [isShownButton, setIsShownButton] = React.useState(false);
+  const [isDisable, setIsDisable] = React.useState(false)
   
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
   
-
-
   const setDescription = ({ target }) => { setNewOffers({ ...newOffer, body: target.value }); }
   const setAmountOfProduct = ({ target }) => { setNewOffers({ ...newOffer, amountOfProduct: target.value }) }
   const setPrice = ({ target }) => { setNewOffers({ ...newOffer, price: target.value }) }
-  
   const setUnit = ({ target }) => { setNewOffers({ ...newOffer, unit: target.value }) }
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
+  const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
-  //  console.log('setCurrency::::::',setCurrency(newOffer);
-  // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
-
   const handleImageUploadSucces = (filename, description) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
     imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
     
     setImageThumbnails([...imageThumbnails])
     checkIfOnlyImageAsignStar(imageThumbnails)
+   
   }
+
+
 
   useEffect(() => {
 
-
   }, [newOffer.photos])
 
+ 
   const submitNewOffer = React.useCallback(
+    
     (event: React.MouseEvent<Element, MouseEvent>) => {
-      event?.preventDefault()
+   
+      setIsShownButton(true)
+      setTimeout(() => {
+        setIsShownButton(false)
+        setIsDisable(true)
+      }, 1000)
+
+    
       
+      const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+        event?.preventDefault()
+        dispatch(
+          fetchCreateNewOffer({
+            id: `${index}`,
+            title: newOffer.title,
+            photos: [{url: `${imageThumbnails[index].imageSource}`,
+              info: `${imageThumbnails[index].alt}`,
+              isPrimary: true}],
+            body:newOffer.body,
+            amountOfProduct: newOffer.amountOfProduct,
+            price: newOffer.price,
+            unit: newOffer.unit,
+            currency:newOffer.currency,
+            categoryId: newOffer.categoryId,
+          })
+        )
     },
-    []
+    
+    [dispatch, newOffer]
+    
+   
   )
 
 
@@ -214,7 +229,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
     <Wrapper>
       <WrapperEditOffer>
         <HeaderEditOffer>Create New Offer</HeaderEditOffer>
-        <Form>
+        <Form  onSubmit={submitNewOffer as any}>
           <FormEditDetail>
             <Input
               label={'Product name*'}
@@ -233,18 +248,19 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               onChange={setDescription}
             />
             <DropDown
-              options={categoriesOptions}
+              options={CATEGORIES_DROP_DOWN_OPTIONS}
               placeholder={'SELECT CATEGORY'}
               name={'select the category'}
               id={'category'}
               label={'Category*'}
+              onChange={setCategory}
             />
             <Input
               label={'Price'}
-              placeholder={'45'}
+              placeholder={'enter the price'}
               inputType={''}
               inputId={'number'}
-              inputValue={String(newOffer.price)}
+              inputValue={newOffer.price||''}
               onChange={setPrice}
             />
             <DropDown
@@ -265,22 +281,25 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
             />
             <Input
               label={'Amount available'}
-              placeholder={''}
+              placeholder={'0'}
               inputType={''}
               inputId={'amout'}
-              inputValue={String(newOffer.amountOfProduct)}
+              inputValue={newOffer.amountOfProduct || ''}
               onChange={setAmountOfProduct}
             />
           </FormEditDetail>
           {offerUpdateAdError && <ErrorMessage message={offerUpdateAdError.message} />}
           <WrapperButton>
-            {/* <Button
-              label={'Save changes'}
-              isPrimary={true}
-              type={'submit'}
-              onClick={(e) => submitNewOffer(e)}
-            /> */}
-            <Button icon={''} type="button" onClick={(e) =>  submitNewOffer(e)} label="Create new" />
+            <Button
+              icon={isShownButton ? loadingIcon : ""} 
+              isPrimary={isShownButton ? true : false}
+              type="submit" 
+              label={isShownButton ? "Learn More": "Create new" } 
+              disabled={isDisable ? true : false} 
+              onClick = { () => setTimeout(()  => {
+                history.push(`${Paths.OFFER_ID}`)
+              }, 2000)}
+              /> 
           </WrapperButton>
         </Form>
       </WrapperEditOffer>
@@ -288,7 +307,6 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
         <UploadFile thumbs={imageThumbnails} onUploadSuccess={handleImageUploadSucces} text={text}/>
         <ThumbnailGrid thumbs={imageThumbnails} onClickImage={handleThumbnailClick} onDeleteImage={handleThumbnailDelete} />
       </ThumbnailWrapper>
-
     </Wrapper>
   )
 }
@@ -298,8 +316,10 @@ const Wrapper = styled.div`
   background-color: #fff;
   max-width: 1167px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 3fr 2fr 20px;
+  @media (min-width: 460px) {
+    display: grid;
+    grid-template-columns: 3fr 2fr 20px;
+  }
 `
 
 export const Form = styled.form`
@@ -338,4 +358,9 @@ export const FormEditDetail = styled.div`
   }
   `
 const ThumbnailWrapper = styled.div`
+@media (max-width: 460px) {
+margin-left: 20px
+}
 `;
+
+
