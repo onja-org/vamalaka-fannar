@@ -111,7 +111,6 @@ export const CreateNewOffer = (text) => {
   const setCurrency = ({ target }) => { setNewOffers({ ...newOffer, currency: target.value });} 
   const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
-  // const setUploadedImages = ({ target }) => { setNewOffers({ ...newOffer, photos: [...newOffer.photos, target.value] }) }
 
   const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
   const handleImageUploadSucces = (filename, description) => {
