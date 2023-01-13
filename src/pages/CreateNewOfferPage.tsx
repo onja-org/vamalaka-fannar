@@ -84,9 +84,6 @@ export const CreateNewOffer = (text) => {
   const offerUpdateAdError = useSelector(selectUpdateAdError)
   const history = useHistory();
  
-  // const categories = useSelector(categoriesSelector)
-  
-  // const categoriesOptions = categories.map(category => ({ label: category.title, value: category.title }))
   const formData = {
     id: '',
     title: '',
@@ -97,11 +94,6 @@ export const CreateNewOffer = (text) => {
     unit: '',
     currency: '',
     categoryId:''
-
-    // category: {
-    //   title: '',
-    //   id: '',
-    // }
   }
 
 
@@ -151,7 +143,6 @@ export const CreateNewOffer = (text) => {
     
       
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
-      console.log('imageThumbnails::::::',imageThumbnails[index].imageSource);
         event?.preventDefault()
         dispatch(
           fetchCreateNewOffer({

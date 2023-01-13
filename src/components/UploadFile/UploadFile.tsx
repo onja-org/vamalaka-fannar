@@ -108,7 +108,4 @@ const LoadingTextStyle = styled.p`
   font-size: 20px;
   color: rgb(0, 150, 255);
 `;
-// function img(img: any, arg1: (string: any) => void) {
-//   throw new Error("Function not implemented.");
-// }
 

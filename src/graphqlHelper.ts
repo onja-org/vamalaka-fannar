@@ -15,7 +15,6 @@ export const sendAuthorizedQuery = (
   token: string,
   variables?: any
 ): Promise<any> => {
-  console.log("sendAuthorizedQuery query::::::", query);
 
   const config = {
     headers: { Authorization: `Bearer ${token}` },
