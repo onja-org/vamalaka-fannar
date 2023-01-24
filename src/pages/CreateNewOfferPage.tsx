@@ -9,7 +9,7 @@ import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
 import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
 import { useEffect } from 'react'
-import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS,CATEGORIES_DROP_DOWN_OPTIONS } from '../constants'
+import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS} from '../constants'
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
@@ -17,7 +17,6 @@ import { UploadFile } from "../components/UploadFile/UploadFile";
 import { ThumbnailGrid } from "../components/ThumbnailGrid/ThumbnailGrid";
 import {fetchCreateNewOffer, NewOfferData} from "../redux/slices/userOfferSlice"
 import loadingIcon from '../icons/small-load-icon.png';
-// import Categorie from '../components/Categories/Categories'
 
 
 // import { BACKEND_URL } from "../localhostURL";
