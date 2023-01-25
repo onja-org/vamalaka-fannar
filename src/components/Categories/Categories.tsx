@@ -22,6 +22,7 @@ export const Categories: React.FC<CategoryProps> = ({
       <h4>Top categories</h4>
       <CategoryList>
         {categories.map((category) => (
+        
           <CategoryItem
             key={category.id}
             categoryId={category.id}
@@ -52,3 +53,4 @@ const CategoryList = styled.ul`
     gap: 15px; 
   `}
 `
+export default Categories

@@ -78,5 +78,4 @@ export const categoriesSelector = createSelector(
   selectCategories,
   (categories) => categories
 )
-
 export default categoriesSlice.reducer

@@ -7,9 +7,9 @@ import { DropDown } from "../components/DropDown/DropDown";
 import Input from "../components/Input/Input";
 import { fonts } from "../globalStyles/fonts";
 import { useSelector } from 'react-redux'
-import { fetchCategories } from '../redux/slices/categoriesSlice'
+import { categoriesSelector, fetchCategories } from '../redux/slices/categoriesSlice'
 import { useEffect } from 'react'
-import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS,CATEGORIES_DROP_DOWN_OPTIONS } from '../constants'
+import { CURRENCIES_DROP_DOWN_OPTIONS, UNIT_DROP_DOWN_OPTIONS} from '../constants'
 import { useAppDispatch } from '../redux/hooks'
 import { selectUpdateAdError } from "../redux/slices/offerByIdSlice";
 import { ErrorMessage } from "../components/ErrorMessage/ErrorMessage"
@@ -79,7 +79,9 @@ const initialThumbnails = [
   },
 ]
 
+
 export const CreateNewOffer = (text) => {
+  const categoriesData  = useSelector(categoriesSelector)
   const dispatch = useAppDispatch()
   const offerUpdateAdError = useSelector(selectUpdateAdError)
   const history = useHistory();
@@ -96,11 +98,13 @@ export const CreateNewOffer = (text) => {
     categoryId:''
   }
 
-
+ 
+ 
 
   const [newOffer, setNewOffers] = React.useState(formData);
   const [isShownButton, setIsShownButton] = React.useState(false);
-  const [isDisable, setIsDisable] = React.useState(false)
+  const [isDisable, setIsDisable] = React.useState(false);
+  const [categoriesOptions, setCategoriesOptions] = React.useState([])
   
   const setTitle = ({ target }) => { setNewOffers({ ...newOffer, title: target.value }) }
   
@@ -122,8 +126,6 @@ export const CreateNewOffer = (text) => {
    
   }
 
-
-
   useEffect(() => {
 
   }, [newOffer.photos])
@@ -139,8 +141,6 @@ export const CreateNewOffer = (text) => {
         setIsDisable(true)
       }, 1000)
 
-    
-      
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
         event?.preventDefault()
         dispatch(
@@ -161,9 +161,10 @@ export const CreateNewOffer = (text) => {
     },
     
     [dispatch, newOffer]
-    
-   
   )
+  
+
+ 
 
 
 const checkIfOnlyImageAsignStar = (imageThumbnails) => {
@@ -224,6 +225,17 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
     dispatch(fetchCategories([]))
   }, [dispatch])
 
+  useEffect(() => {
+    const categoriesOptions = categoriesData.map((category) => {
+       return {
+         label: category.title,
+         value: category.id
+       }
+    })
+     
+    setCategoriesOptions(categoriesOptions as any)
+ 
+  }, [categoriesData])
  
   return (
     <Wrapper>
@@ -248,7 +260,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               onChange={setDescription}
             />
             <DropDown
-              options={CATEGORIES_DROP_DOWN_OPTIONS}
+              options={categoriesOptions}
               placeholder={'SELECT CATEGORY'}
               name={'select the category'}
               id={'category'}
