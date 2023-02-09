@@ -130,11 +130,12 @@ export const CreateNewOffer = (text) => {
 
   }, [newOffer.photos])
 
- 
   const submitNewOffer = React.useCallback(
     
-    (event: React.MouseEvent<Element, MouseEvent>) => {
    
+
+    (event: React.MouseEvent<Element, MouseEvent>) => {
+      
       setIsShownButton(true)
       setTimeout(() => {
         setIsShownButton(false)
@@ -142,14 +143,21 @@ export const CreateNewOffer = (text) => {
       }, 1000)
 
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
+
+       const photos = [{url: `${imageThumbnails[index].imageSource}`,
+       info: `${imageThumbnails[index].alt}`,
+       isPrimary: true}]
+       const dataNewOffer = {...newOffer, photos}
+       history.push(`${Paths.OFFER_ID}`, dataNewOffer)
+
         event?.preventDefault()
         dispatch(
           fetchCreateNewOffer({
             id: `${index}`,
             title: newOffer.title,
-            photos: [{url: `${imageThumbnails[index].imageSource}`,
-              info: `${imageThumbnails[index].alt}`,
-              isPrimary: true}],
+            photos:[{url: `${imageThumbnails[index].imageSource}`,
+            info: `${imageThumbnails[index].alt}`,
+            isPrimary: true}],
             body:newOffer.body,
             amountOfProduct: newOffer.amountOfProduct,
             price: newOffer.price,
@@ -309,7 +317,7 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               label={isShownButton ? "Learn More": "Create new" } 
               disabled={isDisable ? true : false} 
               onClick = { () => setTimeout(()  => {
-                history.push(`${Paths.OFFER_ID}`, newOffer)
+                // history.push(`${Paths.OFFER_ID}`, newOffer)
               }, 2000)}
               /> 
           </WrapperButton>

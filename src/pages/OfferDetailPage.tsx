@@ -4,33 +4,43 @@ import styled from "styled-components";
 import Button from "../components/Buttons/Buttons";
 import  Email  from "../icons/mail.png";
 import  Call  from "../icons/call.png";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
+
+
 
 export const OfferDetailPage = () => {
-
+  // let location = useLocation()
   const history = useHistory()
   const historyData = history.location.state
-  
-   console.log('history::::::',history);
+//   console.log(title)
+//   const newOffer = historyData
+const newOfferData : any  = historyData
 
-console.log(' historyData ::::::', historyData );
-
-
-
+console.log("historyData", newOfferData)
+console.log("log", newOfferData.photos[0].url)
     return(
         <Wrapper>
             <TopWrapper>
             <DescriptionWrapper>
-                <h1>Category value: </h1>
+              <div>
+              <h1>Category value</h1>
+              <div>{newOfferData.categoryId}</div> 
+              </div>
+                
                 <h3>Description</h3>
-                <div>llllll</div>
+                <div>{newOfferData.body}</div>
             </DescriptionWrapper>
             <GrideWrpper>
-                <h4> Price: value</h4>
-                <h5> Avalability: .... </h5>
+                 <div>
+                 <h4> Price: {newOfferData.price} /pieces</h4>
+                 </div>
+                <div>
+                  <h5> Avalability: {newOfferData.amountOfProduct} / month</h5>
+                </div>
             </GrideWrpper>
             </TopWrapper>
-            <img src="./" alt="any" ></img>
+            <img src={newOfferData.photos[0].url} alt="any" ></img>
             <InfoWrapper>
                <ProfileWrapper>
                <Button 
