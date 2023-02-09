@@ -9,16 +9,16 @@ import { useHistory, useLocation } from "react-router-dom";
 
 
 
+
 export const OfferDetailPage = () => {
-  // let location = useLocation()
   const history = useHistory()
   const historyData = history.location.state
-//   console.log(title)
-//   const newOffer = historyData
-const newOfferData : any  = historyData
+  const newOfferData : any  = historyData
 
 console.log("historyData", newOfferData)
 console.log("log", newOfferData.photos[0].url)
+   const imageSource = `http://localhost:4000/uploads/` + newOfferData.photos[0].url
+     console.log("imageSource", imageSource)
     return(
         <Wrapper>
             <TopWrapper>
@@ -36,13 +36,14 @@ console.log("log", newOfferData.photos[0].url)
                  <h4> Price: {newOfferData.price} /pieces</h4>
                  </div>
                 <div>
-                  <h5> Avalability: {newOfferData.amountOfProduct} / month</h5>
+                  <h5> Avalability: {newOfferData.amountOfProduct} pieces / month</h5>
                 </div>
             </GrideWrpper>
             </TopWrapper>
-            <img src={newOfferData.photos[0].url} alt="any" ></img>
+            <img src= {imageSource}  alt={newOfferData.photos[0].info} ></img>
             <InfoWrapper>
                <ProfileWrapper>
+                <ButtonWrapper>
                <Button 
                    type="submit" 
                    label= "View profile and see other items"  
@@ -50,15 +51,19 @@ console.log("log", newOfferData.photos[0].url)
                 >
 
                 </Button>
+                </ButtonWrapper>
+                <ButtonWrapper>
                 <Button 
                    type="submit" 
                    label= "Add Johnny to favourites"  
                    disabled = {false}>
 
                 </Button>
+                </ButtonWrapper>
                </ProfileWrapper>
                <ContactWrappet>
                  <div>contact name of the woner of the profile</div>
+                 <ButtonWrapper>
                  <Button 
                    icon={Email} 
                    type="submit" 
@@ -67,19 +72,18 @@ console.log("log", newOfferData.photos[0].url)
                 >
 
                 </Button>
-                <Button 
-                   icon={Call} 
-                   type="submit" 
-                   label= "Reveal phone number"  
-                   disabled = {false}>
-
-                </Button>
+                </ButtonWrapper>
+                <ButtonWrapper>
+                  <Button 
+                    icon={Call} 
+                    type="submit" 
+                    label= "Reveal phone number"  
+                    disabled = {false}>
+                  </Button>
+                  </ButtonWrapper>
                </ContactWrappet>
             </InfoWrapper>
-            <ButtonWrapper>
-               
-             
-            </ButtonWrapper>
+           
         </Wrapper>
     )
 }
@@ -107,6 +111,5 @@ export const DescriptionWrapper = styled.div`
 export const ProfileWrapper = styled.div``
 export const ContactWrappet = styled.div``
 export const ButtonWrapper = styled.div`
-display: grid;
-grid-template-columns: 2fr 2fr;
+   margin-top : 30px
 `
