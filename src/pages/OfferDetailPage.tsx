@@ -5,6 +5,7 @@ import Button from "../components/Buttons/Buttons";
 import  Email  from "../icons/mail.png";
 import  Call  from "../icons/call.png";
 import { useHistory, useLocation } from "react-router-dom";
+import DefaultProfile from '../images/default.png'
 
 
 
@@ -14,9 +15,6 @@ export const OfferDetailPage = () => {
   const history = useHistory()
   const historyData = history.location.state
   const newOfferData : any  = historyData
-
-console.log("historyData", newOfferData)
-console.log("log", newOfferData.photos[0].url)
    const imageSource = `http://localhost:4000/uploads/` + newOfferData.photos[0].url
      console.log("imageSource", imageSource)
     return(
@@ -32,17 +30,22 @@ console.log("log", newOfferData.photos[0].url)
                 <div>{newOfferData.body}</div>
             </DescriptionWrapper>
             <GrideWrpper>
-                 <div>
-                 <h4> Price: {newOfferData.price} /pieces</h4>
-                 </div>
-                <div>
-                  <h5> Avalability: {newOfferData.amountOfProduct} pieces / month</h5>
-                </div>
+                 <PriceWrapper>
+                 <h4> Price:</h4>
+                  <p> {newOfferData.price} /pieces</p>
+                 </PriceWrapper>
+                <AvalabiltyWrapper>
+                  <h5> Avalability:</h5>
+                  <p> {newOfferData.amountOfProduct} pieces / month</p>
+                </AvalabiltyWrapper>
             </GrideWrpper>
             </TopWrapper>
-            <img src= {imageSource}  alt={newOfferData.photos[0].info} ></img>
+            <div>
+            <Image src= {imageSource}  alt={newOfferData.photos[0].info} ></Image>
+            </div>
             <InfoWrapper>
                <ProfileWrapper>
+                <ImageProfile src={DefaultProfile}></ImageProfile>
                 <ButtonWrapper>
                <Button 
                    type="submit" 
@@ -94,6 +97,33 @@ padding: 30px
 `
 export const GrideWrpper = styled.div`
 
+`
+
+export const Image = styled.img`
+  margin-top: 90px;
+  margin-bottom: 80px
+
+ 
+`
+
+export const PriceWrapper = styled.div`
+display: grid;
+grid-template-columns: 100px 2fr;
+`
+export const AvalabiltyWrapper = styled.div`
+display: grid;
+grid-template-columns: 100px 2fr;
+`
+
+export const ImageProfile = styled.img`
+  width: 30%;
+  border-radius: 10px;
+ 
+`
+
+export const ImageWrapper = styled.div`
+ position: center;
+ 
 `
 
 export const TopWrapper = styled.div`
