@@ -130,6 +130,8 @@ export const CreateNewOffer = (text) => {
 
   }, [newOffer.photos])
 
+
+
   const submitNewOffer = React.useCallback(
     
    
@@ -144,12 +146,14 @@ export const CreateNewOffer = (text) => {
 
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
 
+      console.log("imageThumbnails", imageThumbnails)
+
        const photos = [{url: `${imageThumbnails[index].imageSource}`,
        info: `${imageThumbnails[index].alt}`,
        isPrimary: true}]
-       const dataNewOffer = {...newOffer, photos}
+       const dataNewOffer = {...newOffer, photos, imageThumbnails}
        history.push(`${Paths.OFFER_ID}`, dataNewOffer)
-
+  
         event?.preventDefault()
         dispatch(
           fetchCreateNewOffer({

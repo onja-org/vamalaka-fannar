@@ -6,17 +6,42 @@ import  Email  from "../icons/mail.png";
 import  Call  from "../icons/call.png";
 import { useHistory, useLocation } from "react-router-dom";
 import DefaultProfile from '../images/default.png'
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 
 
 
 
 
-export const OfferDetailPage = () => {
+export const OfferDetailPage = (slides : any) => {
+  
+
+
+
+
   const history = useHistory()
   const historyData = history.location.state
   const newOfferData : any  = historyData
    const imageSource = `http://localhost:4000/uploads/` + newOfferData.photos[0].url
-     console.log("imageSource", imageSource)
+     console.log("imageSource", newOfferData)
+  const imageSlider = newOfferData.imageThumbnails
+  const prefixUrl = `http://localhost:4000/uploads/`
+ 
+console.log("imageSlider", imageSlider)
+     const [current, setCurrent] = useState(0);
+     const length = slides.length;
+
+  const nextSlide = () => {
+     setCurrent(current === length - 1 ? 0 : current + 1);
+   };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+   };
+
+   if (!Array.isArray(slides) || slides.length <= 0) {
+    //  return null;
+   }
+
     return(
         <Wrapper>
             <TopWrapper>
@@ -41,7 +66,20 @@ export const OfferDetailPage = () => {
             </GrideWrpper>
             </TopWrapper>
             <div>
-            <Image src= {imageSource}  alt={newOfferData.photos[0].info} ></Image>
+            <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
+            <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+            {imageSlider.map((slide, index) => {
+        return (
+          <div
+            className={index === current ? 'slide active' : 'slide'}
+            key={index}
+          >
+            {index === current && (
+              <Image src={prefixUrl + slide.imageSource} alt={slide.alt} className='image' />
+            )}
+          </div>
+        );
+      })}
             </div>
             <InfoWrapper>
                <ProfileWrapper>
