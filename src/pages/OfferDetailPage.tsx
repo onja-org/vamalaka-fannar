@@ -6,17 +6,14 @@ import  Email  from "../icons/mail.png";
 import  Call  from "../icons/call.png";
 import { useHistory, useLocation } from "react-router-dom";
 import DefaultProfile from '../images/default.png'
+import leftArrow from '../images/gallery-arrows.png'
+import rightArrow from '../images/gallery-arrows1.png'
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-
-
-
+import '../../src/slider.css'
 
 
 export const OfferDetailPage = (slides : any) => {
   
-
-
-
 
   const history = useHistory()
   const historyData = history.location.state
@@ -65,9 +62,15 @@ console.log("imageSlider", imageSlider)
                 </AvalabiltyWrapper>
             </GrideWrpper>
             </TopWrapper>
+            <ImageSliderWrapper>
             <div>
+              <LeftArrowWrapper>
+              <FlechSLiderRight src={leftArrow}></FlechSLiderRight>
+             
             <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-            <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+            </LeftArrowWrapper>
+            </div>
+            <div>
             {imageSlider.map((slide, index) => {
         return (
           <div
@@ -79,8 +82,16 @@ console.log("imageSlider", imageSlider)
             )}
           </div>
         );
-      })}
+          })}
             </div>
+            <RightArrowWrapper>
+            <FlechSLiderLeft src={rightArrow}></FlechSLiderLeft>
+            
+            <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+           
+           
+            </RightArrowWrapper>
+            </ImageSliderWrapper>
             <InfoWrapper>
                <ProfileWrapper>
                 <ImageProfile src={DefaultProfile}></ImageProfile>
@@ -152,18 +163,15 @@ export const AvalabiltyWrapper = styled.div`
 display: grid;
 grid-template-columns: 100px 2fr;
 `
-
 export const ImageProfile = styled.img`
   width: 30%;
   border-radius: 10px;
  
 `
-
 export const ImageWrapper = styled.div`
  position: center;
  
 `
-
 export const TopWrapper = styled.div`
 display: grid;
 grid-template-columns: 2fr 2fr;
@@ -173,6 +181,11 @@ export const InfoWrapper = styled.div`
 display: grid;
 grid-template-columns: 2fr 2fr;
 `
+export const ImageSliderWrapper = styled.div`
+display: grid;
+grid-template-columns: 2fr 2fr 2fr;
+gap: 20px
+`
 
 export const DescriptionWrapper = styled.div`
 `
@@ -180,4 +193,16 @@ export const ProfileWrapper = styled.div``
 export const ContactWrappet = styled.div``
 export const ButtonWrapper = styled.div`
    margin-top : 30px
+`
+export const LeftArrowWrapper = styled.div`
+
+`
+export const RightArrowWrapper = styled.div`
+margin-left: auto;
+`
+export const FlechSLiderLeft = styled.img`
+height: 70px;
+width: 70px;
+`
+export const FlechSLiderRight = styled.img`
 `

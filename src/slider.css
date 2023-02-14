@@ -1,0 +1,16 @@
+.left-arrow {
+    height: 70px;
+    width: 70px;
+    margin-top: 150px;
+    margin-left: -70px;
+    color: transparent;
+    
+}
+
+.right-arrow {
+    height: 70px;
+    width: 70px;
+    margin-top: 150px;
+    margin-left: -70px;
+    color: transparent;
+}
