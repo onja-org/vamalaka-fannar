@@ -146,8 +146,6 @@ export const CreateNewOffer = (text) => {
 
       const index = imageThumbnails.findIndex((thumb) => thumb.imageSource !== '')
 
-      console.log("imageThumbnails", imageThumbnails)
-
        const photos = [{url: `${imageThumbnails[index].imageSource}`,
        info: `${imageThumbnails[index].alt}`,
        isPrimary: true}]
@@ -321,7 +319,6 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               label={isShownButton ? "Learn More": "Create new" } 
               disabled={isDisable ? true : false} 
               onClick = { () => setTimeout(()  => {
-                // history.push(`${Paths.OFFER_ID}`, newOffer)
               }, 2000)}
               /> 
           </WrapperButton>

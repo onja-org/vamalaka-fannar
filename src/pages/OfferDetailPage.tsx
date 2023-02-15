@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../components/Buttons/Buttons";
 import  Email  from "../icons/mail.png";
 import  Call  from "../icons/call.png";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import DefaultProfile from '../images/default.png'
 import leftArrow from '../images/gallery-arrows.png'
 import rightArrow from '../images/gallery-arrows1.png'
@@ -18,12 +18,9 @@ export const OfferDetailPage = (slides : any) => {
   const history = useHistory()
   const historyData = history.location.state
   const newOfferData : any  = historyData
-   const imageSource = `http://localhost:4000/uploads/` + newOfferData.photos[0].url
-     console.log("imageSource", newOfferData)
   const imageSlider = newOfferData.imageThumbnails
   const prefixUrl = `http://localhost:4000/uploads/`
  
-console.log("imageSlider", imageSlider)
      const [current, setCurrent] = useState(0);
      const length = slides.length;
 
@@ -41,55 +38,50 @@ console.log("imageSlider", imageSlider)
 
     return(
         <Wrapper>
-            <TopWrapper>
+          <TopWrapper>
             <DescriptionWrapper>
               <div>
-              <h1>Category value</h1>
-              <div>{newOfferData.categoryId}</div> 
+                <h1>Category value</h1>
+                <div>{newOfferData.categoryId}</div> 
               </div>
-                
                 <h3>Description</h3>
                 <div>{newOfferData.body}</div>
             </DescriptionWrapper>
             <GrideWrpper>
-                 <PriceWrapper>
-                 <h4> Price:</h4>
+              <PriceWrapper>
+                <h4> Price:</h4>
                   <p> {newOfferData.price} /pieces</p>
-                 </PriceWrapper>
-                <AvalabiltyWrapper>
-                  <h5> Avalability:</h5>
-                  <p> {newOfferData.amountOfProduct} pieces / month</p>
-                </AvalabiltyWrapper>
+                </PriceWrapper>
+              <AvalabiltyWrapper>
+                <h5> Avalability:</h5>
+                <p> {newOfferData.amountOfProduct} pieces / month</p>
+              </AvalabiltyWrapper>
             </GrideWrpper>
-            </TopWrapper>
-            <ImageSliderWrapper>
+          </TopWrapper>
+          <ImageSliderWrapper>
             <div>
               <LeftArrowWrapper>
-              <FlechSLiderRight src={leftArrow}></FlechSLiderRight>
-             
-            <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-            </LeftArrowWrapper>
+                <FlechSLiderRight src={leftArrow}></FlechSLiderRight>
+                <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
+              </LeftArrowWrapper>
             </div>
             <div>
             {imageSlider.map((slide, index) => {
-        return (
-          <div
-            className={index === current ? 'slide active' : 'slide'}
-            key={index}
-          >
-            {index === current && (
-              <Image src={prefixUrl + slide.imageSource} alt={slide.alt} className='image' />
-            )}
-          </div>
-        );
-          })}
+                return (
+                  <div
+                    className={index === current ? 'slide active' : 'slide'}
+                    key={index}
+                  >
+                    {index === current && (
+                      <Image src={prefixUrl + slide.imageSource} alt={slide.alt} className='image' />
+                    )}
+                  </div>
+                );
+                  })}
             </div>
             <RightArrowWrapper>
-            <FlechSLiderLeft src={rightArrow}></FlechSLiderLeft>
-            
-            <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
-           
-           
+              <FlechSLiderLeft src={rightArrow}></FlechSLiderLeft>
+              <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
             </RightArrowWrapper>
             </ImageSliderWrapper>
             <InfoWrapper>
