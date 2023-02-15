@@ -239,7 +239,8 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
     const categoriesOptions = categoriesData.map((category) => {
        return {
          label: category.title,
-         value: category.id
+         value: category.title,
+         id: category.id
        }
     })
      

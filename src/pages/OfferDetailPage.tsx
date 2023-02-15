@@ -41,10 +41,9 @@ export const OfferDetailPage = (slides : any) => {
           <TopWrapper>
             <DescriptionWrapper>
               <div>
-                <h1>Category value</h1>
-                <div>{newOfferData.categoryId}</div> 
+                <h1>{newOfferData.categoryId}</h1> 
               </div>
-                <h3>Description</h3>
+                <h3>Description :</h3>
                 <div>{newOfferData.body}</div>
             </DescriptionWrapper>
             <GrideWrpper>
