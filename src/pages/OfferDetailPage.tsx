@@ -9,20 +9,37 @@ import DefaultProfile from '../images/default.png'
 import leftArrow from '../images/gallery-arrows.png'
 import rightArrow from '../images/gallery-arrows1.png'
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+
 import '../../src/slider.css'
+import { ImageThumbnail } from "./CreateNewOfferPage";
+
+export interface NewFormProps  {
+  amountOfProduct: string,
+  body:string,
+  categoryId: string,
+  currency: string,
+  id: string,
+  imageThumbnails: ImageThumbnail [],
+  photos:[],
+  price: string,
+  title:string,
+  unit: string
+}
 
 
-export const OfferDetailPage = (slides : any) => {
+export const OfferDetailPage = () => {
+
+  const history = useHistory <NewFormProps> ()
+  const historyData = history.location.state
+  const newOfferData = historyData
+  const imageSlider = newOfferData.imageThumbnails
+  const thumnailsWithImage = imageSlider.filter((thumb) => thumb.imageSource !== '')
+  
+    const prefixUrl = `http://localhost:4000/uploads/`
+    const [current, setCurrent] = useState(0);
+    const length = thumnailsWithImage.length
   
 
-  const history = useHistory()
-  const historyData = history.location.state
-  const newOfferData : any  = historyData
-  const imageSlider = newOfferData.imageThumbnails
-  const prefixUrl = `http://localhost:4000/uploads/`
- 
-     const [current, setCurrent] = useState(0);
-     const length = slides.length;
 
   const nextSlide = () => {
      setCurrent(current === length - 1 ? 0 : current + 1);
@@ -31,10 +48,6 @@ export const OfferDetailPage = (slides : any) => {
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
    };
-
-   if (!Array.isArray(slides) || slides.length <= 0) {
-    //  return null;
-   }
 
     return(
         <Wrapper>

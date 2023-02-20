@@ -20,6 +20,13 @@ import loadingIcon from '../icons/small-load-icon.png';
 
 
 // import { BACKEND_URL } from "../localhostURL";
+export interface ImageThumbnail {
+  imageSource: string;
+  emptyImage: boolean;
+  alt: string;
+  showStar: boolean;
+}
+
 
 export interface NewFormProps  extends NewOfferData{
   text: string;
@@ -116,7 +123,7 @@ export const CreateNewOffer = (text) => {
   const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
 
-  const [imageThumbnails, setImageThumbnails] = React.useState(initialThumbnails);
+  const [imageThumbnails, setImageThumbnails] = React.useState < ImageThumbnail[] > (initialThumbnails);
   const handleImageUploadSucces = (filename, description) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
     imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
@@ -149,8 +156,11 @@ export const CreateNewOffer = (text) => {
        const photos = [{url: `${imageThumbnails[index].imageSource}`,
        info: `${imageThumbnails[index].alt}`,
        isPrimary: true}]
-       const dataNewOffer = {...newOffer, photos, imageThumbnails}
-       history.push(`${Paths.OFFER_ID}`, dataNewOffer)
+       const dataNewOffer = {...newOffer, imageThumbnails}
+       setTimeout(() => {
+        history.push(`${Paths.OFFER_ID}`, dataNewOffer)
+       }, 2000)
+       
   
         event?.preventDefault()
         dispatch(
@@ -319,8 +329,6 @@ const checkIfOnlyImageAsignStar = (imageThumbnails) => {
               type="submit" 
               label={isShownButton ? "Learn More": "Create new" } 
               disabled={isDisable ? true : false} 
-              onClick = { () => setTimeout(()  => {
-              }, 2000)}
               /> 
           </WrapperButton>
         </Form>
