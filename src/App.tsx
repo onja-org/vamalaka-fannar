@@ -10,6 +10,7 @@ import { OnboardingPage } from './pages/OnboardingPage'
 import { Paths } from './paths'
 import { CreateNewOffer } from './pages/CreateNewOfferPage'
 import { EditOffer } from './pages/EditOfferPage'
+import {OfferDetailPage} from './pages/OfferDetailPage'
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path={Paths.EDITOFFER}>
             <EditOffer />
+          </Route>
+          <Route path={Paths.OFFER_ID}>
+            <OfferDetailPage />
           </Route>
         </GenericContainerPage>
       </Switch>

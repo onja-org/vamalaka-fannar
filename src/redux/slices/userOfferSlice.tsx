@@ -52,6 +52,7 @@ export interface NewOfferData {
   }]
 }
 
+
 interface NewOfferPayload {
   newOffer: NewOfferData
 }
@@ -102,7 +103,7 @@ export const fetchCreateNewOffer = createAsyncThunk<
 
     const response = await sendAuthorizedQuery(query, token, variables)
 
-  const newOffer = response.data.data
+    const newOffer = response.data.data
   
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
