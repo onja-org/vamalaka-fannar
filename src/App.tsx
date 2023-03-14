@@ -11,6 +11,7 @@ import { Paths } from './paths'
 import { CreateNewOffer } from './pages/CreateNewOfferPage'
 import { EditOffer } from './pages/EditOfferPage'
 import {OfferDetailPage} from './pages/OfferDetailPage'
+import { EditProfilePage } from './pages/EditProfilePage'
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path={Paths.OFFER_ID}>
             <OfferDetailPage />
+          </Route>
+          <Route path={Paths.EDITPROFILE}>
+            <EditProfilePage  />
           </Route>
         </GenericContainerPage>
       </Switch>

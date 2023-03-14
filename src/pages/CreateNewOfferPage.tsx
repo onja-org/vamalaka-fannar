@@ -123,11 +123,10 @@ export const CreateNewOffer = (text) => {
   const setCategory = ({ target }) => { setNewOffers({ ...newOffer, categoryId: target.value }); } 
  
 
-  const [imageThumbnails, setImageThumbnails] = React.useState < ImageThumbnail[] > (initialThumbnails);
+  const [imageThumbnails, setImageThumbnails] = React.useState <ImageThumbnail[] > (initialThumbnails);
   const handleImageUploadSucces = (filename, description) => {
     const index = imageThumbnails.findIndex((thumb) => thumb.imageSource === '')
-    imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description}
-    
+    imageThumbnails[index]={...imageThumbnails[index], imageSource:filename, alt: description} 
     setImageThumbnails([...imageThumbnails])
     checkIfOnlyImageAsignStar(imageThumbnails)
    
@@ -141,8 +140,6 @@ export const CreateNewOffer = (text) => {
 
   const submitNewOffer = React.useCallback(
     
-   
-
     (event: React.MouseEvent<Element, MouseEvent>) => {
       
       setIsShownButton(true)

@@ -40,7 +40,7 @@ const MyAccount: React.FC<OffersListProps> = ({ offers, username, id }) => {
             <Link to={`${Paths.PROFILE}/:${username}`}>Preview</Link>
           </li>
           <li>
-            <Link to={`${Paths.PROFILE}/:${id}`}>Edit</Link>
+            <Link to={`${Paths.EDITPROFILE}/:${id}`}>Edit</Link>
           </li>
         </ProfileLink>
       </Profile>
